@@ -1,0 +1,12 @@
+C:\Users\PHAM PHAN\Desktop\EJumping\EJumping\EJumping.DAL\bin\Debug\netcoreapp3.1\EJumping.DAL.deps.json
+C:\Users\PHAM PHAN\Desktop\EJumping\EJumping\EJumping.DAL\bin\Debug\netcoreapp3.1\EJumping.DAL.runtimeconfig.json
+C:\Users\PHAM PHAN\Desktop\EJumping\EJumping\EJumping.DAL\bin\Debug\netcoreapp3.1\EJumping.DAL.runtimeconfig.dev.json
+C:\Users\PHAM PHAN\Desktop\EJumping\EJumping\EJumping.DAL\bin\Debug\netcoreapp3.1\EJumping.DAL.dll
+C:\Users\PHAM PHAN\Desktop\EJumping\EJumping\EJumping.DAL\bin\Debug\netcoreapp3.1\EJumping.DAL.pdb
+C:\Users\PHAM PHAN\Desktop\EJumping\EJumping\EJumping.DAL\obj\Debug\netcoreapp3.1\EJumping.DAL.AssemblyInfoInputs.cache
+C:\Users\PHAM PHAN\Desktop\EJumping\EJumping\EJumping.DAL\obj\Debug\netcoreapp3.1\EJumping.DAL.AssemblyInfo.cs
+C:\Users\PHAM PHAN\Desktop\EJumping\EJumping\EJumping.DAL\obj\Debug\netcoreapp3.1\EJumping.DAL.csproj.CoreCompileInputs.cache
+C:\Users\PHAM PHAN\Desktop\EJumping\EJumping\EJumping.DAL\obj\Debug\netcoreapp3.1\EJumping.DAL.dll
+C:\Users\PHAM PHAN\Desktop\EJumping\EJumping\EJumping.DAL\obj\Debug\netcoreapp3.1\EJumping.DAL.pdb
+C:\Users\PHAM PHAN\Desktop\EJumping\EJumping\EJumping.DAL\obj\Debug\netcoreapp3.1\EJumping.DAL.genruntimeconfig.cache
+C:\Users\PHAM PHAN\Desktop\EJumping\EJumping\EJumping.DAL\obj\Debug\netcoreapp3.1\EJumping.DAL.csprojAssemblyReference.cache

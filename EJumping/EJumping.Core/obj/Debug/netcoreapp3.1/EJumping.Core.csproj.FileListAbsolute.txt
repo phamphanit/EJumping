@@ -1,0 +1,9 @@
+C:\Users\PHAM PHAN\Desktop\EJumping\EJumping\EJumping.Core\bin\Debug\netcoreapp3.1\EJumping.Core.deps.json
+C:\Users\PHAM PHAN\Desktop\EJumping\EJumping\EJumping.Core\bin\Debug\netcoreapp3.1\EJumping.Core.dll
+C:\Users\PHAM PHAN\Desktop\EJumping\EJumping\EJumping.Core\bin\Debug\netcoreapp3.1\EJumping.Core.pdb
+C:\Users\PHAM PHAN\Desktop\EJumping\EJumping\EJumping.Core\obj\Debug\netcoreapp3.1\EJumping.Core.csprojAssemblyReference.cache
+C:\Users\PHAM PHAN\Desktop\EJumping\EJumping\EJumping.Core\obj\Debug\netcoreapp3.1\EJumping.Core.AssemblyInfoInputs.cache
+C:\Users\PHAM PHAN\Desktop\EJumping\EJumping\EJumping.Core\obj\Debug\netcoreapp3.1\EJumping.Core.AssemblyInfo.cs
+C:\Users\PHAM PHAN\Desktop\EJumping\EJumping\EJumping.Core\obj\Debug\netcoreapp3.1\EJumping.Core.csproj.CoreCompileInputs.cache
+C:\Users\PHAM PHAN\Desktop\EJumping\EJumping\EJumping.Core\obj\Debug\netcoreapp3.1\EJumping.Core.dll
+C:\Users\PHAM PHAN\Desktop\EJumping\EJumping\EJumping.Core\obj\Debug\netcoreapp3.1\EJumping.Core.pdb
