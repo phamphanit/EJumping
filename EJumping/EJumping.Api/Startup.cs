@@ -1,11 +1,17 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
+using EJumping.Api;
+using EJumping.Core.Models.User;
 using EJumping.DAL.EF.Entities;
+using IdentityServer4.Models;
+using IdentityServer4.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -15,11 +21,12 @@ namespace EJumping.API
 {
     public class Startup
     {
-        public Startup(IConfiguration configuration)
+        public Startup(IConfiguration configuration,IWebHostEnvironment env)
         {
             Configuration = configuration;
+            Environment = env;
         }
-
+        public IWebHostEnvironment Environment { get; }
         public IConfiguration Configuration { get; }
 
         // This method gets called by the runtime. Use this method to add services to the container.
@@ -32,6 +39,104 @@ namespace EJumping.API
             var ejumpingConnection = Configuration.GetConnectionString("DefaultConnection");
             services.AddDbContext<ejumpingContext>(options => options.UseNpgsql(ejumpingConnection));
 
+            //Config Asp.net Identity
+            services.AddIdentity<ApplicationUser, ApplicationRole>(options =>
+            {
+                options.Password.RequireDigit = false;
+                options.Password.RequiredLength = 6;
+                options.Password.RequireNonAlphanumeric = false;
+                options.Password.RequireUppercase = false;
+                options.Password.RequireLowercase = false;
+                options.User.AllowedUserNameCharacters = null;
+
+                options.Lockout.AllowedForNewUsers = true;
+                options.Lockout.DefaultLockoutTimeSpan = TimeSpan.FromMinutes(2);
+                options.Lockout.MaxFailedAccessAttempts = 10;
+            })
+             //.AddErrorDescriber<LocalizedIdentityErrorDescriber>()
+             .AddEntityFrameworkStores<ApplicationDbContext>()
+             .AddDefaultTokenProviders();
+
+
+            //Config IdentityServer4
+            var builder = services.AddIdentityServer()
+               .AddAspNetIdentity<ApplicationUser>()
+               .AddInMemoryIdentityResources(Config.IdentityResources)
+               .AddInMemoryApiResources(Config.ApiResource)
+               .AddInMemoryClients(Config.Clients)
+               .AddProfileService<ProfileService>();
+
+            // this adds the config data from DB (clients, resources)
+            //.AddConfigurationStore(options =>
+            //{
+            //    options.ConfigureDbContext = b =>
+            //        b.UseNpgsql(connectionStringIdsvr4,
+            //            sql => sql.MigrationsAssembly(migrationsAssembly));
+            //})
+            //// this adds the operational data from DB (codes, tokens, consents)
+            //.AddOperationalStore(options =>
+            //{
+            //    options.ConfigureDbContext = b =>
+            //        b.UseNpgsql(connectionStringIdsvr4,
+            //            sql => sql.MigrationsAssembly(migrationsAssembly));
+
+            //     // this enables automatic token cleanup. this is optional.
+            //     options.EnableTokenCleanup = true;
+            //})
+            services.Configure<IdentityOptions>(options =>
+            {
+                // Password settings
+                options.Password.RequireDigit = false;
+                options.Password.RequiredLength = 6;
+                options.Password.RequireNonAlphanumeric = false;
+                options.Password.RequireUppercase = false;
+                options.Password.RequireLowercase = false;
+                //options.Password.RequiredUniqueChars = 6;
+
+                // Lockout settings
+                options.Lockout.DefaultLockoutTimeSpan = TimeSpan.FromMinutes(2);
+                options.Lockout.MaxFailedAccessAttempts = 10;
+                options.Lockout.AllowedForNewUsers = true;
+
+                // User settings
+                options.User.RequireUniqueEmail = false;
+                options.User.AllowedUserNameCharacters = null;
+
+                // Require confirmed email, should be enabled later ?
+                //options.SignIn.RequireConfirmedEmail = true;
+            });
+
+            builder.AddDeveloperSigningCredential();
+            services.AddAuthentication("Bearer")
+               .AddIdentityServerAuthentication(options =>
+               {
+                   options.Authority = Configuration["Mo2jaWebConfiguration:IdSrvUrl"];
+                   if (Environment.IsDevelopment())
+                   {
+                       options.RequireHttpsMetadata = false;
+                   }
+                   options.ApiSecret = "secret";
+                   options.ApiName = "api1";
+               });
+               //.AddFacebook(facebookOptions =>
+               //{
+               //     //facebookOptions.SignInScheme = IdentityServerConstants.ExternalCookieAuthenticationScheme;
+               //     //facebookOptions.CallbackPath = new PathString("/api/auth/externalLoginCallBack");
+               //     facebookOptions.AppId = Configuration["Authentication:Facebook:AppId"];
+               //    facebookOptions.AppSecret = Configuration["Authentication:Facebook:AppSecret"];
+               //})
+               //.AddGoogle(googleOptions =>
+               //{
+               //    googleOptions.ClientId = Configuration["Authentication:Google:ClientId"];
+               //    googleOptions.ClientSecret = Configuration["Authentication:Google:ClientSecret"];
+               //})
+               //.AddKakao(kakaoOptions =>
+               //{
+               //     //kakaoOptions.SignInScheme = IdentityServerConstants.ExternalCookieAuthenticationScheme;
+               //     //kakaoOptions.CallbackPath = new PathString("/api/auth/externalLoginCallBack");
+               //     kakaoOptions.ClientId = Configuration["Authentication:Kakao:ClientId"];
+               //    kakaoOptions.ClientSecret = Configuration["Authentication:Kakao:ClientSecret"];
+               //});
 
             services.AddControllersWithViews();
         }
@@ -52,6 +157,7 @@ namespace EJumping.API
             }
             app.UseHttpsRedirection();
             app.UseStaticFiles();
+            app.UseIdentityServer();
 
             app.UseRouting();
 
@@ -63,6 +169,54 @@ namespace EJumping.API
                     name: "default",
                     pattern: "{controller=Home}/{action=Index}/{id?}");
             });
+        }
+    }
+    public class ProfileService : IProfileService
+    {
+        protected UserManager<ApplicationUser> _userManager;
+
+        public ProfileService(UserManager<ApplicationUser> userManager)
+        {
+            this._userManager = userManager;
+        }
+
+        public async Task GetProfileDataAsync(ProfileDataRequestContext context)
+        {
+            //>Processing
+            var user = await this._userManager.GetUserAsync(context.Subject);
+
+            var roles = await this._userManager.GetRolesAsync(user);
+
+            var claims = new List<Claim>
+                {
+                    new Claim("ExampleClaimType", "ExampleClaimValue"),
+                };
+
+            foreach (var role in roles)
+            {
+                claims.Add(new Claim("Role", role));
+            }
+
+            if (!string.IsNullOrEmpty(user.ProfileImageUrl))
+            {
+                claims.Add(new Claim("ProfilePicUrl", user.ProfileImageUrl));
+            }
+            else
+            {
+                claims.Add(new Claim("ProfilePicUrl", "https://mo2ja.s3.ap-northeast-2.amazonaws.com/Uploads/User/Image/defaultuser.jpg"));
+            }
+            claims.Add(new Claim("Username", user.UserName));
+            claims.Add(new Claim("Id", user.Id.ToString()));
+
+            context.IssuedClaims.AddRange(claims);
+        }
+
+        public async Task IsActiveAsync(IsActiveContext context)
+        {
+            //>Processing
+            var user = await this._userManager.GetUserAsync(context.Subject);
+
+            context.IsActive = (user != null);
         }
     }
 }
