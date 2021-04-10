@@ -991,10 +991,6 @@ namespace EJumping.DAL.Migrations
                         .HasColumnType("boolean")
                         .HasColumnName("email_service_notification");
 
-                    b.Property<long>("Exp")
-                        .HasColumnType("bigint")
-                        .HasColumnName("exp");
-
                     b.Property<string>("FirstName")
                         .HasColumnType("character varying")
                         .HasColumnName("first_name");
@@ -1060,10 +1056,6 @@ namespace EJumping.DAL.Migrations
                     b.Property<bool>("PhoneNumberConfirmed")
                         .HasColumnType("boolean")
                         .HasColumnName("phone_number_confirmed");
-
-                    b.Property<long>("Point")
-                        .HasColumnType("bigint")
-                        .HasColumnName("point");
 
                     b.Property<string>("PreferredLanguage")
                         .HasColumnType("character varying")

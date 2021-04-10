@@ -10,8 +10,7 @@ namespace EJumping.DAL.EF.Entities
         {
         }
 
-        public ejumpingContext(DbContextOptions<ejumpingContext> options)
-            : base(options)
+        public ejumpingContext(DbContextOptions<ejumpingContext> options) : base(options)
         {
         }
 
@@ -44,7 +43,7 @@ namespace EJumping.DAL.EF.Entities
             if (!optionsBuilder.IsConfigured)
             {
 #warning To protect potentially sensitive information in your connection string, you should move it out of source code. See http://go.microsoft.com/fwlink/?LinkId=723263 for guidance on storing connection strings.
-                optionsBuilder.UseNpgsql("host=localhost;database=EJumping;Username=postgres;Password=1qaz!QAZ;");
+                optionsBuilder.UseNpgsql("host=localhost;database=ejumping;Username=postgres;Password=1qaz!QAZ;");
             }
         }
 
@@ -746,7 +745,6 @@ namespace EJumping.DAL.EF.Entities
 
                 entity.Property(e => e.EmailServiceNotification).HasColumnName("email_service_notification");
 
-                entity.Property(e => e.Exp).HasColumnName("exp");
 
                 entity.Property(e => e.FirstName)
                     .HasColumnName("first_name")
@@ -793,8 +791,6 @@ namespace EJumping.DAL.EF.Entities
                     .HasDefaultValueSql("''::text");
 
                 entity.Property(e => e.PhoneNumberConfirmed).HasColumnName("phone_number_confirmed");
-
-                entity.Property(e => e.Point).HasColumnName("point");
 
                 entity.Property(e => e.PreferredLanguage)
                     .HasColumnName("preferred_language")

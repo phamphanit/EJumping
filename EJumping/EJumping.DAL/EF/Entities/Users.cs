@@ -51,8 +51,6 @@ namespace EJumping.DAL.EF.Entities
         public int? VerificationStatus { get; set; }
         public int? Status { get; set; }
         public DateTime? Created { get; set; }
-        public long Exp { get; set; }
-        public long Point { get; set; }
         public DateTime? LastMessagesRead { get; set; }
         public DateTime? LastFriendrequestsRead { get; set; }
 

@@ -4,6 +4,7 @@ using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
 using EJumping.Api;
+using EJumping.Core.Models.Configurations;
 using EJumping.Core.Models.User;
 using EJumping.DAL.EF.Entities;
 using IdentityServer4.Models;
@@ -16,12 +17,13 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Serilog;
 
 namespace EJumping.API
 {
     public class Startup
     {
-        public Startup(IConfiguration configuration,IWebHostEnvironment env)
+        public Startup(IConfiguration configuration, IWebHostEnvironment env)
         {
             Configuration = configuration;
             Environment = env;
@@ -32,12 +34,19 @@ namespace EJumping.API
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            //Config Serilog
+            Log.Logger = new LoggerConfiguration()
+                  .ReadFrom.Configuration(this.Configuration)
+                  .CreateLogger();
+
+            //Config Database
+            services.AddDbContext<ejumpingContext>(options =>
+                options.UseNpgsql(
+                  Configuration.GetConnectionString("DefaultConnection")));
+
             services.AddDbContext<ApplicationDbContext>(options =>
                options.UseNpgsql(
                   Configuration.GetConnectionString("DefaultConnection")));
-
-            var ejumpingConnection = Configuration.GetConnectionString("DefaultConnection");
-            services.AddDbContext<ejumpingContext>(options => options.UseNpgsql(ejumpingConnection));
 
             //Config Asp.net Identity
             services.AddIdentity<ApplicationUser, ApplicationRole>(options =>
@@ -64,7 +73,8 @@ namespace EJumping.API
                .AddInMemoryIdentityResources(Config.IdentityResources)
                .AddInMemoryApiResources(Config.ApiResource)
                .AddInMemoryClients(Config.Clients)
-               .AddProfileService<ProfileService>();
+               .AddProfileService<ProfileService>()
+               ;
 
             // this adds the config data from DB (clients, resources)
             //.AddConfigurationStore(options =>
@@ -105,12 +115,13 @@ namespace EJumping.API
                 // Require confirmed email, should be enabled later ?
                 //options.SignIn.RequireConfirmedEmail = true;
             });
+            services.Configure<EJumpingWebConfiguration>(Configuration.GetSection("EJumpingWebConfiguration"));
 
             builder.AddDeveloperSigningCredential();
             services.AddAuthentication("Bearer")
                .AddIdentityServerAuthentication(options =>
                {
-                   options.Authority = Configuration["Mo2jaWebConfiguration:IdSrvUrl"];
+                   options.Authority = Configuration["EJumpingWebConfiguration:IdSrvUrl"];
                    if (Environment.IsDevelopment())
                    {
                        options.RequireHttpsMetadata = false;
@@ -118,25 +129,25 @@ namespace EJumping.API
                    options.ApiSecret = "secret";
                    options.ApiName = "api1";
                });
-               //.AddFacebook(facebookOptions =>
-               //{
-               //     //facebookOptions.SignInScheme = IdentityServerConstants.ExternalCookieAuthenticationScheme;
-               //     //facebookOptions.CallbackPath = new PathString("/api/auth/externalLoginCallBack");
-               //     facebookOptions.AppId = Configuration["Authentication:Facebook:AppId"];
-               //    facebookOptions.AppSecret = Configuration["Authentication:Facebook:AppSecret"];
-               //})
-               //.AddGoogle(googleOptions =>
-               //{
-               //    googleOptions.ClientId = Configuration["Authentication:Google:ClientId"];
-               //    googleOptions.ClientSecret = Configuration["Authentication:Google:ClientSecret"];
-               //})
-               //.AddKakao(kakaoOptions =>
-               //{
-               //     //kakaoOptions.SignInScheme = IdentityServerConstants.ExternalCookieAuthenticationScheme;
-               //     //kakaoOptions.CallbackPath = new PathString("/api/auth/externalLoginCallBack");
-               //     kakaoOptions.ClientId = Configuration["Authentication:Kakao:ClientId"];
-               //    kakaoOptions.ClientSecret = Configuration["Authentication:Kakao:ClientSecret"];
-               //});
+            //.AddFacebook(facebookOptions =>
+            //{
+            //     //facebookOptions.SignInScheme = IdentityServerConstants.ExternalCookieAuthenticationScheme;
+            //     //facebookOptions.CallbackPath = new PathString("/api/auth/externalLoginCallBack");
+            //     facebookOptions.AppId = Configuration["Authentication:Facebook:AppId"];
+            //    facebookOptions.AppSecret = Configuration["Authentication:Facebook:AppSecret"];
+            //})
+            //.AddGoogle(googleOptions =>
+            //{
+            //    googleOptions.ClientId = Configuration["Authentication:Google:ClientId"];
+            //    googleOptions.ClientSecret = Configuration["Authentication:Google:ClientSecret"];
+            //})
+            //.AddKakao(kakaoOptions =>
+            //{
+            //     //kakaoOptions.SignInScheme = IdentityServerConstants.ExternalCookieAuthenticationScheme;
+            //     //kakaoOptions.CallbackPath = new PathString("/api/auth/externalLoginCallBack");
+            //     kakaoOptions.ClientId = Configuration["Authentication:Kakao:ClientId"];
+            //    kakaoOptions.ClientSecret = Configuration["Authentication:Kakao:ClientSecret"];
+            //});
 
             services.AddControllersWithViews();
         }

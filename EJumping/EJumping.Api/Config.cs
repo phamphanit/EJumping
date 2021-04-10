@@ -36,7 +36,20 @@ namespace EJumping.Api
                 // scopes that client has access to
                 AllowedScopes = { "api1" }
             },
+               new Client
+                 {
+                          ClientId = "ro.client",
+                ClientSecrets = { new Secret("secret".Sha256()) },
 
+                AllowedGrantTypes = GrantTypes.ResourceOwnerPassword,
+
+                 AllowedScopes = new List<string>
+                {
+                    IdentityServerConstants.StandardScopes.OpenId,
+                    IdentityServerConstants.StandardScopes.Profile,
+                    "api1"
+                }
+            },
             // interactive ASP.NET Core MVC client
             new Client
             {
