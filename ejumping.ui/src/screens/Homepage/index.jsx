@@ -1,4 +1,3 @@
-import FeaturePost from "./feature-post/feature-post.component";
 const HomePage = () => {
   return (
     <div>
@@ -14,12 +13,10 @@ const HomePage = () => {
           <div className="row">
             <div className="col-lg-7">
               <h1>Bootstrap 4 Blog - A free template by Bootstrap Temple</h1>
-              <a href="#" className="hero-link">
-                Discover More
-              </a>
+              <a className="hero-link">Discover More</a>
             </div>
           </div>
-          <a href=".intro" className="continue link-scroll">
+          <a className="continue link-scroll">
             <i className="fa fa-long-arrow-down"></i> Scroll Down
           </a>
         </div>
@@ -42,11 +39,7 @@ const HomePage = () => {
         </div>
       </section>
       <section class="featured-posts no-padding-top">
-        <div class="container">
-          <FeaturePost></FeaturePost>
-          <FeaturePost reverse></FeaturePost>
-          <FeaturePost></FeaturePost>
-        </div>
+        <div class="container"></div>
       </section>
     </div>
   );

@@ -1,2 +1,19 @@
+header {
+  display: flex;
+  position: fixed;
+  z-index: 999;
 
-
+  .navbar {
+    width: 100vw;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding: 0px 90px;
+    .left {
+      display: flex;
+    }
+    .right {
+      display: flex;
+    }
+  }
+}
