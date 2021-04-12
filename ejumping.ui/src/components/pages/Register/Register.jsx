@@ -35,7 +35,6 @@ export default class RegisterPage extends React.Component {
     this.props.dispatchUserRegisterRequested(model);
   }
   handleToggleCheckTos() {
-    console.log("hello");
     this.setState({ tosAgreed: !this.state.tosAgreed });
   }
   getValidationSchema(values) {
@@ -83,7 +82,7 @@ export default class RegisterPage extends React.Component {
                   <div className="value-text">
                     <label> ID</label>
                     <input
-                      type="email"
+                      type="text"
                       name="userName"
                       onChange={handleChange}
                       onBlur={handleBlur}
@@ -177,7 +176,7 @@ export default class RegisterPage extends React.Component {
                   <input
                     type="checkbox"
                     checked={this.state.tosAgreed}
-                    onClick={this.handleToggleCheckTos}
+                    onChange={this.handleToggleCheckTos}
                   />
                   <label className="form-check-label">
                     I agree to the Terms of Use and the collection and use of
@@ -185,11 +184,7 @@ export default class RegisterPage extends React.Component {
                   </label>
                 </div>
                 <div className="bottom-btn">
-                  <button
-                    type="submit"
-                    class="btn btn-info"
-                    disabled={isSubmitting}
-                  >
+                  <button type="submit" className="btn btn-info">
                     Submit
                   </button>
                 </div>

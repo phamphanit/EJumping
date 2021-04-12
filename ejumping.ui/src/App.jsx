@@ -1,8 +1,7 @@
 import { BrowserRouter, Route, Switch } from "react-router-dom";
-import HomePage from "./screens/Homepage/index";
+import HomePage from "./components/pages/Homepage/index";
 import Header from "./partials/Header/index";
 import Footer from "./partials/Footer/index";
-import RegisterPage from "./components/pages/Register/Register";
 import RegisterPageContainer from "./components/pages/Register/RegisterPageContainer";
 function App() {
   return (

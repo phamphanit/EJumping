@@ -1,0 +1,7 @@
+const userActionTypes = {
+        USER_REGISTER_REQUEST: "USER_REGISTER_REQUEST",
+        USER_REGISTER_SUCCESS: "USER_REGISTER_SUCCESS",
+        USER_REGISTER_FAILURE: "USER_REGISTER_FAILURE",
+}
+
+export default userActionTypes

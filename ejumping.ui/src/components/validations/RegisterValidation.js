@@ -5,9 +5,9 @@ export const RegisterValidation = (values) =>
                         .min(2, "validation.register.idhastobemorethancharacters")
                         .max(12, "validation.register.idhastobemorethancharacters")
                         .required("validation.register.youhavetohavenickname"),
-                password: Yup.string().matches(/^(?=.*[A-Z])(?=.*\d)(?=.*[^\w])(?!.*[=&?<>]).{6,12}$/, "validation.register.pleaseusealphanumeric").required(
-                        "validation.register.youhavetohavepassword"
-                ),
+                // password: Yup.string().matches(/^(?=.*[A-Z])(?=.*\d)(?=.*[^\w])(?!.*[=&?<>]).{6,12}$/, "validation.register.pleaseusealphanumeric").required(
+                //         "validation.register.youhavetohavepassword"
+                // ),
                 passwordConfirm: Yup.string()
                         .oneOf([values.password], 'validation.register.passwordsarenotthesame')
                         .required(
