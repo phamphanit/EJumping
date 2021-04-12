@@ -35,15 +35,16 @@ namespace EJumping.Api.Controllers
         /// </returns>
         [AllowAnonymous]
         [HttpPost]
-        [Route("register")]
-        [ProducesResponseType(201)]
+        //[Route("register")]
+        [Route("/api/auth/register")]
+
+        [ProducesResponseType(200)]
         [ProducesResponseType(400, Type = typeof(ValidationResultModel))]
         public async Task<IActionResult> Register([FromBody] UserCreateModel model)
         {
 
             if (ModelState.IsValid)
             {
-
                 try
                 {
                     var account = new ApplicationUser 
@@ -83,14 +84,20 @@ namespace EJumping.Api.Controllers
                                 return BadRequest(this.ModelState);
                             }
 
-                            return this.Created(
-                                "~/",
-                                new
-                                {
-                                    access_token = response.AccessToken,
-                                    expires_in = response.ExpiresIn,
-                                    token_type = response.TokenType
-                                });
+                            //return this.Created(
+                            //    "~/",
+                            //    new
+                            //    {
+                            //        access_token = response.AccessToken,
+                            //        expires_in = response.ExpiresIn,
+                            //        token_type = response.TokenType
+                            //    });
+                            return this.Ok(new
+                            {
+                                access_token = response.AccessToken,
+                                expires_in = response.ExpiresIn,
+                                token_type = response.TokenType
+                            });
                         }
                     }
                     else

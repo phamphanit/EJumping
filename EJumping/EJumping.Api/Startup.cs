@@ -148,7 +148,14 @@ namespace EJumping.API
             //     kakaoOptions.ClientId = Configuration["Authentication:Kakao:ClientId"];
             //    kakaoOptions.ClientSecret = Configuration["Authentication:Kakao:ClientSecret"];
             //});
+            services.AddCors(o => o.AddPolicy("MyPolicy", builder =>
+            {
+                //builder.WithOrigins("http://localhost:3000", "https://localhost:3000")               
 
+                builder.AllowAnyOrigin()
+                       .AllowAnyMethod()
+                       .AllowAnyHeader();
+            }));
             services.AddControllersWithViews();
         }
 
@@ -168,6 +175,8 @@ namespace EJumping.API
             }
             app.UseHttpsRedirection();
             app.UseStaticFiles();
+            app.UseCors("MyPolicy");
+
             app.UseIdentityServer();
 
             app.UseRouting();
