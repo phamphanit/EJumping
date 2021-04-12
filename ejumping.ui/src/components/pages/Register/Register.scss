@@ -1,1 +1,44 @@
- 
+.container__register {
+  .register-card {
+    padding: 30px;
+    margin: auto;
+    width: 500px;
+    .title {
+      text-align: center;
+      margin-bottom: 30px;
+    }
+    .form-group {
+      .value-text {
+        position: relative;
+
+        display: flex;
+        label {
+          width: 100px;
+        }
+        input {
+          position: absolute;
+          right: 0;
+          width: 300px;
+        }
+      }
+
+      .msg-sec {
+        font-size: 0.8rem;
+        margin-top: 15px;
+        display: block;
+        text-align: right;
+        .error-msg {
+          color: red;
+        }
+        .success-msg {
+          color: green;
+        }
+      }
+    }
+    .bottom-btn {
+      margin-top: 50px;
+      display: flex;
+      justify-content: center;
+    }
+  }
+}

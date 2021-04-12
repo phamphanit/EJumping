@@ -2,7 +2,7 @@ import { BrowserRouter, Route, Switch } from "react-router-dom";
 import HomePage from "./screens/Homepage/index";
 import Header from "./partials/Header/index";
 import Footer from "./partials/Footer/index";
-import Register from "./components/pages/Register/Register";
+import RegisterPage from "./components/pages/Register/Register";
 function App() {
   return (
     <BrowserRouter>
@@ -13,7 +13,7 @@ function App() {
             <Switch>
               <Route exact path="/" component={HomePage} />
               <Route exact path="/post" component={HomePage} />
-              <Route exact path="/register" component={Register} />
+              <Route exact path="/register" component={RegisterPage} />
             </Switch>
           </main>
         </div>

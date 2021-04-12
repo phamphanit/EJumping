@@ -1,20 +1,17 @@
 .footer-wrapper {
-  // position: absolute;
-  // bottom: 0;
-  // left: 0;
-  // right: 0;
-  width: 100%;
-  // min-height: 182px;
   background: #e0e0e0;
   border-top: 1px solid #c3c5c6;
   margin-top: 15px;
   .row-footer__menu {
     border-bottom: 1px solid #c3c5c6;
+    min-width: 100vw;
+    padding-left: 50px;
     .footer__menu {
       list-style-type: none;
       display: flex;
       margin-bottom: 0;
       padding: 0;
+
       li {
         padding: 0;
       }
@@ -25,5 +22,8 @@
     .footer-tab__menu {
       padding: 15px;
     }
+  }
+  .row-footer__content {
+    padding-left: 50px;
   }
 }
