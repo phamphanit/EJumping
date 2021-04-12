@@ -3,6 +3,7 @@ import HomePage from "./screens/Homepage/index";
 import Header from "./partials/Header/index";
 import Footer from "./partials/Footer/index";
 import RegisterPage from "./components/pages/Register/Register";
+import RegisterPageContainer from "./components/pages/Register/RegisterPageContainer";
 function App() {
   return (
     <BrowserRouter>
@@ -13,7 +14,7 @@ function App() {
             <Switch>
               <Route exact path="/" component={HomePage} />
               <Route exact path="/post" component={HomePage} />
-              <Route exact path="/register" component={RegisterPage} />
+              <Route exact path="/register" component={RegisterPageContainer} />
             </Switch>
           </main>
         </div>
