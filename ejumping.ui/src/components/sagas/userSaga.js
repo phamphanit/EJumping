@@ -1,7 +1,8 @@
 import { all, call, takeLatest, put, fork } from 'redux-saga/effects';
 import { registerUser, request } from '../../api/userApi';
-import { userLoginSucceed, userRegisterFailure, userRegisterSucceed } from '../actions/userActions';
+import { userLoginSucceed, userLogoutSuccess, userRegisterFailure, userRegisterSucceed } from '../actions/userActions';
 import userActionTypes from '../constant/userActionTypes';
+import { Cookies } from 'react-cookie';
 
 function* workerUserRegister(model) {
         // try {
@@ -31,20 +32,36 @@ function* workerUserRegister(model) {
                         yield put(userLoginSucceed(response.data))
                 }
                 else {
-                        console.log("bbbbbbbb")
-
                         yield put(userRegisterFailure(response.request.response));
                 }
         }
         catch (error) {
-                console.log("aaaaaaaaaaaa")
                 yield put(userRegisterFailure(error))
-
         }
+}
+function* workerUserLogin(model) {
+        const cookie = new Cookies();
+        const act = cookie.get('act');
+        console.log(act);
+        const data = { access_token: "12312123" }
+        yield put(userLoginSucceed(data));
+}
+function* workerUserLogout() {
+        yield put(userLogoutSuccess());
 }
 export function* watchUserRegister() {
         yield takeLatest(userActionTypes.USER_REGISTER_REQUEST, workerUserRegister)
 }
-const userSagas = [fork(watchUserRegister)]
+export function* watchUserLogin() {
+        yield takeLatest(userActionTypes.USER_LOGIN_REQUEST, workerUserLogin)
+}
+export function* watchUserLogout() {
+        yield takeLatest(userActionTypes.USER_LOGOUT_REQUESTED, workerUserLogout)
+}
+const userSagas = [
+        fork(watchUserRegister),
+        fork(watchUserLogin),
+        fork(watchUserLogout)
+]
 
 export default userSagas;

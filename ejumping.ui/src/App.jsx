@@ -3,6 +3,7 @@ import HomePage from "./components/pages/Homepage/index";
 import Header from "./partials/Header/index";
 import Footer from "./partials/Footer/index";
 import RegisterPageContainer from "./components/pages/Register/RegisterPageContainer";
+import LoginPage from "./components/pages/Login/LoginPage";
 function App() {
   return (
     <div>
@@ -14,6 +15,7 @@ function App() {
               <Route exact path="/" component={HomePage} />
               <Route exact path="/post" component={HomePage} />
               <Route exact path="/register" component={RegisterPageContainer} />
+              <Route exact path="/login" component={LoginPage}></Route>
             </Switch>
           </main>
         </div>

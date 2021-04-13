@@ -1,9 +1,13 @@
 import "./Header.scss";
 import { NavLink, Link } from "react-router-dom";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { userLogoutRequest } from "../../components/actions/userActions";
 const Header = () => {
+  const dispatch = useDispatch();
   const isLoggedIn = useSelector((state) => state.user.isLoggedIn);
-  const handleLogout = () => {};
+  const handleLogout = () => {
+    dispatch(userLogoutRequest());
+  };
   return (
     <header>
       <nav className="navbar navbar-expand-sm navbar-light bg-light">

@@ -17,3 +17,13 @@ export const RegisterValidation = (values) =>
                         "validation.register.emailisrequired"
                 ),
         })
+export const LoginValidation = Yup.object().shape({
+        userName: Yup.string()
+                .required(
+                        "validation.login.usernameisrequired"
+                ),
+        password: Yup.string()
+                .required(
+                        "validation.login.passwordisrequired"
+                )
+});
