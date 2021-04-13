@@ -10,3 +10,15 @@ export function registerUser(model) {
                 responseType: 'json'
         });
 }
+const requestInstance = axios.create({
+        baseURL: globalUrl.root
+});
+
+export function request(url, options) {
+        const requestOptions = Object.assign({}, options);
+        requestOptions.url = url;
+
+        return requestInstance.post(url, requestOptions)
+                .then((response) => response)
+                .catch((error) => error.response);
+}

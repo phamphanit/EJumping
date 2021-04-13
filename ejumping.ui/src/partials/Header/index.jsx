@@ -1,6 +1,9 @@
 import "./Header.scss";
 import { NavLink, Link } from "react-router-dom";
+import { useSelector } from "react-redux";
 const Header = () => {
+  const isLoggedIn = useSelector((state) => state.user.isLoggedIn);
+  const handleLogout = () => {};
   return (
     <header>
       <nav className="navbar navbar-expand-sm navbar-light bg-light">
@@ -53,18 +56,32 @@ const Header = () => {
           </div>
         </div>
         <div className="right">
-          <ul className="navbar-nav">
-            <li className="nav-item">
-              <Link to="/register" className="nav-link">
-                SignUp
-              </Link>
-            </li>
-            <li className="nav-item">
-              <Link to="/login" className="nav-link">
-                SignIn
-              </Link>
-            </li>
-          </ul>
+          {!isLoggedIn ? (
+            <ul className="navbar-nav">
+              <li className="nav-item">
+                <Link to="/register" className="nav-link">
+                  SignUp
+                </Link>
+              </li>
+              <li className="nav-item">
+                <Link to="/login" className="nav-link">
+                  SignIn
+                </Link>
+              </li>
+            </ul>
+          ) : (
+            <ul className="navbar-nav">
+              <li className="nav-item">
+                {" "}
+                <a className="nav-link">Hello</a>
+              </li>
+              <li className="nav-item">
+                <a onClick={handleLogout} className="nav-link">
+                  Log out
+                </a>
+              </li>
+            </ul>
+          )}
         </div>
       </nav>
     </header>

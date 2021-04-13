@@ -1,11 +1,11 @@
-import { BrowserRouter, Route, Switch } from "react-router-dom";
+import { Route, Switch } from "react-router-dom";
 import HomePage from "./components/pages/Homepage/index";
 import Header from "./partials/Header/index";
 import Footer from "./partials/Footer/index";
 import RegisterPageContainer from "./components/pages/Register/RegisterPageContainer";
 function App() {
   return (
-    <BrowserRouter>
+    <div>
       <Header></Header>
       <div className="container">
         <div className="main-wrapper">
@@ -19,7 +19,7 @@ function App() {
         </div>
       </div>
       <Footer></Footer>
-    </BrowserRouter>
+    </div>
   );
 }
 

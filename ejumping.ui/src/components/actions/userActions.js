@@ -14,3 +14,27 @@ export const userRegisterFailure = (err) =>
         type: userActionTypes.USER_REGISTER_FAILURE,
         payload: err
 })
+export const userLoginRequest = model =>
+({
+        type: userActionTypes.USER_LOGIN_REQUEST,
+        payload: model
+})
+export const userLoginSucceed = (data) => ({
+        type: userActionTypes.USER_LOGIN_SUCCESS,
+        payload: data
+})
+export const userLoginFailure = (err) => ({
+        type: userActionTypes.USER_LOGIN_FAILURE,
+        payload: err
+})
+export const userLogoutRequest = () => ({
+        type: userActionTypes.USER_LOGOUT_REQUESTED,
+})
+export const userLogoutSuccess = () => ({
+        type: userActionTypes.USER_LOGOUT_SUCCESS,
+})
+export const userLogoutFailure = (err) => ({
+        type: userActionTypes.USER_LOGOUT_FAILURE,
+        payload: err
+
+})

@@ -58,6 +58,16 @@ export default class RegisterPage extends React.Component {
       };
     }, {});
   }
+  componentDidMount() {
+    if (this.props.isLoggedIn) {
+      this.props.dispatchUrl("/");
+    }
+  }
+  componentDidUpdate() {
+    if (this.props.isLoggedIn) {
+      this.props.dispatchUrl("/");
+    }
+  }
   render() {
     return (
       <div className="container container__register">
@@ -183,6 +193,12 @@ export default class RegisterPage extends React.Component {
                     personal information
                   </label>
                 </div>
+                {this.props.userRegisterErrorMsg && (
+                  <div className="server-error-msg text-danger">
+                    {this.props.userRegisterErrorMsg}
+                  </div>
+                )}
+
                 <div className="bottom-btn">
                   <button type="submit" className="btn btn-info">
                     Submit
