@@ -22,3 +22,12 @@ export function request(url, options) {
                 .then((response) => response)
                 .catch((error) => error.response);
 }
+export function getLoggedInUser() {
+        const url = globalUrl.root + '/api/user/';
+        return axios.get(url, {
+                headers: { Pragma: 'no-cache' },
+                responseType: 'json'
+        })
+                .then((response) => response)
+                .catch((error) => error.response);
+}

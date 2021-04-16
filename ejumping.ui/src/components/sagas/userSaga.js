@@ -1,53 +1,58 @@
 import { all, call, takeLatest, put, fork } from 'redux-saga/effects';
-import { registerUser, request } from '../../api/userApi';
-import { userLoginSucceed, userLogoutSuccess, userRegisterFailure, userRegisterSucceed } from '../actions/userActions';
+import * as api from '../../api/userApi';
+import * as action from '../actions/userActions';
 import userActionTypes from '../constant/userActionTypes';
-import { Cookies } from 'react-cookie';
 
+const userSagas = [
+        fork(watchUserRegister),
+        fork(watchUserLogin),
+        fork(watchUserLogout),
+        fork(watchfetchMyInfo)
+]
 function* workerUserRegister(model) {
-        // try {
-        //         const data = yield call(() => registerUser(model.payload));
-        //         console.log(data)
-        //         if (data.status === 200) {
-        //                 yield put(userRegisterSucceed(data.data))
-
-        //         }
-        //         else {
-        //                 yield put(userRegisterFailure(data.data.errors))
-
-        //         }
-
-        // }
-        // catch (error) {
-        //         console.log(error.response.data.errors)
-        //         yield put(userRegisterFailure(error))
-
-        // }
-
-
         try {
-                const response = yield call(request, '/api/auth/register', model.payload)
+                const response = yield call(api.request, '/api/auth/register', model.payload)
                 if (response.status === 200) {
-                        yield put(userRegisterSucceed(response.data))
-                        yield put(userLoginSucceed(response.data))
+                        yield put(action.userRegisterSucceed(response.data))
+                        yield put(action.userLoginSucceed(response.data))
                 }
                 else {
-                        yield put(userRegisterFailure(response.request.response));
+                        yield put(action.userRegisterFailure(response.request.response));
                 }
         }
         catch (error) {
-                yield put(userRegisterFailure(error))
+                yield put(action.userRegisterFailure(error))
         }
 }
 function* workerUserLogin(model) {
-        const cookie = new Cookies();
-        const act = cookie.get('act');
-        console.log(act);
-        const data = { access_token: "12312123" }
-        yield put(userLoginSucceed(data));
+        try {
+                const response = yield call(api.request, '/api/auth/login', model.payload)
+                if (response.status === 200) {
+                        yield put(action.userLoginSucceed(response.data));
+                        yield put(action.fetchMyInfoRequested())
+                } else {
+                        yield put(action.userLoginFailure(response.request.response));
+                }
+        }
+        catch (err) {
+
+                yield put(action.userLoginFailure(err));
+        }
 }
 function* workerUserLogout() {
-        yield put(userLogoutSuccess());
+        yield put(action.userLogoutSuccess());
+}
+function* workerFetchMyInfo() {
+        try {
+                const response = yield call(() => api.getLoggedInUser());
+                if (response.status === 200) {
+                        yield put(action.fetchMyInfoSucceed(response.data))
+                }
+                else yield put(action.fetchMyInfoFailure(response.request.response));
+        }
+        catch (err) {
+                yield put(action.fetchMyInfoFailure(err))
+        }
 }
 export function* watchUserRegister() {
         yield takeLatest(userActionTypes.USER_REGISTER_REQUEST, workerUserRegister)
@@ -58,10 +63,9 @@ export function* watchUserLogin() {
 export function* watchUserLogout() {
         yield takeLatest(userActionTypes.USER_LOGOUT_REQUESTED, workerUserLogout)
 }
-const userSagas = [
-        fork(watchUserRegister),
-        fork(watchUserLogin),
-        fork(watchUserLogout)
-]
+export function* watchfetchMyInfo() {
+        yield takeLatest(userActionTypes.FETCH_MYINFO_REQUESTED, workerFetchMyInfo)
+}
+
 
 export default userSagas;

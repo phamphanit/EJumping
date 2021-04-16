@@ -38,3 +38,14 @@ export const userLogoutFailure = (err) => ({
         payload: err
 
 })
+export const fetchMyInfoRequested = () => ({
+        type: userActionTypes.FETCH_MYINFO_REQUESTED,
+})
+export const fetchMyInfoSucceed = (model) => ({
+        type: userActionTypes.FETCH_MYINFO_SUCCEEDED,
+        payload: model
+})
+export const fetchMyInfoFailure = (err) => ({
+        type: userActionTypes.FETCH_MYINFO_FAILURE,
+        payload: err
+})

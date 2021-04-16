@@ -21,9 +21,12 @@
 	  <PackageReference Include="Serilog.Extensions.Logging" Version="3.0.1" />
 	  <PackageReference Include="serilog.sinks.console" Version="3.1.1" />
 	  <PackageReference Include="serilog.sinks.file" Version="4.1.0" />
+	  <PackageReference Include="AutoMapper" Version="10.1.1" />
+
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\EJumping.BLL\EJumping.BLL.csproj" />
     <ProjectReference Include="..\EJumping.Core\EJumping.Core.csproj" />
     <ProjectReference Include="..\EJumping.DAL\EJumping.DAL.csproj" />
   </ItemGroup>

@@ -1,13 +1,10 @@
 import "./Header.scss";
 import { NavLink, Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { userLogoutRequest } from "../../components/actions/userActions";
 const Header = () => {
   const dispatch = useDispatch();
   const isLoggedIn = useSelector((state) => state.user.isLoggedIn);
-  const handleLogout = () => {
-    dispatch(userLogoutRequest());
-  };
+  const handleLogout = () => {};
   return (
     <header>
       <nav className="navbar navbar-expand-sm navbar-light bg-light">
@@ -32,7 +29,9 @@ const Header = () => {
                 </Link>
               </li>
               <li className="nav-item">
-                <a className="nav-link">Features</a>
+                <Link to="/feature" className="nav-link">
+                  Features
+                </Link>
               </li>
               <li className="nav-item">
                 <a className="nav-link">Pricing</a>

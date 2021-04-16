@@ -3,7 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
+using AutoMapper;
 using EJumping.Api;
+using EJumping.BLL;
+using EJumping.BLL.User;
 using EJumping.Core.Models.Configurations;
 using EJumping.Core.Models.User;
 using EJumping.DAL.EF.Entities;
@@ -115,6 +118,23 @@ namespace EJumping.API
                 // Require confirmed email, should be enabled later ?
                 //options.SignIn.RequireConfirmedEmail = true;
             });
+
+            services.ConfigureApplicationCookie(options =>
+            {
+                // Cookie settings
+                options.Cookie.HttpOnly = true;
+                options.ExpireTimeSpan = TimeSpan.FromDays(30);
+                options.Cookie.Name = "ejumping.identity";
+                // If the LoginPath isn't set, ASP.NET Core defaults 
+                // the path to /Account/Login.
+                // options.LoginPath = "/Account/Login";
+                options.LoginPath = "/Account/Login";
+                // If the AccessDeniedPath isn't set, ASP.NET Core defaults 
+                // the path to /Account/AccessDenied.
+                options.AccessDeniedPath = "/Account/AccessDenied";
+                options.SlidingExpiration = true;
+
+            });
             services.Configure<EJumpingWebConfiguration>(Configuration.GetSection("EJumpingWebConfiguration"));
 
             builder.AddDeveloperSigningCredential();
@@ -156,6 +176,18 @@ namespace EJumping.API
                        .AllowAnyMethod()
                        .AllowAnyHeader();
             }));
+            services.AddScoped<DbContext, ejumpingContext>();
+            services.AddScoped<IUserService, UserService>();
+
+
+            //Auto Mapper
+            var mappingConfig = new MapperConfiguration(mc =>
+            {
+                mc.AddProfile(new MappingProfile());
+
+            });
+            IMapper mapper = mappingConfig.CreateMapper();
+            services.AddSingleton(mapper);
             services.AddControllersWithViews();
         }
 
@@ -180,6 +212,7 @@ namespace EJumping.API
             app.UseIdentityServer();
 
             app.UseRouting();
+            app.UseAuthentication();
 
             app.UseAuthorization();
 

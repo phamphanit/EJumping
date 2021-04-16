@@ -7,6 +7,7 @@ const initialState = {
         userRegisterErrorMsg: null,
         userLoginErrorMsg: null,
         access_token: null,
+        myInfo: null
 }
 const userReducer = (state = initialState, action) => {
         switch (action.type) {
@@ -23,7 +24,7 @@ const userReducer = (state = initialState, action) => {
                                 userRegisterErrorMsg: action.payload
                         };
                 case userActionTypes.USER_LOGIN_SUCCESS:
-                        axios.defaults.headers.common['Authorization'] = 'Bearer' + action.payload.access_token;
+                        axios.defaults.headers.common['Authorization'] = 'Bearer ' + action.payload.access_token;
                         var cookies = new Cookies();
                         cookies.set("act", action.payload.access_token)
                         return {
@@ -41,7 +42,13 @@ const userReducer = (state = initialState, action) => {
                         return {
                                 ...state,
                                 isLoggedIn: false,
-                                access_token: null
+                                access_token: null,
+                                myInfo: null
+                        }
+                case userActionTypes.FETCH_MYINFO_SUCCEEDED:
+                        return {
+                                ...state,
+                                myInfo: action.payload
                         }
                 default:
                         return state;
