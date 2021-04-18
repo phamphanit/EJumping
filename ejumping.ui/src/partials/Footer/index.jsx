@@ -2,36 +2,53 @@ import "./Footer.scss";
 import { Link } from "react-router-dom";
 const Footer = () => {
   return (
-    <footer className="footer-wrapper">
-      <div className="container row-footer__menu">
-        <ul className="footer__menu">
-          <li className="footer-tab__menu">
-            <Link to="/privacy">Privacy</Link>
-          </li>
-          <span>/</span>
-          <li className="footer-tab__menu">
-            <Link to="/terms">Terms</Link>
-          </li>
-        </ul>
-      </div>
-      <div className="container row-footer__content">
+    <footer>
+      <div className="container footer_content">
         <div className="row">
-          <div className="col-sm-12">
-            <div className="footer-content">
-              <div className="left">
-                <Link to="/" className="logo">
-                  <img src="/assets/images/logo.svg" />
-                </Link>
-                <div className="footer-info">
-                  <p>Contact Number: 326-87-00373</p>
-                  <p>Customer Service: help@.ejumping.com</p>
-                  <p>
-                    Copyright@<strong>EugenePhan.</strong>All rights reserved
-                  </p>
+          <div className="col-lg-4">
+            <div className="contact">
+              <div className="logo_container">
+                <div className="logo">eJumping</div>
+                <div>Got Question? Call Us 24/7</div>
+                <div>ETown Cong Hoa, Viet Nam</div>
+                <div class="footer_social">
+                  <ul>
+                    <li>
+                      <a href="#">
+                        <i class="fab fa-facebook-f"></i>
+                      </a>
+                    </li>
+                    <li>
+                      <a href="#">
+                        <i class="fab fa-twitter"></i>
+                      </a>
+                    </li>
+                    <li>
+                      <a href="#">
+                        <i class="fab fa-youtube"></i>
+                      </a>
+                    </li>
+                    <li>
+                      <a href="#">
+                        <i class="fab fa-google"></i>
+                      </a>
+                    </li>
+                    <li>
+                      <a href="#">
+                        <i class="fab fa-vimeo-v"></i>
+                      </a>
+                    </li>
+                  </ul>
                 </div>
               </div>
-              <div style={{ clear: "both" }}></div>
             </div>
+          </div>
+        </div>
+      </div>
+      <div className="footer_bot">
+        <div className="container">
+          <div className="row">
+            <div>Copyright ©2021 All rights reserved | Eugene Pham</div>
           </div>
         </div>
       </div>

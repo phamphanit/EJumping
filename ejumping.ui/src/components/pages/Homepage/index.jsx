@@ -38,8 +38,8 @@ const HomePage = () => {
           </div>
         </div>
       </section>
-      <section class="featured-posts no-padding-top">
-        <div class="container"></div>
+      <section className="featured-posts no-padding-top">
+        <div className="container"></div>
       </section>
     </div>
   );

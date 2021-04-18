@@ -1,4 +1,5 @@
 import React, { useEffect } from "react";
+import "../Register/Register.scss";
 import PropTypes from "prop-types";
 import { Formik } from "formik";
 import { useDispatch, useSelector } from "react-redux";

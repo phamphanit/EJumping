@@ -1,19 +1,49 @@
 body {
   color: #25262b;
-  font-family: "Open Sans", sans-serif;
-  background: #eeefef;
-  font-weight: 400;
+  font-family: "Rubik", sans-serif;
+  font-weight: 300;
+  padding: 0;
+  margin: 0;
+  // height: 100%;
 }
+html {
+  // height: 100%;
+  padding: 0;
+  margin: 0;
+}
+div {
+  align-items: center;
+}
+* {
+  box-sizing: border-box;
+}
+ul {
+  list-style: none;
 
+  padding: 0;
+  margin: 0;
+}
+li,
+a {
+  text-decoration: none;
+  color: black;
+  &:hover {
+    color: grey;
+    text-decoration: none;
+  }
+}
 .main-wrapper {
   display: block;
-  padding-top: 175px;
+  padding-top: 50px;
 }
 .container {
-  min-width: 100%;
-  padding: 15px;
+  height: 100%;
+}
+.row {
+  height: 100%;
 }
 .card {
-  padding: 15px;
-  // width: 400px;
+  justify-content: center;
+  align-items: center;
 }
+$main-theme: #228891;
