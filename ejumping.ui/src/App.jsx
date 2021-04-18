@@ -5,10 +5,13 @@ import Footer from "./partials/Footer/index";
 import RegisterPageContainer from "./components/pages/Register/RegisterPageContainer";
 import LoginPage from "./components/pages/Login/LoginPage";
 import FeaturePage from "./components/pages/FeaturePage/Feature";
+import { PageMenu } from "./partials/Menu/PageMenu";
 function App() {
   return (
     <div>
       <Header></Header>
+      <PageMenu></PageMenu>
+
       <div className="container">
         <div className="main-wrapper">
           <main className="container-form">
