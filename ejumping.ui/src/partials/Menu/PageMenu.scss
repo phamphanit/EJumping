@@ -51,6 +51,9 @@
         li {
           margin-left: 40px;
           .menu_item_container {
+            height: 60px;
+            align-items: center;
+            display: flex;
             .menu_head_text {
               font-size: 1.1rem;
               font-weight: bold;
@@ -80,5 +83,28 @@
         }
       }
     }
+  }
+}
+.banner {
+  z-index: -5;
+  position: relative;
+  height: 300px;
+  .background {
+    background-image: url("../../assests/images/shop_background.jpg");
+    height: 100%;
+    background-size: cover;
+    background-position: center center;
+    background-attachment: fixed;
+  }
+  .text {
+    z-index: 10;
+    height: 100%;
+    width: 100%;
+    display: flex;
+    position: absolute;
+    top: 0;
+    align-items: center;
+    justify-content: center;
+    font-size: 2rem;
   }
 }

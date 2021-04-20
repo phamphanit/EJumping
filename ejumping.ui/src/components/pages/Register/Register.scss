@@ -1,53 +1,50 @@
+@import "../../../_scss/style";
 .container__register {
   .register-card {
     padding: 30px;
     margin: auto;
     width: 500px;
-    .title {
-      text-align: center;
-      margin-bottom: 30px;
-    }
-    .form-group {
-      // width: 450px;
-      .value-text {
-        position: relative;
+    .register-form-size {
+      width: 100%;
+      .title {
+        text-align: center;
+        margin-bottom: 30px;
+      }
+      .form-group {
+        .value-text {
+          display: flex;
+          flex-direction: column;
+          label {
+            width: 100px;
+          }
+        }
 
+        .msg-sec {
+          font-size: 0.8rem;
+          margin-top: 15px;
+          display: block;
+          text-align: right;
+          .error-msg {
+            color: red;
+          }
+          .success-msg {
+            color: green;
+          }
+        }
+      }
+      .bottom-btn {
+        margin-top: 50px;
         display: flex;
-        label {
-          width: 100px;
-        }
-        input {
-          position: absolute;
-          right: 0;
-          width: 300px;
-        }
+        justify-content: center;
       }
-
-      .msg-sec {
+      .agree-Terms {
+        display: flex;
+        flex-direction: column;
+      }
+      .server-error-msg {
+        margin-top: 20px;
         font-size: 0.8rem;
-        margin-top: 15px;
-        display: block;
-        text-align: right;
-        .error-msg {
-          color: red;
-        }
-        .success-msg {
-          color: green;
-        }
       }
-    }
-    .bottom-btn {
-      margin-top: 50px;
-      display: flex;
-      justify-content: center;
-    }
-    .agree-Terms {
-      display: flex;
-      flex-direction: column;
-    }
-    .server-error-msg {
-      margin-top: 20px;
-      font-size: 0.8rem;
     }
   }
 }

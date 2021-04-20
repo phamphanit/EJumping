@@ -47,14 +47,14 @@ const LoginPage = (props) => {
             <form onSubmit={handleSubmit} className="register-form-size">
               <div className="form-group">
                 <div className="value-text">
-                  <label> ID</label>
+                  <label> UserName</label>
                   <input
                     type="text"
                     name="userName"
                     onChange={handleChange}
                     onBlur={handleBlur}
                     value={values.userName}
-                    className="form-control"
+                    className="ej-input"
                     placeholder="Username"
                   />
                 </div>
