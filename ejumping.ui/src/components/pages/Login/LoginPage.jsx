@@ -3,10 +3,11 @@ import "../Register/Register.scss";
 import PropTypes from "prop-types";
 import { Formik } from "formik";
 import { useDispatch, useSelector } from "react-redux";
-import { userLoginRequest } from "../../actions/userActions";
+import { userExternalLogin, userLoginRequest } from "../../actions/userActions";
 import { push } from "connected-react-router";
 import { LoginValidation } from "../../validations/RegisterValidation";
 import "./Login.scss";
+import GoogleLogin from "react-google-login";
 const LoginPage = (props) => {
   const dispatch = useDispatch();
   const isLoggedIn = useSelector((state) => state.user.isLoggedIn);
@@ -27,6 +28,16 @@ const LoginPage = (props) => {
     };
     dispatch(userLoginRequest(model));
   };
+  const handleExternalLogin = (provider) => {
+    // model.provider = provider;
+    // model.returnUrl = "/";
+    dispatch(userExternalLogin());
+    // window.location.href =
+    //   "/api/auth/challengeExternalLogin?provider=" + provider + "&returnUrl=/";
+  };
+  const googleResponseHandler = (response) => {
+    dispatch(userExternalLogin(response));
+  };
   return (
     <div className="container container__register">
       <h2 className="title">Welcome to eJumping</h2>
@@ -34,11 +45,19 @@ const LoginPage = (props) => {
       <div className="external_login_container">
         <div>Log in with</div>
         <ul className="login_provider">
-          <li className="google">
+          <li className="google" onClick={() => handleExternalLogin("Google")}>
             <div className="logo">
               <img src="https://img.icons8.com/fluent/48/000000/google-logo.png" />
             </div>
             <div className="text">Google</div>
+          </li>
+          <li>
+            <GoogleLogin
+              clientId="950609480264-f2da4qpiakv1806u4ifpmhoq8bfdksv0.apps.googleusercontent.com"
+              buttonText="Google Login"
+              onSuccess={googleResponseHandler}
+              onFailure={googleResponseHandler}
+            />
           </li>
           <li className="facebook">
             <div className="logo">

@@ -7,7 +7,8 @@ const userSagas = [
         fork(watchUserRegister),
         fork(watchUserLogin),
         fork(watchUserLogout),
-        fork(watchfetchMyInfo)
+        fork(watchfetchMyInfo),
+        fork(watchexteralLogin)
 ]
 function* workerUserRegister(model) {
         try {
@@ -26,7 +27,11 @@ function* workerUserRegister(model) {
 }
 function* workerUserLogin(model) {
         try {
-                const response = yield call(api.request, '/api/auth/login', model.payload)
+                const modelOptions = {
+                        method: "POST",
+                        data: model.payload
+                }
+                const response = yield call(api.request, '/api/auth/login', modelOptions)
                 if (response.status === 200) {
                         yield put(action.userLoginSucceed(response.data));
                         yield put(action.fetchMyInfoRequested())
@@ -54,6 +59,26 @@ function* workerFetchMyInfo() {
                 yield put(action.fetchMyInfoFailure(err))
         }
 }
+function* workerExternalLogin(model) {
+
+        try {
+
+                const modelOptions = {
+                        method: "POST",
+                        data: {
+                                userToken: model.payload.tokenId
+                        }
+                }
+                const response = yield call(api.request, '/api/auth/google', modelOptions)
+                console.log(response);
+                yield put(action.userLoginSucceed(response.data));
+                yield put(action.fetchMyInfoRequested())
+        }
+        catch (err) {
+                yield put(action.userLoginFailure(err.response));
+        }
+
+}
 export function* watchUserRegister() {
         yield takeLatest(userActionTypes.USER_REGISTER_REQUEST, workerUserRegister)
 }
@@ -65,6 +90,9 @@ export function* watchUserLogout() {
 }
 export function* watchfetchMyInfo() {
         yield takeLatest(userActionTypes.FETCH_MYINFO_REQUESTED, workerFetchMyInfo)
+}
+export function* watchexteralLogin() {
+        yield takeLatest(userActionTypes.USER_EXTERNAL_LOGIN_REQUEST, workerExternalLogin)
 }
 
 

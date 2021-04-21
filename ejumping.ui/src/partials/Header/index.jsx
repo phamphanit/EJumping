@@ -2,10 +2,14 @@ import "./Header.scss";
 import { NavLink, Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { PageMenu } from "./../Menu/PageMenu";
+import { userLogoutRequest } from "../../components/actions/userActions";
 const Header = () => {
   const dispatch = useDispatch();
   const isLoggedIn = useSelector((state) => state.user.isLoggedIn);
-  const handleLogout = () => {};
+  const userInfo = useSelector((state) => state.user.myInfo);
+  const handleLogout = () => {
+    dispatch(userLogoutRequest());
+  };
   return (
     <header>
       <div className="top_bar">
@@ -46,11 +50,15 @@ const Header = () => {
                         </Link>
                       </li>
                     </ul>
-                  ) : (
-                    <ul className="">
-                      <li className="">
-                        {" "}
-                        <a className="">Hello</a>
+                  ) : userInfo ? (
+                    <ul className="d-flex flex-row">
+                      <li className="user-info">
+                        <img
+                          src={`${userInfo.profileImageUrl}`}
+                          alt=""
+                          className="mr-1"
+                        />
+                        <span>{userInfo.userName}</span>
                       </li>
                       <li className="">
                         <a onClick={handleLogout} className="">
@@ -58,6 +66,8 @@ const Header = () => {
                         </a>
                       </li>
                     </ul>
+                  ) : (
+                    ""
                   )}
                 </div>
               </div>

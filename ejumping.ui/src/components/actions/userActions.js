@@ -49,3 +49,7 @@ export const fetchMyInfoFailure = (err) => ({
         type: userActionTypes.FETCH_MYINFO_FAILURE,
         payload: err
 })
+export const userExternalLogin = (res) => ({
+        type: userActionTypes.USER_EXTERNAL_LOGIN_REQUEST,
+        payload: res
+})

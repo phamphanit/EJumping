@@ -148,26 +148,13 @@ namespace EJumping.API
                    }
                    options.ApiSecret = "secret";
                    options.ApiName = "api1";
-               });
-            //.AddFacebook(facebookOptions =>
-            //{
-            //     //facebookOptions.SignInScheme = IdentityServerConstants.ExternalCookieAuthenticationScheme;
-            //     //facebookOptions.CallbackPath = new PathString("/api/auth/externalLoginCallBack");
-            //     facebookOptions.AppId = Configuration["Authentication:Facebook:AppId"];
-            //    facebookOptions.AppSecret = Configuration["Authentication:Facebook:AppSecret"];
-            //})
-            //.AddGoogle(googleOptions =>
-            //{
-            //    googleOptions.ClientId = Configuration["Authentication:Google:ClientId"];
-            //    googleOptions.ClientSecret = Configuration["Authentication:Google:ClientSecret"];
-            //})
-            //.AddKakao(kakaoOptions =>
-            //{
-            //     //kakaoOptions.SignInScheme = IdentityServerConstants.ExternalCookieAuthenticationScheme;
-            //     //kakaoOptions.CallbackPath = new PathString("/api/auth/externalLoginCallBack");
-            //     kakaoOptions.ClientId = Configuration["Authentication:Kakao:ClientId"];
-            //    kakaoOptions.ClientSecret = Configuration["Authentication:Kakao:ClientSecret"];
-            //});
+               })
+               .AddGoogle(googleOptions =>
+            {
+                googleOptions.ClientId = Configuration["Authentication:Google:ClientId"];
+                googleOptions.ClientSecret = Configuration["Authentication:Google:ClientSecret"];
+            });
+
             services.AddCors(o => o.AddPolicy("MyPolicy", builder =>
             {
                 //builder.WithOrigins("http://localhost:3000", "https://localhost:3000")               

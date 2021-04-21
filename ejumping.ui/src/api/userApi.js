@@ -18,7 +18,7 @@ export function request(url, options) {
         const requestOptions = Object.assign({}, options);
         requestOptions.url = url;
 
-        return requestInstance.post(url, requestOptions)
+        return requestInstance.request(url, requestOptions)
                 .then((response) => response)
                 .catch((error) => error.response);
 }

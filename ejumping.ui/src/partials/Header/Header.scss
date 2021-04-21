@@ -28,6 +28,18 @@ header {
       }
       .item-user {
         margin-left: 70px;
+        li {
+          display: flex;
+          justify-content: center;
+          align-items: center;
+        }
+        .user-info {
+          img {
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+          }
+        }
         .login {
           position: relative;
           &:before {
