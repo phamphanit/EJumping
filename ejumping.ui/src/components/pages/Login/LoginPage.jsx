@@ -6,6 +6,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { userLoginRequest } from "../../actions/userActions";
 import { push } from "connected-react-router";
 import { LoginValidation } from "../../validations/RegisterValidation";
+import "./Login.scss";
 const LoginPage = (props) => {
   const dispatch = useDispatch();
   const isLoggedIn = useSelector((state) => state.user.isLoggedIn);
@@ -28,8 +29,34 @@ const LoginPage = (props) => {
   };
   return (
     <div className="container container__register">
+      <h2 className="title">Welcome to eJumping</h2>
+
+      <div className="external_login_container">
+        <div>Log in with</div>
+        <ul className="login_provider">
+          <li className="google">
+            <div className="logo">
+              <img src="https://img.icons8.com/fluent/48/000000/google-logo.png" />
+            </div>
+            <div className="text">Google</div>
+          </li>
+          <li className="facebook">
+            <div className="logo">
+              <img src="https://img.icons8.com/fluent/26/000000/facebook-new.png" />{" "}
+            </div>
+            <div className="text">Facebook</div>
+          </li>
+          <li className="apple">
+            <div className="logo">
+              <img src="https://img.icons8.com/metro/26/000000/mac-os.png" />
+            </div>
+            <div className="text">Apple</div>
+          </li>
+        </ul>
+        <div className="or-space">----------or-----------</div>
+        <div>Log in with your email and password</div>
+      </div>
       <div className="card register-card">
-        <h4 className="title">Sign In</h4>
         <Formik
           initialValues={initialValues}
           validationSchema={LoginValidation}
@@ -78,7 +105,7 @@ const LoginPage = (props) => {
                     onChange={handleChange}
                     onBlur={handleBlur}
                     value={values.password}
-                    className="form-control"
+                    className="ej-input"
                     placeholder="Enter Password"
                   />
                 </div>
@@ -99,8 +126,8 @@ const LoginPage = (props) => {
               )}
 
               <div className="bottom-btn">
-                <button type="submit" className="btn btn-info">
-                  Submit
+                <button type="submit" className="ej-button">
+                  Login
                 </button>
               </div>
             </form>

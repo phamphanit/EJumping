@@ -97,7 +97,7 @@ export default class RegisterPage extends React.Component {
                       onChange={handleChange}
                       onBlur={handleBlur}
                       value={values.userName}
-                      className="form-control"
+                      className="ej-input"
                       placeholder="Username"
                     />
                   </div>
@@ -120,7 +120,7 @@ export default class RegisterPage extends React.Component {
                       onChange={handleChange}
                       onBlur={handleBlur}
                       value={values.email}
-                      className="form-control"
+                      className="ej-input"
                       placeholder="Email Address"
                     />
                   </div>
@@ -143,7 +143,7 @@ export default class RegisterPage extends React.Component {
                       onChange={handleChange}
                       onBlur={handleBlur}
                       value={values.password}
-                      className="form-control"
+                      className="ej-input"
                       placeholder="Enter Password"
                     />
                   </div>
@@ -166,7 +166,7 @@ export default class RegisterPage extends React.Component {
                       onChange={handleChange}
                       onBlur={handleBlur}
                       value={values.passwordConfirm}
-                      className="form-control"
+                      className="ej-input"
                       placeholder="Confirm Password"
                     />
                   </div>
@@ -200,8 +200,8 @@ export default class RegisterPage extends React.Component {
                 )}
 
                 <div className="bottom-btn">
-                  <button type="submit" className="btn btn-info">
-                    Submit
+                  <button type="submit" className="ej-button">
+                    Register
                   </button>
                 </div>
               </form>

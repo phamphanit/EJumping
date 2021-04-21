@@ -1,0 +1,30 @@
+@import "../../../_scss/style";
+.container__register {
+  .external_login_container {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 10px;
+    .login_provider {
+      display: flex;
+      margin: 15px 0;
+      li {
+        display: flex;
+        border: 1px solid $border-color;
+        border-radius: 5px;
+        padding: 5px 15px;
+        margin: auto 5px;
+        cursor: pointer;
+        img {
+          width: 20px;
+          height: 20px;
+          margin-right: 8px;
+        }
+        .text {
+        }
+      }
+    }
+    .or-space {
+      margin-bottom: 15px;
+    }
+  }
+}
