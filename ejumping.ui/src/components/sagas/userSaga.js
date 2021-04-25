@@ -34,9 +34,9 @@ function* workerUserLogin(model) {
                 }
                 const response = yield call(api.request, '/api/auth/login', modelOptions)
                 if (response.status === 200) {
-                        yield [put(action.userLoginSucceed(response.data)),
-                        put(action.fetchMyInfoRequested())
-                        ]
+                        yield put(action.userLoginSucceed(response.data));
+                        yield put(action.fetchMyInfoRequested());
+
 
                         message.success("Login Success");
                 } else {

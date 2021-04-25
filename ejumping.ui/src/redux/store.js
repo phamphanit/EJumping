@@ -15,7 +15,7 @@ const routerMiddlewaree = routerMiddleware(history);
 const middlewares = [sagaMiddleware, routerMiddlewaree];
 
 const persistConfig = {
-        key: "root",
+        key: "calispeak",
         storage,
         whitelist: ["user"],
 };

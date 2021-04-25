@@ -27,7 +27,7 @@ const Header = () => {
                 <div className="icon">
                   <i class="fal fa-envelope"></i>{" "}
                 </div>
-                <span>ejumpingSale@gmail.com</span>
+                <span>CaliSpeak@gmail.com</span>
               </div>
               <div className="content-items ml-auto d-flex">
                 <ul className="item-stuff">
@@ -83,7 +83,7 @@ const Header = () => {
               <div className="header_logo ">
                 <img src="" alt="" />
                 <Link to="/" className="logo">
-                  eJumping
+                  Cali Speak
                 </Link>
               </div>
             </div>

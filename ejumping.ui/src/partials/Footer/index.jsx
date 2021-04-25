@@ -8,7 +8,7 @@ const Footer = () => {
           <div className="col-lg-4">
             <div className="contact">
               <div className="logo_container">
-                <div className="logo">eJumping</div>
+                <div className="logo">CaliSpeak</div>
                 <div>Got Question? Call Us 24/7</div>
                 <div>ETown Cong Hoa, Viet Nam</div>
                 <div className="footer_social">
