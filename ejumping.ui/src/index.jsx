@@ -2,18 +2,23 @@ import React from "react";
 import ReactDOM from "react-dom";
 import App from "./App";
 import { Provider } from "react-redux";
-import { store } from "./redux/store";
+import { persistor, store } from "./redux/store";
 import { history } from "./redux/store";
 import { ConnectedRouter } from "connected-react-router";
 // import 'bootstrap/dist/css/bootstrap.min.css';
 import "./_scss/style.scss";
+import { PersistGate } from "redux-persist/integration/react";
+// or 'antd/dist/antd.less'
+
 ReactDOM.render(
   <Provider store={store}>
-    <ConnectedRouter history={history}>
-      <React.StrictMode>
-        <App />
-      </React.StrictMode>
-    </ConnectedRouter>
+    <PersistGate persistor={persistor}>
+      <ConnectedRouter history={history}>
+        <React.StrictMode>
+          <App />
+        </React.StrictMode>
+      </ConnectedRouter>
+    </PersistGate>
   </Provider>,
   document.getElementById("root")
 );

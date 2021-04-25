@@ -74,12 +74,6 @@ export const PageMenu = () => {
           </div>
         </div>
       </div>
-      <div className="banner">
-        <div className="background" data-parallax="scroll">
-          <img src="" alt="" />
-        </div>
-        <div className="text">Technological Blog</div>
-      </div>
     </div>
   );
 };

@@ -11,31 +11,31 @@ const Footer = () => {
                 <div className="logo">eJumping</div>
                 <div>Got Question? Call Us 24/7</div>
                 <div>ETown Cong Hoa, Viet Nam</div>
-                <div class="footer_social">
+                <div className="footer_social">
                   <ul>
                     <li>
                       <a href="#">
-                        <i class="fab fa-facebook-f"></i>
+                        <i className="fab fa-facebook-f"></i>
                       </a>
                     </li>
                     <li>
                       <a href="#">
-                        <i class="fab fa-twitter"></i>
+                        <i className="fab fa-twitter"></i>
                       </a>
                     </li>
                     <li>
                       <a href="#">
-                        <i class="fab fa-youtube"></i>
+                        <i className="fab fa-youtube"></i>
                       </a>
                     </li>
                     <li>
                       <a href="#">
-                        <i class="fab fa-google"></i>
+                        <i className="fab fa-google"></i>
                       </a>
                     </li>
                     <li>
                       <a href="#">
-                        <i class="fab fa-vimeo-v"></i>
+                        <i className="fab fa-vimeo-v"></i>
                       </a>
                     </li>
                   </ul>

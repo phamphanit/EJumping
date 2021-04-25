@@ -3,6 +3,7 @@ import axios from 'axios';
 import { Cookies } from 'react-cookie';
 const initialState = {
         isRegistered: false,
+        isLogging: false,
         isLoggedIn: false,
         userRegisterErrorMsg: null,
         userLoginErrorMsg: null,
@@ -23,6 +24,11 @@ const userReducer = (state = initialState, action) => {
                                 isRegistered: false,
                                 userRegisterErrorMsg: action.payload
                         };
+                case userActionTypes.USER_LOGIN_REQUEST:
+                        return {
+                                ...state,
+                                isLogging: true
+                        }
                 case userActionTypes.USER_LOGIN_SUCCESS:
                         axios.defaults.headers.common['Authorization'] = 'Bearer ' + action.payload.access_token;
                         var cookies = new Cookies();

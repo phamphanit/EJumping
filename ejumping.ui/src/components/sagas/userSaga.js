@@ -2,6 +2,7 @@ import { all, call, takeLatest, put, fork } from 'redux-saga/effects';
 import * as api from '../../api/userApi';
 import * as action from '../actions/userActions';
 import userActionTypes from '../constant/userActionTypes';
+import { message } from 'antd';
 
 const userSagas = [
         fork(watchUserRegister),
@@ -33,8 +34,11 @@ function* workerUserLogin(model) {
                 }
                 const response = yield call(api.request, '/api/auth/login', modelOptions)
                 if (response.status === 200) {
-                        yield put(action.userLoginSucceed(response.data));
-                        yield put(action.fetchMyInfoRequested())
+                        yield [put(action.userLoginSucceed(response.data)),
+                        put(action.fetchMyInfoRequested())
+                        ]
+
+                        message.success("Login Success");
                 } else {
                         yield put(action.userLoginFailure(response.request.response));
                 }
@@ -72,6 +76,8 @@ function* workerExternalLogin(model) {
                 const response = yield call(api.request, '/api/auth/google', modelOptions)
                 console.log(response);
                 yield put(action.userLoginSucceed(response.data));
+                message.success("Login Success");
+
                 yield put(action.fetchMyInfoRequested())
         }
         catch (err) {

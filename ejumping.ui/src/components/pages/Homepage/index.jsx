@@ -1,6 +1,12 @@
 const HomePage = () => {
   return (
     <div>
+      <div className="banner">
+        <div className="background" data-parallax="scroll">
+          <img src="" alt="" />
+        </div>
+        <div className="text">Technological Blog</div>
+      </div>
       <section
         style={{
           // backgroundImage: `url(${img})`,

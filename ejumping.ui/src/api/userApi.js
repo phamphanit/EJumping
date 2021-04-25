@@ -1,9 +1,8 @@
-import globalUrl from "../components/constant/constant";
-
+import config from '../config';
 import axios from 'axios';
 
 export function registerUser(model) {
-        const url = globalUrl.root + '/api/auth/register'
+        const url = config.root + '/api/auth/register'
         return axios.post(url, model, {
                 headers: { Pragma: 'no-cache' },
                 // withCredentials: true,
@@ -11,7 +10,7 @@ export function registerUser(model) {
         });
 }
 const requestInstance = axios.create({
-        baseURL: globalUrl.root
+        baseURL: config.root
 });
 
 export function request(url, options) {
@@ -23,7 +22,7 @@ export function request(url, options) {
                 .catch((error) => error.response);
 }
 export function getLoggedInUser() {
-        const url = globalUrl.root + '/api/user/';
+        const url = config.root + '/api/user/';
         return axios.get(url, {
                 headers: { Pragma: 'no-cache' },
                 responseType: 'json'

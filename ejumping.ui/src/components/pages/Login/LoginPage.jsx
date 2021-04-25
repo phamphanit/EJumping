@@ -7,7 +7,9 @@ import { userExternalLogin, userLoginRequest } from "../../actions/userActions";
 import { push } from "connected-react-router";
 import { LoginValidation } from "../../validations/RegisterValidation";
 import "./Login.scss";
+import config from "../../../config.json";
 import GoogleLogin from "react-google-login";
+import { message } from "antd";
 const LoginPage = (props) => {
   const dispatch = useDispatch();
   const isLoggedIn = useSelector((state) => state.user.isLoggedIn);
@@ -45,21 +47,19 @@ const LoginPage = (props) => {
       <div className="external_login_container">
         <div>Log in with</div>
         <ul className="login_provider">
-          <li className="google" onClick={() => handleExternalLogin("Google")}>
-            <div className="logo">
-              <img src="https://img.icons8.com/fluent/48/000000/google-logo.png" />
-            </div>
-            <div className="text">Google</div>
-          </li>
           <li>
             <GoogleLogin
-              clientId="950609480264-f2da4qpiakv1806u4ifpmhoq8bfdksv0.apps.googleusercontent.com"
-              buttonText="Google Login"
+              className="google"
+              clientId={config.GOOGLE_CLIENT_ID}
+              buttonText="Google"
               onSuccess={googleResponseHandler}
               onFailure={googleResponseHandler}
             />
           </li>
-          <li className="facebook">
+          <li
+            className="facebook"
+            onClick={() => handleExternalLogin("Facebook")}
+          >
             <div className="logo">
               <img src="https://img.icons8.com/fluent/26/000000/facebook-new.png" />{" "}
             </div>
