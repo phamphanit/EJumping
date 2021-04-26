@@ -13,10 +13,16 @@ const userSagas = [
 ]
 function* workerUserRegister(model) {
         try {
-                const response = yield call(api.request, '/api/auth/register', model.payload)
+                const modelOptions = {
+                        method: "POST",
+                        data: model.payload
+                }
+                const response = yield call(api.request, '/api/auth/register', modelOptions)
                 if (response.status === 200) {
                         yield put(action.userRegisterSucceed(response.data))
                         yield put(action.userLoginSucceed(response.data))
+                        yield put(action.fetchMyInfoRequested());
+
                 }
                 else {
                         yield put(action.userRegisterFailure(response.request.response));
