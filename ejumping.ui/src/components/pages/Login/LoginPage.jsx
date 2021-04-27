@@ -42,7 +42,7 @@ const LoginPage = (props) => {
   };
   return (
     <div className="container container__register">
-      <h2 className="title">Welcome to eJumping</h2>
+      <h2 className="title">Welcome to Cali Speak</h2>
 
       <div className="external_login_container">
         <div>Log in with</div>

@@ -12,18 +12,14 @@ function App() {
       <Header></Header>
       <PageMenu></PageMenu>
 
-      <div className="container">
-        <div className="main-wrapper">
-          <main className="container-form">
-            <Switch>
-              <Route exact path="/" component={HomePage} />
-              <Route exact path="/feature" component={FeaturePage} />
-              <Route exact path="/register" component={RegisterPageContainer} />
-              <Route exact path="/login" component={LoginPage}></Route>
-            </Switch>
-          </main>
-        </div>
-      </div>
+      <main className="main-wrapper">
+        <Switch>
+          <Route exact path="/" component={HomePage} />
+          <Route exact path="/feature" component={FeaturePage} />
+          <Route exact path="/register" component={RegisterPageContainer} />
+          <Route exact path="/login" component={LoginPage}></Route>
+        </Switch>
+      </main>
       <Footer></Footer>
     </div>
   );

@@ -81,10 +81,13 @@ function* workerExternalLogin(model) {
                 }
                 const response = yield call(api.request, '/api/auth/google', modelOptions)
                 console.log(response);
-                yield put(action.userLoginSucceed(response.data));
-                message.success("Login Success");
+                if (response.status === 200) {
+                        yield put(action.userLoginSucceed(response.data));
+                        message.success("Login Success");
 
-                yield put(action.fetchMyInfoRequested())
+                        yield put(action.fetchMyInfoRequested())
+                }
+
         }
         catch (err) {
                 yield put(action.userLoginFailure(err.response));

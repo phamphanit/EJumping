@@ -1,15 +1,11 @@
+import { SliderData } from "../../../partials/Carousel/SliderData";
+import Carousel from "./../../../partials/Carousel/Carousel";
 const HomePage = () => {
   return (
     <div>
-      <div className="banner">
-        <div className="background" data-parallax="scroll">
-          <img src="" alt="" />
-        </div>
-        <div className="text">Technological Blog</div>
-      </div>
+      <Carousel slides={SliderData}></Carousel>
       <section
         style={{
-          // backgroundImage: `url(${img})`,
           backgroundSize: "cover",
           backgroundPosition: "center",
         }}

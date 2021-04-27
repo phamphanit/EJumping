@@ -17,12 +17,12 @@ const Header = () => {
         <div className="container">
           <div className="row">
             <div className="col d-flex flex-row">
-              <div className="contact-item">
+              {/* <div className="contact-item">
                 <div className="icon">
                   <i class="far fa-mobile"></i>{" "}
                 </div>
                 <span>(+84) 919 262 894</span>
-              </div>
+              </div> */}
               <div className="contact-item">
                 <div className="icon">
                   <i class="fal fa-envelope"></i>{" "}

@@ -36,9 +36,8 @@ a {
   }
 }
 .main-wrapper {
-  display: block;
-  padding-top: 50px;
-  padding-bottom: 50px;
+  // display: block;
+  z-index: 10;
 }
 .container {
   height: 100%;
