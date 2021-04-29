@@ -10,8 +10,8 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace EJumping.DAL.Migrations
 {
     [DbContext(typeof(ejumpingContext))]
-    [Migration("20210410053614_init3")]
-    partial class init3
+    [Migration("20210428084007_4")]
+    partial class _4
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -568,6 +568,186 @@ namespace EJumping.DAL.Migrations
                     b.ToTable("pb_gameround_ws");
                 });
 
+            modelBuilder.Entity("EJumping.DAL.EF.Entities.Question", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer")
+                        .UseIdentityByDefaultColumn();
+
+                    b.Property<int>("CorrectAnswer")
+                        .HasColumnType("integer");
+
+                    b.Property<int>("CorrectAnswerPoints")
+                        .HasColumnType("integer");
+
+                    b.Property<string>("FirstOption")
+                        .HasColumnType("text");
+
+                    b.Property<string>("FourthOption")
+                        .HasColumnType("text");
+
+                    b.Property<string>("QuestionName")
+                        .HasColumnType("text");
+
+                    b.Property<int>("QuizId")
+                        .HasColumnType("integer");
+
+                    b.Property<string>("SecondOption")
+                        .HasColumnType("text");
+
+                    b.Property<string>("ThirdOption")
+                        .HasColumnType("text");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("QuizId");
+
+                    b.ToTable("Questions");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            CorrectAnswer = 1,
+                            CorrectAnswerPoints = 0,
+                            FirstOption = "Would you like me to spell it?",
+                            QuestionName = "Could you tell me your surname?",
+                            QuizId = 1,
+                            SecondOption = "Do you like my family name?",
+                            ThirdOption = "How do I say that?"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            CorrectAnswer = 2,
+                            CorrectAnswerPoints = 0,
+                            FirstOption = "It's in the garden.",
+                            QuestionName = "This plant looks dead.",
+                            QuizId = 1,
+                            SecondOption = "It only needs some water.",
+                            ThirdOption = "It's sleeping."
+                        },
+                        new
+                        {
+                            Id = 3,
+                            CorrectAnswer = 3,
+                            CorrectAnswerPoints = 0,
+                            FirstOption = "Of course not.",
+                            QuestionName = "I hope it doesn't rain.",
+                            QuizId = 1,
+                            SecondOption = "Will it be wet?",
+                            ThirdOption = "So do I."
+                        },
+                        new
+                        {
+                            Id = 4,
+                            CorrectAnswer = 3,
+                            CorrectAnswerPoints = 0,
+                            FirstOption = "For ever.",
+                            QuestionName = "Are you going to come inside soon?",
+                            QuizId = 1,
+                            SecondOption = "Not long.",
+                            ThirdOption = "In a minute."
+                        },
+                        new
+                        {
+                            Id = 5,
+                            CorrectAnswer = 1,
+                            CorrectAnswerPoints = 0,
+                            FirstOption = "I bought it.",
+                            QuestionName = "Who gave you this book, Lucy?",
+                            QuizId = 1,
+                            SecondOption = "For my birthday.",
+                            ThirdOption = "My uncle was."
+                        },
+                        new
+                        {
+                            Id = 6,
+                            CorrectAnswer = 2,
+                            CorrectAnswerPoints = 0,
+                            FirstOption = "I know that.",
+                            QuestionName = "Shall we go out for pizza tonight?",
+                            QuizId = 1,
+                            SecondOption = "It's very good.",
+                            ThirdOption = "I'm too tired."
+                        },
+                        new
+                        {
+                            Id = 7,
+                            CorrectAnswer = 2,
+                            CorrectAnswerPoints = 0,
+                            FirstOption = "That's fine!",
+                            QuestionName = "Do you mind if I come too?",
+                            QuizId = 1,
+                            SecondOption = "I'd like to.",
+                            ThirdOption = "I don't know if I can."
+                        },
+                        new
+                        {
+                            Id = 8,
+                            CorrectAnswer = 2,
+                            CorrectAnswerPoints = 0,
+                            FirstOption = "Can I help you?",
+                            QuestionName = "There's someone at the door.",
+                            QuizId = 1,
+                            SecondOption = "Well, go and answer it then.",
+                            ThirdOption = "He's busy at the moment."
+                        },
+                        new
+                        {
+                            Id = 9,
+                            CorrectAnswer = 3,
+                            CorrectAnswerPoints = 0,
+                            FirstOption = "I'd like one.",
+                            QuestionName = "How much butter do I need for this cake?",
+                            QuizId = 1,
+                            SecondOption = "I'll use some.",
+                            ThirdOption = "I'm not sure."
+                        },
+                        new
+                        {
+                            Id = 10,
+                            CorrectAnswer = 2,
+                            CorrectAnswerPoints = 0,
+                            FirstOption = "Since last week.",
+                            QuestionName = "How long are you here for?",
+                            QuizId = 1,
+                            SecondOption = "Ten days ago.",
+                            ThirdOption = "Till tomorrow."
+                        });
+                });
+
+            modelBuilder.Entity("EJumping.DAL.EF.Entities.Quiz", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer")
+                        .UseIdentityByDefaultColumn();
+
+                    b.Property<string>("Name")
+                        .HasColumnType("text");
+
+                    b.Property<string>("QuizLogoUrl")
+                        .HasColumnType("text");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Quizzes");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Name = "Ielts"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Name = "Toeic"
+                        });
+                });
+
             modelBuilder.Entity("EJumping.DAL.EF.Entities.Role", b =>
                 {
                     b.Property<long>("Id")
@@ -1114,6 +1294,17 @@ namespace EJumping.DAL.Migrations
                     b.Navigation("NewsComment");
                 });
 
+            modelBuilder.Entity("EJumping.DAL.EF.Entities.Question", b =>
+                {
+                    b.HasOne("EJumping.DAL.EF.Entities.Quiz", "Quiz")
+                        .WithMany("QuizQuestions")
+                        .HasForeignKey("QuizId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Quiz");
+                });
+
             modelBuilder.Entity("EJumping.DAL.EF.Entities.Roleclaim", b =>
                 {
                     b.HasOne("EJumping.DAL.EF.Entities.Role", "Role")
@@ -1266,6 +1457,11 @@ namespace EJumping.DAL.Migrations
             modelBuilder.Entity("EJumping.DAL.EF.Entities.NewsComment", b =>
                 {
                     b.Navigation("NewsCommentReport");
+                });
+
+            modelBuilder.Entity("EJumping.DAL.EF.Entities.Quiz", b =>
+                {
+                    b.Navigation("QuizQuestions");
                 });
 
             modelBuilder.Entity("EJumping.DAL.EF.Entities.Role", b =>

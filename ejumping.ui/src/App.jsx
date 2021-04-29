@@ -6,6 +6,7 @@ import RegisterPageContainer from "./components/pages/Register/RegisterPageConta
 import LoginPage from "./components/pages/Login/LoginPage";
 import FeaturePage from "./components/pages/FeaturePage/Feature";
 import { PageMenu } from "./partials/Menu/PageMenu";
+import QuizPage from "./components/pages/QuizPage";
 function App() {
   return (
     <div>
@@ -18,6 +19,7 @@ function App() {
           <Route exact path="/feature" component={FeaturePage} />
           <Route exact path="/register" component={RegisterPageContainer} />
           <Route exact path="/login" component={LoginPage}></Route>
+          <Route exact path="/quiz" component={QuizPage}></Route>
         </Switch>
       </main>
       <Footer></Footer>

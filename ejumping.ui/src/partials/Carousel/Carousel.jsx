@@ -7,7 +7,6 @@ const Carousel = ({ slides }) => {
   const length = slides.length;
 
   const currentIndex = useRef(0);
-  console.log(currentIndex.current);
   // useEffect(() => {
   //   const intervalSlide = setInterval(() => {
   //     currentIndex.current =
@@ -32,7 +31,19 @@ const Carousel = ({ slides }) => {
       <FaArrowAltCircleRight className="arrow ar-right" onClick={nextSlide} />
       {slides.map((slide, index) => (
         <div
-          className={index === current ? "slide active" : "slide"}
+          className={
+            index === current
+              ? "slide active"
+              : index === current - 1
+              ? "slide prev"
+              : index === current + 1
+              ? "slide next"
+              : index === 0
+              ? "slide first"
+              : index === length - 1
+              ? "slide last"
+              : "slide "
+          }
           key={index}
         >
           {index === current && (

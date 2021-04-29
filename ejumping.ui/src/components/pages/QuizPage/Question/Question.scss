@@ -1,0 +1,27 @@
+.question-main {
+  .title {
+    .number {
+      height: 2rem;
+      width: 2rem;
+      background-color: black;
+      border-radius: 100%;
+      align-items: center;
+      display: flex;
+      justify-content: center;
+      font-weight: bold;
+      color: white;
+    }
+
+    .name {
+    }
+  }
+  .options {
+    .option {
+      max-width: 464px;
+      border: 1px solid grey;
+      border-radius: 10px;
+      padding: 16px 8px 16px 48px;
+      margin: 15px 0;
+    }
+  }
+}

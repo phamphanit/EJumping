@@ -10,8 +10,8 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace EJumping.DAL.Migrations
 {
     [DbContext(typeof(ejumpingContext))]
-    [Migration("20210412163215_InitialCreate")]
-    partial class InitialCreate
+    [Migration("20210428082309_2")]
+    partial class _2
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -568,6 +568,74 @@ namespace EJumping.DAL.Migrations
                     b.ToTable("pb_gameround_ws");
                 });
 
+            modelBuilder.Entity("EJumping.DAL.EF.Entities.Question", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer")
+                        .UseIdentityByDefaultColumn();
+
+                    b.Property<int>("CorrectAnswer")
+                        .HasColumnType("integer");
+
+                    b.Property<int>("CorrectAnswerPoints")
+                        .HasColumnType("integer");
+
+                    b.Property<int>("FirstOption")
+                        .HasColumnType("integer");
+
+                    b.Property<int>("FourthOption")
+                        .HasColumnType("integer");
+
+                    b.Property<string>("QuestionName")
+                        .HasColumnType("text");
+
+                    b.Property<int>("QuizId")
+                        .HasColumnType("integer");
+
+                    b.Property<int>("SecondOption")
+                        .HasColumnType("integer");
+
+                    b.Property<int>("ThirdOption")
+                        .HasColumnType("integer");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("QuizId");
+
+                    b.ToTable("Questions");
+                });
+
+            modelBuilder.Entity("EJumping.DAL.EF.Entities.Quiz", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer")
+                        .UseIdentityByDefaultColumn();
+
+                    b.Property<string>("Name")
+                        .HasColumnType("text");
+
+                    b.Property<string>("QuizLogoUrl")
+                        .HasColumnType("text");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Quizzes");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Name = "Ielts"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Name = "Toeic"
+                        });
+                });
+
             modelBuilder.Entity("EJumping.DAL.EF.Entities.Role", b =>
                 {
                     b.Property<long>("Id")
@@ -1114,6 +1182,17 @@ namespace EJumping.DAL.Migrations
                     b.Navigation("NewsComment");
                 });
 
+            modelBuilder.Entity("EJumping.DAL.EF.Entities.Question", b =>
+                {
+                    b.HasOne("EJumping.DAL.EF.Entities.Quiz", "Quiz")
+                        .WithMany("QuizQuestions")
+                        .HasForeignKey("QuizId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Quiz");
+                });
+
             modelBuilder.Entity("EJumping.DAL.EF.Entities.Roleclaim", b =>
                 {
                     b.HasOne("EJumping.DAL.EF.Entities.Role", "Role")
@@ -1266,6 +1345,11 @@ namespace EJumping.DAL.Migrations
             modelBuilder.Entity("EJumping.DAL.EF.Entities.NewsComment", b =>
                 {
                     b.Navigation("NewsCommentReport");
+                });
+
+            modelBuilder.Entity("EJumping.DAL.EF.Entities.Quiz", b =>
+                {
+                    b.Navigation("QuizQuestions");
                 });
 
             modelBuilder.Entity("EJumping.DAL.EF.Entities.Role", b =>

@@ -3,15 +3,17 @@ using System;
 using EJumping.DAL.EF.Entities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 namespace EJumping.DAL.Migrations
 {
     [DbContext(typeof(ejumpingContext))]
-    partial class ejumpingContextModelSnapshot : ModelSnapshot
+    [Migration("20210428083349_3")]
+    partial class _3
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -669,50 +671,6 @@ namespace EJumping.DAL.Migrations
                             QuizId = 1,
                             SecondOption = "It's very good.",
                             ThirdOption = "I'm too tired."
-                        },
-                        new
-                        {
-                            Id = 7,
-                            CorrectAnswer = 2,
-                            CorrectAnswerPoints = 0,
-                            FirstOption = "That's fine!",
-                            QuestionName = "Do you mind if I come too?",
-                            QuizId = 1,
-                            SecondOption = "I'd like to.",
-                            ThirdOption = "I don't know if I can."
-                        },
-                        new
-                        {
-                            Id = 8,
-                            CorrectAnswer = 2,
-                            CorrectAnswerPoints = 0,
-                            FirstOption = "Can I help you?",
-                            QuestionName = "There's someone at the door.",
-                            QuizId = 1,
-                            SecondOption = "Well, go and answer it then.",
-                            ThirdOption = "He's busy at the moment."
-                        },
-                        new
-                        {
-                            Id = 9,
-                            CorrectAnswer = 3,
-                            CorrectAnswerPoints = 0,
-                            FirstOption = "I'd like one.",
-                            QuestionName = "How much butter do I need for this cake?",
-                            QuizId = 1,
-                            SecondOption = "I'll use some.",
-                            ThirdOption = "I'm not sure."
-                        },
-                        new
-                        {
-                            Id = 10,
-                            CorrectAnswer = 2,
-                            CorrectAnswerPoints = 0,
-                            FirstOption = "Since last week.",
-                            QuestionName = "How long are you here for?",
-                            QuizId = 1,
-                            SecondOption = "Ten days ago.",
-                            ThirdOption = "Till tomorrow."
                         });
                 });
 

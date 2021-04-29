@@ -37,6 +37,8 @@ namespace EJumping.DAL.EF.Entities
         public virtual DbSet<UserRole> UserRole { get; set; }
         public virtual DbSet<UserToken> UserToken { get; set; }
         public virtual DbSet<Users> Users { get; set; }
+        public virtual DbSet<Question> Questions { get; set; }
+        public virtual DbSet<Quiz> Quizzes { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -49,6 +51,117 @@ namespace EJumping.DAL.EF.Entities
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            modelBuilder.Entity<Quiz>().HasData(
+                new Quiz
+                {
+                    Id = 1,
+                    Name = "Ielts",
+
+                },
+                new Quiz
+                {
+                    Id = 2,
+                    Name = "Toeic"
+                }
+                );
+            modelBuilder.Entity<Question>().HasData(
+                new Question
+                {
+                    Id = 1,
+                    QuizId = 1,
+                    QuestionName = "Could you tell me your surname?",
+                    FirstOption = "Would you like me to spell it?",
+                    SecondOption = "Do you like my family name?",
+                    ThirdOption = "How do I say that?",
+                    CorrectAnswer = 1,
+
+                }, new Question
+                {
+                    Id = 2,
+                    QuizId = 1,
+                    QuestionName = "This plant looks dead.",
+                    FirstOption = "It's in the garden.",
+                    SecondOption = "It only needs some water.",
+                    ThirdOption = "It's sleeping.",
+                    CorrectAnswer = 1,
+
+                }, new Question
+                {
+                    Id = 3,
+                    QuizId = 1,
+                    QuestionName = "I hope it doesn't rain.",
+                    FirstOption = "Of course not.",
+                    SecondOption = "Will it be wet?",
+                    ThirdOption = "So do I.",
+                    CorrectAnswer = 1,
+
+                }, new Question
+                {
+                    Id = 4,
+                    QuizId = 1,
+                    QuestionName = "Are you going to come inside soon?",
+                    FirstOption = "For ever.",
+                    SecondOption = "Not long.",
+                    ThirdOption = "In a minute.",
+                    CorrectAnswer = 1,
+
+                }, new Question
+                {
+                    Id = 5,
+                    QuizId = 1,
+                    QuestionName = "Who gave you this book, Lucy?",
+                    FirstOption = "I bought it.",
+                    SecondOption = "For my birthday.",
+                    ThirdOption = "My uncle was.",
+                    CorrectAnswer = 1,
+
+                }, new Question
+                {
+                    Id = 6,
+                    QuizId = 1,
+                    QuestionName = "Shall we go out for pizza tonight?",
+                    FirstOption = "I know that.",
+                    SecondOption = "It's very good.",
+                    ThirdOption = "I'm too tired.",
+                    CorrectAnswer = 1
+                }, new Question
+                {
+                    Id = 7,
+                    QuizId = 1,
+                    QuestionName = "Do you mind if I come too?",
+                    FirstOption = "That's fine!",
+                    SecondOption = "I'd like to.",
+                    ThirdOption = "I don't know if I can.",
+                    CorrectAnswer = 1,
+                }, new Question
+                {
+                    Id = 8,
+                    QuizId = 1,
+                    QuestionName = "There's someone at the door.",
+                    FirstOption = "Can I help you?",
+                    SecondOption = "Well, go and answer it then.",
+                    ThirdOption = "He's busy at the moment.",
+                    CorrectAnswer = 1,
+                }, new Question
+                {
+                    Id = 9,
+                    QuizId = 1,
+                    QuestionName = "How much butter do I need for this cake?",
+                    FirstOption = "I'd like one.",
+                    SecondOption = "I'll use some.",
+                    ThirdOption = "I'm not sure.",
+                    CorrectAnswer = 1,
+                }, new Question
+                {
+                    Id = 10,
+                    QuizId = 1,
+                    QuestionName = "How long are you here for?",
+                    FirstOption = "Since last week.",
+                    SecondOption = "Ten days ago.",
+                    ThirdOption = "Till tomorrow.",
+                    CorrectAnswer = 1,
+                }
+                );
             modelBuilder.Entity<Advertisement>(entity =>
             {
                 entity.ToTable("advertisement");

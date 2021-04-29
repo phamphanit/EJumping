@@ -4,7 +4,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 namespace EJumping.DAL.Migrations
 {
-    public partial class InitialCreate : Migration
+    public partial class add : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -187,6 +187,20 @@ namespace EJumping.DAL.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Quizzes",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "integer", nullable: false)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    Name = table.Column<string>(type: "text", nullable: true),
+                    QuizLogoUrl = table.Column<string>(type: "text", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Quizzes", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "role",
                 columns: table => new
                 {
@@ -241,6 +255,32 @@ namespace EJumping.DAL.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_users", x => x.id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Questions",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "integer", nullable: false)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    QuestionName = table.Column<string>(type: "text", nullable: true),
+                    FirstOption = table.Column<int>(type: "integer", nullable: false),
+                    SecondOption = table.Column<int>(type: "integer", nullable: false),
+                    ThirdOption = table.Column<int>(type: "integer", nullable: false),
+                    FourthOption = table.Column<int>(type: "integer", nullable: false),
+                    CorrectAnswer = table.Column<int>(type: "integer", nullable: false),
+                    CorrectAnswerPoints = table.Column<int>(type: "integer", nullable: false),
+                    QuizId = table.Column<int>(type: "integer", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Questions", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Questions_Quizzes_QuizId",
+                        column: x => x.QuizId,
+                        principalTable: "Quizzes",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -572,6 +612,11 @@ namespace EJumping.DAL.Migrations
                 column: "news_comment_id");
 
             migrationBuilder.CreateIndex(
+                name: "IX_Questions_QuizId",
+                table: "Questions",
+                column: "QuizId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_roleclaim_role_id",
                 table: "roleclaim",
                 column: "role_id");
@@ -657,6 +702,9 @@ namespace EJumping.DAL.Migrations
                 name: "pb_gameround_ws");
 
             migrationBuilder.DropTable(
+                name: "Questions");
+
+            migrationBuilder.DropTable(
                 name: "roleclaim");
 
             migrationBuilder.DropTable(
@@ -691,6 +739,9 @@ namespace EJumping.DAL.Migrations
 
             migrationBuilder.DropTable(
                 name: "news_comment");
+
+            migrationBuilder.DropTable(
+                name: "Quizzes");
 
             migrationBuilder.DropTable(
                 name: "role");
