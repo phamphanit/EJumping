@@ -1,7 +1,18 @@
-import React from "react";
+import React, { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { loadQuestionRequest } from "../../actions/quizActions";
 import Question from "./Question/Question";
 import "./QuizPage.scss";
 const QuizPage = () => {
+  const dispatch = useDispatch();
+  // const data = useSelector((state) => state.quiz.questions);
+  const data = { ...mock };
+  const totalPage = data.totalCount / data.pageSize;
+  const finished = (data.page / totalPage) * 100;
+
+  useEffect(() => {
+    dispatch(loadQuestionRequest(1, 1, 1, 6));
+  }, []);
   return (
     <div className="quiz-main">
       <div className="container">
@@ -20,22 +31,69 @@ const QuizPage = () => {
             </div>
             <div className="loading-test">
               <div className="count">
-                Page <b>1</b> of 5
+                Page <b>{data.page}</b> of {totalPage}
               </div>
               <div className="loading-bar">
-                <div className="loaded"></div>
+                <div className="loaded" style={{ width: `${finished}%` }}></div>
               </div>
             </div>
           </div>
           <div className="questions-container">
-            <Question></Question>
-            <Question></Question>
-            <Question></Question>
+            {data.items.map((question, index) => (
+              <Question question={question} key={question.id} />
+            ))}
           </div>
         </div>
       </div>
     </div>
   );
+};
+const mock = {
+  page: 1,
+  pageSize: 5,
+  totalCount: 20,
+  items: [
+    {
+      id: 1,
+      name: "Can I park here?",
+      firstOption: "Sorry, I did that.",
+      secondOption: "It's the same place.",
+      thirdOption: "Only for half an hour.",
+      fouthOption: null,
+    },
+    {
+      id: 2,
+      name: "Can I park here?",
+      firstOption: "Sorry, I did that.",
+      secondOption: "It's the same place.",
+      thirdOption: "Only for half an hour.",
+      fouthOption: null,
+    },
+    {
+      id: 3,
+      name: "Can I park here?",
+      firstOption: "Sorry, I did that.",
+      secondOption: "It's the same place.",
+      thirdOption: "Only for half an hour.",
+      fouthOption: null,
+    },
+    {
+      id: 4,
+      name: "Can I park here?",
+      firstOption: "Sorry, I did that.",
+      secondOption: "It's the same place.",
+      thirdOption: "Only for half an hour.",
+      fouthOption: "It's OK",
+    },
+    {
+      id: 5,
+      name: "Can I park here?",
+      firstOption: "Sorry, I did that.",
+      secondOption: "It's the same place.",
+      thirdOption: "Only for half an hour.",
+      fouthOption: null,
+    },
+  ],
 };
 
 export default QuizPage;

@@ -1,26 +1,38 @@
-import React from "react";
+import React, { useState } from "react";
 import "./Question.scss";
-const Question = () => {
+import QuestionOption from "./QuestionOption/QuestionOption";
+const Question = (props) => {
+  const { question } = props;
+  // const options = ["I don't know", "Just do that", "I am not sure"];
+  const options = [
+    question.firstOption,
+    question.secondOption,
+    question.thirdOption,
+    question.fouthOption,
+  ];
+  const [selected, setSelected] = useState("");
+  const handleClick = (idx) => {
+    setSelected(idx);
+  };
   return (
     <div className="question-main">
       <div className="title d-flex flex-row">
-        <div className="number mr-3">1</div>
-        <div className="name"> Can i park here?</div>
+        <div className="number mr-3">{question.id}</div>
+        <div className="name"> {question.name}</div>
       </div>
       <div className="options">
-        <div className="option">
-          <input type="radio" />
-          <span>Sorry, I did that</span>
-        </div>
-        <div className="option">
-          <input type="radio" />
-          <span>It's the same place.</span>
-        </div>
-        <div className="option">
-          <input type="radio" />
-          <span>Only for half an hour.</span>
-        </div>
-        <div className="bottom">---</div>
+        {options.map((x, index) => {
+          if (!x) return;
+          return (
+            <QuestionOption
+              content={x}
+              handleClick={handleClick}
+              selected={selected}
+              index={index}
+              key={index}
+            ></QuestionOption>
+          );
+        })}
       </div>
     </div>
   );
