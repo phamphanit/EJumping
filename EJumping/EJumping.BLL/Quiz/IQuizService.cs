@@ -7,6 +7,6 @@ namespace EJumping.BLL.Quiz
 {
     public interface IQuizService
     {
-        List<Question> GetQuestions(int type, int pageSize, int pageNumber,out int totalCount);
+        List<Question> GetQuestions(int type, int pageSize, int page,out int totalCount);
     }
 }
