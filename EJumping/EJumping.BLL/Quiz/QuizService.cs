@@ -18,11 +18,12 @@ namespace EJumping.BLL.Quiz
             this.context = context;
             this.mapper = mapper;
         }
-        public List<Question> GetQuestions(int type)
+        public List<Question> GetQuestions(int type, int pageSize, int pageNumber, out int totalCount)
         {
-
-            var question = context.Questions.Where(x => x.QuizId == type).ToList();
-                return question;
+            var query = context.Questions.Where(x => x.QuizId == type);
+            var question = query.Skip(pageSize * (1 - pageNumber)).Take(pageSize).ToList();
+            totalCount = question.Count();
+            return question;
         }
     }
 }

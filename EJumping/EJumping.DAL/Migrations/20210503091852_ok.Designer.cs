@@ -3,15 +3,17 @@ using System;
 using EJumping.DAL.EF.Entities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 namespace EJumping.DAL.Migrations
 {
     [DbContext(typeof(ejumpingContext))]
-    partial class ejumpingContextModelSnapshot : ModelSnapshot
+    [Migration("20210503091852_ok")]
+    partial class ok
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

@@ -14,8 +14,6 @@ namespace EJumping.DAL.EF.Entities
         {
         }
 
-        public virtual DbSet<Advertisement> Advertisement { get; set; }
-        public virtual DbSet<DiceRound> DiceRound { get; set; }
         public virtual DbSet<EmailVerification> EmailVerification { get; set; }
         public virtual DbSet<FxCandlestickRound> FxCandlestickRound { get; set; }
         public virtual DbSet<Level> Level { get; set; }
@@ -162,51 +160,6 @@ namespace EJumping.DAL.EF.Entities
                     CorrectAnswer = 1,
                 }
                 );
-            modelBuilder.Entity<Advertisement>(entity =>
-            {
-                entity.ToTable("advertisement");
-
-                entity.Property(e => e.Id).HasColumnName("id");
-
-                entity.Property(e => e.Created).HasColumnName("created");
-
-                entity.Property(e => e.ImageUrl)
-                    .HasColumnName("image_url")
-                    .HasColumnType("character varying");
-
-                entity.Property(e => e.LinkUrl)
-                    .HasColumnName("link_url")
-                    .HasColumnType("character varying");
-
-                entity.Property(e => e.Modified).HasColumnName("modified");
-
-                entity.Property(e => e.Status).HasColumnName("status");
-
-                entity.Property(e => e.Title)
-                    .HasColumnName("title")
-                    .HasColumnType("character varying");
-
-                entity.Property(e => e.Type).HasColumnName("type");
-            });
-
-            modelBuilder.Entity<DiceRound>(entity =>
-            {
-                entity.ToTable("dice_round");
-
-                entity.Property(e => e.Id).HasColumnName("id");
-
-                entity.Property(e => e.FirstNumber).HasColumnName("first_number");
-
-                entity.Property(e => e.RoundDate)
-                    .HasColumnName("round_date")
-                    .HasDefaultValueSql("now()");
-
-                entity.Property(e => e.RoundNumber).HasColumnName("round_number");
-
-                entity.Property(e => e.SecondNumber).HasColumnName("second_number");
-
-                entity.Property(e => e.Timestamp).HasColumnName("timestamp");
-            });
 
             modelBuilder.Entity<EmailVerification>(entity =>
             {

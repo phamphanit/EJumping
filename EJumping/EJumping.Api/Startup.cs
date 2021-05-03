@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using AutoMapper;
 using EJumping.Api;
 using EJumping.BLL;
+using EJumping.BLL.Quiz;
 using EJumping.BLL.User;
 using EJumping.Core.Models.Configurations;
 using EJumping.Core.Models.User;
@@ -175,6 +176,7 @@ namespace EJumping.API
             });
             IMapper mapper = mappingConfig.CreateMapper();
             services.AddSingleton(mapper);
+            services.AddScoped<IQuizService,QuizService>();
             services.AddControllersWithViews();
         }
 
