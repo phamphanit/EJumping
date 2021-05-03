@@ -11,11 +11,11 @@ export const loadQuestionRequest = (type, id, page, pageSize) => ({
 });
 export const loadQuestionSuccess = (result) =>
 ({
-        type: quizActionTypes.LOAD_QUESTION_RESULT_SUCCEED,
+        type: quizActionTypes.LOAD_QUESTION_SUCCEED,
         payload: result
 })
 export const loadQuestionFailure = (err) =>
 ({
-        type: quizActionTypes.LOAD_QUESTION_RESULT_FAILURE,
+        type: quizActionTypes.LOAD_QUESTION_FAILURE,
         payload: err
 })

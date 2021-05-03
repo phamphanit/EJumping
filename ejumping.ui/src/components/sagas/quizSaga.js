@@ -8,11 +8,13 @@ const quizSagas = [
 ]
 function* workerLoadQuestions(model) {
         try {
-                const { page, pageSize = 5, type, id } = model.payload;
+                const { page, pageSize = 5, type } = model.payload;
                 console.log(pageSize);
-                const response = yield call(request, `/api/question/${type}/${id}/${page}/${pageSize}`);
+                const response = yield call(request, `/api/quiz/${type}?page=${page}&pageSize=${pageSize}`);
                 if (response.status === 200) {
-                        yield call(loadQuestionSuccess(response.data))
+                        console.log(response);
+                        yield put(loadQuestionSuccess(response.data))
+                        console.log("heyyy")
                 }
         }
         catch (err) {

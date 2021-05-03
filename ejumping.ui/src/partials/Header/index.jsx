@@ -25,7 +25,7 @@ const Header = () => {
               </div> */}
               <div className="contact-item">
                 <div className="icon">
-                  <i class="fal fa-envelope"></i>{" "}
+                  <i className="fal fa-envelope"></i>{" "}
                 </div>
                 <span>CaliSpeak@gmail.com</span>
               </div>
@@ -39,7 +39,7 @@ const Header = () => {
                     <ul className="d-flex flex-row">
                       <li className="">
                         <span className="icon">
-                          <i class="far fa-user mr-2"></i>
+                          <i className="far fa-user mr-2"></i>
                         </span>
                         <Link to="/register" className="register">
                           Sign Up
@@ -62,9 +62,9 @@ const Header = () => {
                         <span>{userInfo.userName}</span>
                       </li>
                       <li className="">
-                        <a onClick={handleLogout} className="">
+                        <Link onClick={handleLogout} className="">
                           Log out
-                        </a>
+                        </Link>
                       </li>
                     </ul>
                   ) : (
@@ -102,39 +102,27 @@ const Header = () => {
                     <i className="fas fa-chevron-down"></i>
                     <ul className="custom_list clc" style={{ display: "none" }}>
                       <li>
-                        <a className="clc" href="#">
-                          All Categories
-                        </a>
+                        <Link className="clc">All Categories</Link>
                       </li>
                       <li>
-                        <a className="clc" href="#">
-                          Computers
-                        </a>
+                        <Link className="clc">Computers</Link>
                       </li>
                       <li>
-                        <a className="clc" href="#">
-                          Laptops
-                        </a>
+                        <Link className="clc">Laptops</Link>
                       </li>
                       <li>
-                        <a className="clc" href="#">
-                          Cameras
-                        </a>
+                        <Link className="clc">Cameras</Link>
                       </li>
                       <li>
-                        <a className="clc" href="#">
-                          Hardware
-                        </a>
+                        <Link className="clc">Hardware</Link>
                       </li>
                       <li>
-                        <a className="clc" href="#">
-                          Smartphones
-                        </a>
+                        <Link className="clc">Smartphones</Link>
                       </li>
                     </ul>
                   </div>
                   <button>
-                    <i class="fal fa-search text-white"></i>
+                    <i className="fal fa-search text-white"></i>
                   </button>
                 </form>
               </div>
@@ -142,7 +130,7 @@ const Header = () => {
             <div className="cart_container col-lg-4 col-9 order-lg-3 order-2">
               <div className="right-item">
                 <div className="icon">
-                  <i class="fal fa-heart"></i>{" "}
+                  <i className="fal fa-heart"></i>{" "}
                 </div>
                 <div className="content">
                   <span htmlFor="">Wishlist</span>
@@ -151,7 +139,7 @@ const Header = () => {
               </div>
               <div className="right-item cart">
                 <div className="icon">
-                  <i class="fal fa-cart-plus"></i>
+                  <i className="fal fa-cart-plus"></i>
                 </div>
                 <div className="cart-count">
                   <span>5</span>

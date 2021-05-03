@@ -7,18 +7,18 @@ const initialState = {
 }
 const quizReducer = (state = initialState, action) => {
         switch (action.type) {
-                case quizActionTypes.LOAD_QUESTION_RESULT_REQUEST:
+                case quizActionTypes.LOAD_QUESTION_REQUEST:
                         return {
                                 ...state,
                                 isFetching: true
                         }
-                case quizActionTypes.LOAD_QUESTION_RESULT_SUCCEED:
+                case quizActionTypes.LOAD_QUESTION_SUCCEED:
                         return {
                                 ...state,
                                 isFetching: false,
-                                questions: { ...state.quiz.questions, ...action.payload }
+                                questions: action.payload
                         }
-                case quizActionTypes.LOAD_QUESTION_RESULT_FAILURE:
+                case quizActionTypes.LOAD_QUESTION_FAILURE:
                         return {
                                 ...state,
                                 isFetching: false,

@@ -14,29 +14,29 @@ const Footer = () => {
                 <div className="footer_social">
                   <ul>
                     <li>
-                      <a href="#">
+                      <Link>
                         <i className="fab fa-facebook-f"></i>
-                      </a>
+                      </Link>
                     </li>
                     <li>
-                      <a href="#">
+                      <Link>
                         <i className="fab fa-twitter"></i>
-                      </a>
+                      </Link>
                     </li>
                     <li>
-                      <a href="#">
+                      <Link>
                         <i className="fab fa-youtube"></i>
-                      </a>
+                      </Link>
                     </li>
                     <li>
-                      <a href="#">
+                      <Link>
                         <i className="fab fa-google"></i>
-                      </a>
+                      </Link>
                     </li>
                     <li>
-                      <a href="#">
+                      <Link>
                         <i className="fab fa-vimeo-v"></i>
-                      </a>
+                      </Link>
                     </li>
                   </ul>
                 </div>

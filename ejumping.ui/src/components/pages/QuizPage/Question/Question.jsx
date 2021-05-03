@@ -3,7 +3,6 @@ import "./Question.scss";
 import QuestionOption from "./QuestionOption/QuestionOption";
 const Question = (props) => {
   const { question } = props;
-  // const options = ["I don't know", "Just do that", "I am not sure"];
   const options = [
     question.firstOption,
     question.secondOption,
@@ -18,7 +17,7 @@ const Question = (props) => {
     <div className="question-main">
       <div className="title d-flex flex-row">
         <div className="number mr-3">{question.id}</div>
-        <div className="name"> {question.name}</div>
+        <div className="name"> {question.questionName}</div>
       </div>
       <div className="options">
         {options.map((x, index) => {

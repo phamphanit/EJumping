@@ -6,13 +6,14 @@ import "./QuizPage.scss";
 const QuizPage = () => {
   const dispatch = useDispatch();
   // const data = useSelector((state) => state.quiz.questions);
-  const data = { ...mock };
-  const totalPage = data.totalCount / data.pageSize;
-  const finished = (data.page / totalPage) * 100;
-
+  // const data = { ...mock };
   useEffect(() => {
-    dispatch(loadQuestionRequest(1, 1, 1, 6));
+    dispatch(loadQuestionRequest(1, 0, 1, 10));
   }, []);
+  const data = useSelector((state) => state.quiz.questions);
+
+  const isFetching = useSelector((state) => state.quiz.isFetching);
+
   return (
     <div className="quiz-main">
       <div className="container">
@@ -22,28 +23,39 @@ const QuizPage = () => {
         <div className="quiz-header">
           <h1>General English</h1>
         </div>
-        <div className="test-container">
-          <div className="test-header">
-            <div className="test-title">Test your English</div>
-            <div className="requirement">
-              For the questions below, please choose the best option to complete
-              the sentence or conversation
+        {data && (
+          <div className="test-container">
+            <div className="test-header">
+              <div className="test-title">Test your English</div>
+              <div className="requirement">
+                For the questions below, please choose the best option to
+                complete the sentence or conversation
+              </div>
+              <div className="loading-test">
+                <div className="count">
+                  Page <b>{data.page}</b> of {data.totalCount / data.pageSize}
+                </div>
+
+                <div className="loading-bar">
+                  <div
+                    className="loaded"
+                    style={{
+                      width: `${
+                        (data.page / (data.totalCount / data.pageSize)) * 100
+                      }%`,
+                    }}
+                  ></div>
+                </div>
+              </div>
             </div>
-            <div className="loading-test">
-              <div className="count">
-                Page <b>{data.page}</b> of {totalPage}
-              </div>
-              <div className="loading-bar">
-                <div className="loaded" style={{ width: `${finished}%` }}></div>
-              </div>
+            <div className="questions-container">
+              {data &&
+                data.items.map((question, index) => (
+                  <Question question={question} key={question.id} />
+                ))}
             </div>
           </div>
-          <div className="questions-container">
-            {data.items.map((question, index) => (
-              <Question question={question} key={question.id} />
-            ))}
-          </div>
-        </div>
+        )}
       </div>
     </div>
   );

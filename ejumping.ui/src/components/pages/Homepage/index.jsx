@@ -15,12 +15,8 @@ const HomePage = () => {
           <div className="row">
             <div className="col-lg-7">
               <h1>Bootstrap 4 Blog - A free template by Bootstrap Temple</h1>
-              <a className="hero-link">Discover More</a>
             </div>
           </div>
-          <a className="continue link-scroll">
-            <i className="fa fa-long-arrow-down"></i> Scroll Down
-          </a>
         </div>
       </section>
       <section className="intro">
