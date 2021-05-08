@@ -1,4 +1,4 @@
-﻿using EJumping.BLL.User;
+﻿using EJumping.BLL.UserService;
 using EJumping.Core.Security;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;

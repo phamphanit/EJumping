@@ -3,7 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace EJumping.BLL.Quiz
+namespace EJumping.BLL.QuizService
 {
     public interface IQuizService
     {

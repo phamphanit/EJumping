@@ -3,7 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace EJumping.BLL.User
+namespace EJumping.BLL.UserService
 {
     public interface IUserService
     {

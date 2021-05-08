@@ -6,11 +6,13 @@ using System.Threading.Tasks;
 using AutoMapper;
 using EJumping.Api;
 using EJumping.BLL;
-using EJumping.BLL.Quiz;
-using EJumping.BLL.User;
+using EJumping.BLL.QuizService;
+using EJumping.BLL.UserService;
 using EJumping.Core.Models.Configurations;
 using EJumping.Core.Models.User;
 using EJumping.DAL.EF.Entities;
+using EJumping.DAL.Repository;
+using EJumping.DAL.UnitOfWork;
 using IdentityServer4.Models;
 using IdentityServer4.Services;
 using Microsoft.AspNetCore.Builder;
@@ -176,6 +178,8 @@ namespace EJumping.API
             });
             IMapper mapper = mappingConfig.CreateMapper();
             services.AddSingleton(mapper);
+            services.AddTransient<IUnitOfWork, UnitOfWork>();
+            services.AddTransient<IRepository<Question>, BaseRepository<Question>>();
             services.AddScoped<IQuizService,QuizService>();
             services.AddControllersWithViews();
         }

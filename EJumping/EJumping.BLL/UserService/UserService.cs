@@ -7,7 +7,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace EJumping.BLL.User
+namespace EJumping.BLL.UserService
 {
     public class UserService : IUserService
     {
