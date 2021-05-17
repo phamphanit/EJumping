@@ -1,10 +1,9 @@
 ﻿using System;
 using Microsoft.EntityFrameworkCore.Migrations;
-using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
-namespace EJumping.DAL.Migrations
+namespace EJumping.DAL.Migrations.AdsDb
 {
-    public partial class ok : Migration
+    public partial class Init : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -13,14 +12,14 @@ namespace EJumping.DAL.Migrations
                 columns: table => new
                 {
                     id = table.Column<long>(type: "bigint", nullable: false)
-                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                        .Annotation("SqlServer:Identity", "1, 1"),
                     recipient_email = table.Column<string>(type: "character varying", nullable: true),
-                    is_sent = table.Column<bool>(type: "boolean", nullable: true),
+                    is_sent = table.Column<bool>(type: "bit", nullable: true),
                     verification_code = table.Column<string>(type: "character varying", nullable: true),
-                    requested = table.Column<DateTime>(type: "timestamp without time zone", nullable: true),
-                    expired = table.Column<DateTime>(type: "timestamp without time zone", nullable: true),
-                    last_failed = table.Column<DateTime>(type: "timestamp without time zone", nullable: true),
-                    num_failed = table.Column<int>(type: "integer", nullable: true),
+                    requested = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    expired = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    last_failed = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    num_failed = table.Column<int>(type: "int", nullable: true),
                     ip_address = table.Column<string>(type: "character varying", nullable: true)
                 },
                 constraints: table =>
@@ -33,14 +32,14 @@ namespace EJumping.DAL.Migrations
                 columns: table => new
                 {
                     id = table.Column<long>(type: "bigint", nullable: false)
-                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                        .Annotation("SqlServer:Identity", "1, 1"),
                     timestamp = table.Column<long>(type: "bigint", nullable: false),
-                    round_number = table.Column<int>(type: "integer", nullable: false),
+                    round_number = table.Column<int>(type: "int", nullable: false),
                     open = table.Column<decimal>(type: "numeric(13,5)", nullable: false),
                     close = table.Column<decimal>(type: "numeric(13,5)", nullable: false),
                     low = table.Column<decimal>(type: "numeric(13,5)", nullable: false),
                     high = table.Column<decimal>(type: "numeric(13,5)", nullable: false),
-                    round_date = table.Column<DateTime>(type: "timestamp without time zone", nullable: false, defaultValueSql: "now()")
+                    round_date = table.Column<DateTime>(type: "datetime2", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -52,14 +51,14 @@ namespace EJumping.DAL.Migrations
                 columns: table => new
                 {
                     id = table.Column<long>(type: "bigint", nullable: false)
-                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                        .Annotation("SqlServer:Identity", "1, 1"),
                     title = table.Column<string>(type: "character varying", nullable: true),
                     description = table.Column<string>(type: "character varying", nullable: true),
-                    min_exp = table.Column<int>(type: "integer", nullable: true),
-                    max_exp = table.Column<int>(type: "integer", nullable: true),
-                    status = table.Column<int>(type: "integer", nullable: true),
-                    created = table.Column<DateTime>(type: "timestamp without time zone", nullable: true),
-                    modified = table.Column<DateTime>(type: "timestamp without time zone", nullable: true)
+                    min_exp = table.Column<int>(type: "int", nullable: true),
+                    max_exp = table.Column<int>(type: "int", nullable: true),
+                    status = table.Column<int>(type: "int", nullable: true),
+                    created = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    modified = table.Column<DateTime>(type: "datetime2", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -71,11 +70,11 @@ namespace EJumping.DAL.Migrations
                 columns: table => new
                 {
                     id = table.Column<long>(type: "bigint", nullable: false)
-                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                        .Annotation("SqlServer:Identity", "1, 1"),
                     user_id = table.Column<long>(type: "bigint", nullable: false),
                     news_id = table.Column<long>(type: "bigint", nullable: false),
-                    status = table.Column<int>(type: "integer", nullable: false),
-                    created_at = table.Column<DateTime>(type: "timestamp without time zone", nullable: true)
+                    status = table.Column<int>(type: "int", nullable: false),
+                    created_at = table.Column<DateTime>(type: "datetime2", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -87,25 +86,25 @@ namespace EJumping.DAL.Migrations
                 columns: table => new
                 {
                     bet_id = table.Column<long>(type: "bigint", nullable: false)
-                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
-                    game_date = table.Column<DateTime>(type: "timestamp without time zone", nullable: false),
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    game_date = table.Column<DateTime>(type: "datetime2", nullable: false),
                     user_id = table.Column<long>(type: "bigint", nullable: false),
                     bet_ball = table.Column<long>(type: "bigint", nullable: false),
                     hit_odds = table.Column<decimal>(type: "numeric", nullable: false),
                     hit_ball = table.Column<long>(type: "bigint", nullable: false),
-                    is_provide = table.Column<int>(type: "integer", nullable: false),
-                    create_date = table.Column<DateTime>(type: "timestamp without time zone", nullable: false, defaultValueSql: "now()"),
-                    update_date = table.Column<DateTime>(type: "timestamp without time zone", nullable: false, defaultValueSql: "now()"),
-                    start_date = table.Column<DateTime>(type: "timestamp without time zone", nullable: false, defaultValueSql: "now()"),
+                    is_provide = table.Column<int>(type: "int", nullable: false),
+                    create_date = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    update_date = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    start_date = table.Column<DateTime>(type: "datetime2", nullable: false),
                     game_round_id = table.Column<long>(type: "bigint", nullable: false),
-                    bet_pb_odd_even = table.Column<int>(type: "integer", nullable: false),
-                    bet_pb_prediction = table.Column<int>(type: "integer", nullable: false),
-                    bet_pb_under_over = table.Column<int>(type: "integer", nullable: false),
-                    bet_rb_sum_low_high_medium = table.Column<int>(type: "integer", nullable: false),
-                    bet_rb_sum_low_high_medium_odd_even = table.Column<int>(type: "integer", nullable: false),
-                    bet_rb_sum_odd_even = table.Column<int>(type: "integer", nullable: false),
-                    bet_rb_sum_under_over = table.Column<int>(type: "integer", nullable: false),
-                    bet_rb_sum_under_over_odd_even = table.Column<int>(type: "integer", nullable: false)
+                    bet_pb_odd_even = table.Column<int>(type: "int", nullable: false),
+                    bet_pb_prediction = table.Column<int>(type: "int", nullable: false),
+                    bet_pb_under_over = table.Column<int>(type: "int", nullable: false),
+                    bet_rb_sum_low_high_medium = table.Column<int>(type: "int", nullable: false),
+                    bet_rb_sum_low_high_medium_odd_even = table.Column<int>(type: "int", nullable: false),
+                    bet_rb_sum_odd_even = table.Column<int>(type: "int", nullable: false),
+                    bet_rb_sum_under_over = table.Column<int>(type: "int", nullable: false),
+                    bet_rb_sum_under_over_odd_even = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -116,34 +115,34 @@ namespace EJumping.DAL.Migrations
                 name: "pb_gameround_ws",
                 columns: table => new
                 {
-                    game_date = table.Column<DateTime>(type: "timestamp without time zone", nullable: false),
+                    game_date = table.Column<DateTime>(type: "datetime2", nullable: false),
                     game_round_id = table.Column<long>(type: "bigint", nullable: false),
-                    rb1 = table.Column<int>(type: "integer", nullable: true),
-                    rb2 = table.Column<int>(type: "integer", nullable: true),
-                    rb3 = table.Column<int>(type: "integer", nullable: true),
-                    rb4 = table.Column<int>(type: "integer", nullable: true),
-                    rb5 = table.Column<int>(type: "integer", nullable: true),
-                    pb = table.Column<int>(type: "integer", nullable: true),
-                    rb_sum_odd_bet_count = table.Column<int>(type: "integer", nullable: false),
-                    rb_sum_event_bet_count = table.Column<int>(type: "integer", nullable: false),
-                    rb_sum_under_bet_count = table.Column<int>(type: "integer", nullable: false),
-                    rb_sum_over_bet_count = table.Column<int>(type: "integer", nullable: false),
-                    pb_odd_bet_count = table.Column<int>(type: "integer", nullable: false),
-                    pb_event_bet_count = table.Column<int>(type: "integer", nullable: false),
-                    pb_under_bet_count = table.Column<int>(type: "integer", nullable: false),
-                    pb_over_bet_count = table.Column<int>(type: "integer", nullable: false),
-                    rb_sum_low_bet_count = table.Column<int>(type: "integer", nullable: false),
-                    rb_sum_high_bet_count = table.Column<int>(type: "integer", nullable: false),
-                    rb_sum_medium_bet_count = table.Column<int>(type: "integer", nullable: false),
-                    hit_event_id1 = table.Column<int>(type: "integer", nullable: false),
-                    hit_event_id2 = table.Column<int>(type: "integer", nullable: false),
-                    hit_event_id3 = table.Column<int>(type: "integer", nullable: false),
-                    hit_event_id4 = table.Column<int>(type: "integer", nullable: false),
-                    hit_event_id5 = table.Column<int>(type: "integer", nullable: false),
-                    is_provide = table.Column<int>(type: "integer", nullable: false),
-                    create_date = table.Column<DateTime>(type: "timestamp without time zone", nullable: false, defaultValueSql: "now()"),
-                    update_date = table.Column<DateTime>(type: "timestamp without time zone", nullable: false, defaultValueSql: "now()"),
-                    start_date = table.Column<DateTime>(type: "timestamp without time zone", nullable: false, defaultValueSql: "now()")
+                    rb1 = table.Column<int>(type: "int", nullable: true),
+                    rb2 = table.Column<int>(type: "int", nullable: true),
+                    rb3 = table.Column<int>(type: "int", nullable: true),
+                    rb4 = table.Column<int>(type: "int", nullable: true),
+                    rb5 = table.Column<int>(type: "int", nullable: true),
+                    pb = table.Column<int>(type: "int", nullable: true),
+                    rb_sum_odd_bet_count = table.Column<int>(type: "int", nullable: false),
+                    rb_sum_event_bet_count = table.Column<int>(type: "int", nullable: false),
+                    rb_sum_under_bet_count = table.Column<int>(type: "int", nullable: false),
+                    rb_sum_over_bet_count = table.Column<int>(type: "int", nullable: false),
+                    pb_odd_bet_count = table.Column<int>(type: "int", nullable: false),
+                    pb_event_bet_count = table.Column<int>(type: "int", nullable: false),
+                    pb_under_bet_count = table.Column<int>(type: "int", nullable: false),
+                    pb_over_bet_count = table.Column<int>(type: "int", nullable: false),
+                    rb_sum_low_bet_count = table.Column<int>(type: "int", nullable: false),
+                    rb_sum_high_bet_count = table.Column<int>(type: "int", nullable: false),
+                    rb_sum_medium_bet_count = table.Column<int>(type: "int", nullable: false),
+                    hit_event_id1 = table.Column<int>(type: "int", nullable: false),
+                    hit_event_id2 = table.Column<int>(type: "int", nullable: false),
+                    hit_event_id3 = table.Column<int>(type: "int", nullable: false),
+                    hit_event_id4 = table.Column<int>(type: "int", nullable: false),
+                    hit_event_id5 = table.Column<int>(type: "int", nullable: false),
+                    is_provide = table.Column<int>(type: "int", nullable: false),
+                    create_date = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    update_date = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    start_date = table.Column<DateTime>(type: "datetime2", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -154,10 +153,10 @@ namespace EJumping.DAL.Migrations
                 name: "Quizzes",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "integer", nullable: false)
-                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
-                    Name = table.Column<string>(type: "text", nullable: true),
-                    QuizLogoUrl = table.Column<string>(type: "text", nullable: true)
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Name = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    QuizLogoUrl = table.Column<string>(type: "nvarchar(max)", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -169,7 +168,7 @@ namespace EJumping.DAL.Migrations
                 columns: table => new
                 {
                     id = table.Column<long>(type: "bigint", nullable: false)
-                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                        .Annotation("SqlServer:Identity", "1, 1"),
                     name = table.Column<string>(type: "character varying", nullable: true),
                     normalized_name = table.Column<string>(type: "character varying", nullable: true),
                     concurrency_stamp = table.Column<string>(type: "character varying", nullable: true)
@@ -184,37 +183,37 @@ namespace EJumping.DAL.Migrations
                 columns: table => new
                 {
                     id = table.Column<long>(type: "bigint", nullable: false)
-                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                        .Annotation("SqlServer:Identity", "1, 1"),
                     user_name = table.Column<string>(type: "character varying", nullable: true),
                     normalized_user_name = table.Column<string>(type: "character varying", nullable: true),
                     email = table.Column<string>(type: "character varying", nullable: true),
                     normalized_email = table.Column<string>(type: "character varying", nullable: true),
-                    email_confirmed = table.Column<bool>(type: "boolean", nullable: false),
+                    email_confirmed = table.Column<bool>(type: "bit", nullable: false),
                     first_name = table.Column<string>(type: "character varying", nullable: true),
                     last_name = table.Column<string>(type: "character varying", nullable: true),
-                    birth_date = table.Column<DateTime>(type: "timestamp without time zone", nullable: true),
-                    gender = table.Column<int>(type: "integer", nullable: true),
-                    phone_number = table.Column<string>(type: "text", nullable: true, defaultValueSql: "''::text"),
-                    phone_number_confirmed = table.Column<bool>(type: "boolean", nullable: false),
+                    birth_date = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    gender = table.Column<int>(type: "int", nullable: true),
+                    phone_number = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    phone_number_confirmed = table.Column<bool>(type: "bit", nullable: false),
                     profile_image_url = table.Column<string>(type: "character varying", nullable: true),
                     preferred_language = table.Column<string>(type: "character varying", nullable: true),
                     password_hash = table.Column<string>(type: "character varying", nullable: true),
                     security_stamp = table.Column<string>(type: "character varying", nullable: true),
                     concurrency_stamp = table.Column<string>(type: "character varying", nullable: true),
-                    two_factor_enabled = table.Column<bool>(type: "boolean", nullable: false),
-                    lockout_enabled = table.Column<bool>(type: "boolean", nullable: false),
-                    access_failed_count = table.Column<int>(type: "integer", nullable: false),
-                    mfa_secret = table.Column<string>(type: "text", nullable: true),
-                    locked = table.Column<bool>(type: "boolean", nullable: true, defaultValueSql: "false"),
-                    lockout_end = table.Column<DateTime>(type: "timestamp without time zone", nullable: true),
-                    email_marketing = table.Column<bool>(type: "boolean", nullable: true),
-                    email_service_notification = table.Column<bool>(type: "boolean", nullable: true),
-                    level = table.Column<int>(type: "integer", nullable: false, defaultValueSql: "1"),
-                    verification_status = table.Column<int>(type: "integer", nullable: true),
-                    status = table.Column<int>(type: "integer", nullable: true),
-                    created = table.Column<DateTime>(type: "timestamp without time zone", nullable: true, defaultValueSql: "now()"),
-                    last_messages_read = table.Column<DateTime>(type: "timestamp without time zone", nullable: true),
-                    last_friendrequests_read = table.Column<DateTime>(type: "timestamp without time zone", nullable: true)
+                    two_factor_enabled = table.Column<bool>(type: "bit", nullable: false),
+                    lockout_enabled = table.Column<bool>(type: "bit", nullable: false),
+                    access_failed_count = table.Column<int>(type: "int", nullable: false),
+                    mfa_secret = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    locked = table.Column<bool>(type: "bit", nullable: true),
+                    lockout_end = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    email_marketing = table.Column<bool>(type: "bit", nullable: true),
+                    email_service_notification = table.Column<bool>(type: "bit", nullable: true),
+                    level = table.Column<int>(type: "int", nullable: false, defaultValueSql: "1"),
+                    verification_status = table.Column<int>(type: "int", nullable: true),
+                    status = table.Column<int>(type: "int", nullable: true),
+                    created = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    last_messages_read = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    last_friendrequests_read = table.Column<DateTime>(type: "datetime2", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -225,16 +224,16 @@ namespace EJumping.DAL.Migrations
                 name: "Questions",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "integer", nullable: false)
-                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
-                    QuestionName = table.Column<string>(type: "text", nullable: true),
-                    FirstOption = table.Column<string>(type: "text", nullable: true),
-                    SecondOption = table.Column<string>(type: "text", nullable: true),
-                    ThirdOption = table.Column<string>(type: "text", nullable: true),
-                    FourthOption = table.Column<string>(type: "text", nullable: true),
-                    CorrectAnswer = table.Column<int>(type: "integer", nullable: false),
-                    CorrectAnswerPoints = table.Column<int>(type: "integer", nullable: false),
-                    QuizId = table.Column<int>(type: "integer", nullable: false)
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    QuestionName = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    FirstOption = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    SecondOption = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    ThirdOption = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    FourthOption = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    CorrectAnswer = table.Column<int>(type: "int", nullable: false),
+                    CorrectAnswerPoints = table.Column<int>(type: "int", nullable: false),
+                    QuizId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -252,7 +251,7 @@ namespace EJumping.DAL.Migrations
                 columns: table => new
                 {
                     id = table.Column<long>(type: "bigint", nullable: false)
-                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                        .Annotation("SqlServer:Identity", "1, 1"),
                     role_id = table.Column<long>(type: "bigint", nullable: true),
                     claim_type = table.Column<string>(type: "character varying", nullable: true),
                     claim_value = table.Column<string>(type: "character varying", nullable: true)
@@ -273,17 +272,17 @@ namespace EJumping.DAL.Migrations
                 columns: table => new
                 {
                     id = table.Column<long>(type: "bigint", nullable: false)
-                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                        .Annotation("SqlServer:Identity", "1, 1"),
                     user_id = table.Column<long>(type: "bigint", nullable: false),
                     news_id = table.Column<long>(type: "bigint", nullable: false),
-                    status = table.Column<int>(type: "integer", nullable: false),
-                    last_reported_at = table.Column<DateTime>(type: "timestamp without time zone", nullable: true),
-                    hidden_at = table.Column<DateTime>(type: "timestamp without time zone", nullable: true),
-                    created_at = table.Column<DateTime>(type: "timestamp without time zone", nullable: false),
-                    updated_at = table.Column<DateTime>(type: "timestamp without time zone", nullable: false),
+                    status = table.Column<int>(type: "int", nullable: false),
+                    last_reported_at = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    hidden_at = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    created_at = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    updated_at = table.Column<DateTime>(type: "datetime2", nullable: false),
                     content = table.Column<string>(type: "character varying", nullable: false),
                     hidden_reason = table.Column<string>(type: "character varying", nullable: true),
-                    deleted_at = table.Column<DateTime>(type: "timestamp without time zone", nullable: true),
+                    deleted_at = table.Column<DateTime>(type: "datetime2", nullable: true),
                     deleted_by_id = table.Column<long>(type: "bigint", nullable: true)
                 },
                 constraints: table =>
@@ -303,7 +302,7 @@ namespace EJumping.DAL.Migrations
                 {
                     user_id = table.Column<long>(type: "bigint", nullable: false),
                     blocked_user_id = table.Column<long>(type: "bigint", nullable: false),
-                    created = table.Column<DateTime>(type: "timestamp without time zone", nullable: true)
+                    created = table.Column<DateTime>(type: "datetime2", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -327,7 +326,7 @@ namespace EJumping.DAL.Migrations
                 columns: table => new
                 {
                     id = table.Column<long>(type: "bigint", nullable: false)
-                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                        .Annotation("SqlServer:Identity", "1, 1"),
                     user_id = table.Column<long>(type: "bigint", nullable: true),
                     claim_type = table.Column<string>(type: "character varying", nullable: true),
                     claim_value = table.Column<string>(type: "character varying", nullable: true)
@@ -348,16 +347,16 @@ namespace EJumping.DAL.Migrations
                 columns: table => new
                 {
                     id = table.Column<long>(type: "bigint", nullable: false)
-                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                        .Annotation("SqlServer:Identity", "1, 1"),
                     user_id = table.Column<long>(type: "bigint", nullable: false),
-                    action_type = table.Column<int>(type: "integer", nullable: false),
+                    action_type = table.Column<int>(type: "int", nullable: false),
                     before_value = table.Column<long>(type: "bigint", nullable: false),
                     change_value = table.Column<long>(type: "bigint", nullable: false),
                     after_value = table.Column<long>(type: "bigint", nullable: false),
                     description = table.Column<string>(type: "character varying", nullable: true),
-                    status = table.Column<int>(type: "integer", nullable: true),
-                    created = table.Column<DateTime>(type: "timestamp without time zone", nullable: true),
-                    modified = table.Column<DateTime>(type: "timestamp without time zone", nullable: true)
+                    status = table.Column<int>(type: "int", nullable: true),
+                    created = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    modified = table.Column<DateTime>(type: "datetime2", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -376,9 +375,9 @@ namespace EJumping.DAL.Migrations
                 {
                     user_id = table.Column<long>(type: "bigint", nullable: false),
                     friend_id = table.Column<long>(type: "bigint", nullable: false),
-                    status = table.Column<int>(type: "integer", nullable: false),
-                    friend_since = table.Column<DateTime>(type: "timestamp without time zone", nullable: true),
-                    created = table.Column<DateTime>(type: "timestamp without time zone", nullable: true)
+                    status = table.Column<int>(type: "int", nullable: false),
+                    friend_since = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    created = table.Column<DateTime>(type: "datetime2", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -422,7 +421,7 @@ namespace EJumping.DAL.Migrations
                 columns: table => new
                 {
                     id = table.Column<long>(type: "bigint", nullable: false)
-                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                        .Annotation("SqlServer:Identity", "1, 1"),
                     user_id = table.Column<long>(type: "bigint", nullable: true),
                     request_ip = table.Column<string>(type: "character varying", nullable: true),
                     user_agent = table.Column<string>(type: "character varying", nullable: true),
@@ -444,14 +443,14 @@ namespace EJumping.DAL.Migrations
                 columns: table => new
                 {
                     id = table.Column<long>(type: "bigint", nullable: false)
-                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                        .Annotation("SqlServer:Identity", "1, 1"),
                     sender_id = table.Column<long>(type: "bigint", nullable: false),
                     receiver_id = table.Column<long>(type: "bigint", nullable: false),
                     title = table.Column<string>(type: "character varying", nullable: false),
                     content = table.Column<string>(type: "character varying", nullable: false),
-                    status = table.Column<int>(type: "integer", nullable: false),
-                    created = table.Column<DateTime>(type: "timestamp without time zone", nullable: true),
-                    deleted = table.Column<DateTime>(type: "timestamp without time zone", nullable: true)
+                    status = table.Column<int>(type: "int", nullable: false),
+                    created = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    deleted = table.Column<DateTime>(type: "datetime2", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -475,17 +474,17 @@ namespace EJumping.DAL.Migrations
                 columns: table => new
                 {
                     id = table.Column<long>(type: "bigint", nullable: false)
-                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                        .Annotation("SqlServer:Identity", "1, 1"),
                     user_id = table.Column<long>(type: "bigint", nullable: false),
-                    action_type = table.Column<int>(type: "integer", nullable: false),
-                    change_type = table.Column<int>(type: "integer", nullable: false),
+                    action_type = table.Column<int>(type: "int", nullable: false),
+                    change_type = table.Column<int>(type: "int", nullable: false),
                     before_value = table.Column<long>(type: "bigint", nullable: false),
                     change_value = table.Column<long>(type: "bigint", nullable: false),
                     after_value = table.Column<long>(type: "bigint", nullable: false),
                     description = table.Column<string>(type: "character varying", nullable: true),
-                    status = table.Column<int>(type: "integer", nullable: true),
-                    created = table.Column<DateTime>(type: "timestamp without time zone", nullable: true),
-                    modified = table.Column<DateTime>(type: "timestamp without time zone", nullable: true)
+                    status = table.Column<int>(type: "int", nullable: true),
+                    created = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    modified = table.Column<DateTime>(type: "datetime2", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -547,11 +546,11 @@ namespace EJumping.DAL.Migrations
                 columns: table => new
                 {
                     id = table.Column<long>(type: "bigint", nullable: false)
-                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                        .Annotation("SqlServer:Identity", "1, 1"),
                     news_comment_id = table.Column<long>(type: "bigint", nullable: false),
                     reason = table.Column<string>(type: "character varying", nullable: true),
-                    status = table.Column<int>(type: "integer", nullable: true),
-                    created_at = table.Column<DateTime>(type: "timestamp without time zone", nullable: true),
+                    status = table.Column<int>(type: "int", nullable: true),
+                    created_at = table.Column<DateTime>(type: "datetime2", nullable: true),
                     reported_by_id = table.Column<long>(type: "bigint", nullable: true)
                 },
                 constraints: table =>
@@ -568,11 +567,12 @@ namespace EJumping.DAL.Migrations
             migrationBuilder.InsertData(
                 table: "Quizzes",
                 columns: new[] { "Id", "Name", "QuizLogoUrl" },
-                values: new object[,]
-                {
-                    { 1, "Ielts", null },
-                    { 2, "Toeic", null }
-                });
+                values: new object[] { 1, "Ielts", null });
+
+            migrationBuilder.InsertData(
+                table: "Quizzes",
+                columns: new[] { "Id", "Name", "QuizLogoUrl" },
+                values: new object[] { 2, "Toeic", null });
 
             migrationBuilder.InsertData(
                 table: "Questions",

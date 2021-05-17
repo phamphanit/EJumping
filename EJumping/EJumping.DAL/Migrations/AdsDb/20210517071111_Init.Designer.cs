@@ -3,20 +3,22 @@ using System;
 using EJumping.DAL.EF.Entities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
-using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
-namespace EJumping.DAL.Migrations
+namespace EJumping.DAL.Migrations.AdsDb
 {
     [DbContext(typeof(ejumpingContext))]
-    partial class ejumpingContextModelSnapshot : ModelSnapshot
+    [Migration("20210517071111_Init")]
+    partial class Init
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .UseIdentityByDefaultColumns()
-                .HasAnnotation("Relational:MaxIdentifierLength", 63)
+                .UseIdentityColumns()
+                .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("ProductVersion", "5.0.0");
 
             modelBuilder.Entity("EJumping.DAL.EF.Entities.EmailVerification", b =>
@@ -25,10 +27,10 @@ namespace EJumping.DAL.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("bigint")
                         .HasColumnName("id")
-                        .UseIdentityByDefaultColumn();
+                        .UseIdentityColumn();
 
                     b.Property<DateTime?>("Expired")
-                        .HasColumnType("timestamp without time zone")
+                        .HasColumnType("datetime2")
                         .HasColumnName("expired");
 
                     b.Property<string>("IpAddress")
@@ -36,15 +38,15 @@ namespace EJumping.DAL.Migrations
                         .HasColumnName("ip_address");
 
                     b.Property<bool?>("IsSent")
-                        .HasColumnType("boolean")
+                        .HasColumnType("bit")
                         .HasColumnName("is_sent");
 
                     b.Property<DateTime?>("LastFailed")
-                        .HasColumnType("timestamp without time zone")
+                        .HasColumnType("datetime2")
                         .HasColumnName("last_failed");
 
                     b.Property<int?>("NumFailed")
-                        .HasColumnType("integer")
+                        .HasColumnType("int")
                         .HasColumnName("num_failed");
 
                     b.Property<string>("RecipientEmail")
@@ -52,7 +54,7 @@ namespace EJumping.DAL.Migrations
                         .HasColumnName("recipient_email");
 
                     b.Property<DateTime?>("Requested")
-                        .HasColumnType("timestamp without time zone")
+                        .HasColumnType("datetime2")
                         .HasColumnName("requested");
 
                     b.Property<string>("VerificationCode")
@@ -70,7 +72,7 @@ namespace EJumping.DAL.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("bigint")
                         .HasColumnName("id")
-                        .UseIdentityByDefaultColumn();
+                        .UseIdentityColumn();
 
                     b.Property<decimal>("Close")
                         .HasColumnType("numeric(13,5)")
@@ -89,13 +91,11 @@ namespace EJumping.DAL.Migrations
                         .HasColumnName("open");
 
                     b.Property<DateTime>("RoundDate")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("timestamp without time zone")
-                        .HasColumnName("round_date")
-                        .HasDefaultValueSql("now()");
+                        .HasColumnType("datetime2")
+                        .HasColumnName("round_date");
 
                     b.Property<int>("RoundNumber")
-                        .HasColumnType("integer")
+                        .HasColumnType("int")
                         .HasColumnName("round_number");
 
                     b.Property<long>("Timestamp")
@@ -113,10 +113,10 @@ namespace EJumping.DAL.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("bigint")
                         .HasColumnName("id")
-                        .UseIdentityByDefaultColumn();
+                        .UseIdentityColumn();
 
                     b.Property<DateTime?>("Created")
-                        .HasColumnType("timestamp without time zone")
+                        .HasColumnType("datetime2")
                         .HasColumnName("created");
 
                     b.Property<string>("Description")
@@ -124,19 +124,19 @@ namespace EJumping.DAL.Migrations
                         .HasColumnName("description");
 
                     b.Property<int?>("MaxExp")
-                        .HasColumnType("integer")
+                        .HasColumnType("int")
                         .HasColumnName("max_exp");
 
                     b.Property<int?>("MinExp")
-                        .HasColumnType("integer")
+                        .HasColumnType("int")
                         .HasColumnName("min_exp");
 
                     b.Property<DateTime?>("Modified")
-                        .HasColumnType("timestamp without time zone")
+                        .HasColumnType("datetime2")
                         .HasColumnName("modified");
 
                     b.Property<int?>("Status")
-                        .HasColumnType("integer")
+                        .HasColumnType("int")
                         .HasColumnName("status");
 
                     b.Property<string>("Title")
@@ -154,7 +154,7 @@ namespace EJumping.DAL.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("bigint")
                         .HasColumnName("id")
-                        .UseIdentityByDefaultColumn();
+                        .UseIdentityColumn();
 
                     b.Property<string>("Content")
                         .IsRequired()
@@ -162,11 +162,11 @@ namespace EJumping.DAL.Migrations
                         .HasColumnName("content");
 
                     b.Property<DateTime>("CreatedAt")
-                        .HasColumnType("timestamp without time zone")
+                        .HasColumnType("datetime2")
                         .HasColumnName("created_at");
 
                     b.Property<DateTime?>("DeletedAt")
-                        .HasColumnType("timestamp without time zone")
+                        .HasColumnType("datetime2")
                         .HasColumnName("deleted_at");
 
                     b.Property<long?>("DeletedById")
@@ -174,7 +174,7 @@ namespace EJumping.DAL.Migrations
                         .HasColumnName("deleted_by_id");
 
                     b.Property<DateTime?>("HiddenAt")
-                        .HasColumnType("timestamp without time zone")
+                        .HasColumnType("datetime2")
                         .HasColumnName("hidden_at");
 
                     b.Property<string>("HiddenReason")
@@ -182,7 +182,7 @@ namespace EJumping.DAL.Migrations
                         .HasColumnName("hidden_reason");
 
                     b.Property<DateTime?>("LastReportedAt")
-                        .HasColumnType("timestamp without time zone")
+                        .HasColumnType("datetime2")
                         .HasColumnName("last_reported_at");
 
                     b.Property<long>("NewsId")
@@ -190,11 +190,11 @@ namespace EJumping.DAL.Migrations
                         .HasColumnName("news_id");
 
                     b.Property<int>("Status")
-                        .HasColumnType("integer")
+                        .HasColumnType("int")
                         .HasColumnName("status");
 
                     b.Property<DateTime>("UpdatedAt")
-                        .HasColumnType("timestamp without time zone")
+                        .HasColumnType("datetime2")
                         .HasColumnName("updated_at");
 
                     b.Property<long>("UserId")
@@ -214,10 +214,10 @@ namespace EJumping.DAL.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("bigint")
                         .HasColumnName("id")
-                        .UseIdentityByDefaultColumn();
+                        .UseIdentityColumn();
 
                     b.Property<DateTime?>("CreatedAt")
-                        .HasColumnType("timestamp without time zone")
+                        .HasColumnType("datetime2")
                         .HasColumnName("created_at");
 
                     b.Property<long>("NewsCommentId")
@@ -233,7 +233,7 @@ namespace EJumping.DAL.Migrations
                         .HasColumnName("reported_by_id");
 
                     b.Property<int?>("Status")
-                        .HasColumnType("integer")
+                        .HasColumnType("int")
                         .HasColumnName("status");
 
                     b.HasKey("Id");
@@ -249,10 +249,10 @@ namespace EJumping.DAL.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("bigint")
                         .HasColumnName("id")
-                        .UseIdentityByDefaultColumn();
+                        .UseIdentityColumn();
 
                     b.Property<DateTime?>("CreatedAt")
-                        .HasColumnType("timestamp without time zone")
+                        .HasColumnType("datetime2")
                         .HasColumnName("created_at");
 
                     b.Property<long>("NewsId")
@@ -260,7 +260,7 @@ namespace EJumping.DAL.Migrations
                         .HasColumnName("news_id");
 
                     b.Property<int>("Status")
-                        .HasColumnType("integer")
+                        .HasColumnType("int")
                         .HasColumnName("status");
 
                     b.Property<long>("UserId")
@@ -278,52 +278,50 @@ namespace EJumping.DAL.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("bigint")
                         .HasColumnName("bet_id")
-                        .UseIdentityByDefaultColumn();
+                        .UseIdentityColumn();
 
                     b.Property<long>("BetBall")
                         .HasColumnType("bigint")
                         .HasColumnName("bet_ball");
 
                     b.Property<int>("BetPbOddEven")
-                        .HasColumnType("integer")
+                        .HasColumnType("int")
                         .HasColumnName("bet_pb_odd_even");
 
                     b.Property<int>("BetPbPrediction")
-                        .HasColumnType("integer")
+                        .HasColumnType("int")
                         .HasColumnName("bet_pb_prediction");
 
                     b.Property<int>("BetPbUnderOver")
-                        .HasColumnType("integer")
+                        .HasColumnType("int")
                         .HasColumnName("bet_pb_under_over");
 
                     b.Property<int>("BetRbSumLowHighMedium")
-                        .HasColumnType("integer")
+                        .HasColumnType("int")
                         .HasColumnName("bet_rb_sum_low_high_medium");
 
                     b.Property<int>("BetRbSumLowHighMediumOddEven")
-                        .HasColumnType("integer")
+                        .HasColumnType("int")
                         .HasColumnName("bet_rb_sum_low_high_medium_odd_even");
 
                     b.Property<int>("BetRbSumOddEven")
-                        .HasColumnType("integer")
+                        .HasColumnType("int")
                         .HasColumnName("bet_rb_sum_odd_even");
 
                     b.Property<int>("BetRbSumUnderOver")
-                        .HasColumnType("integer")
+                        .HasColumnType("int")
                         .HasColumnName("bet_rb_sum_under_over");
 
                     b.Property<int>("BetRbSumUnderOverOddEven")
-                        .HasColumnType("integer")
+                        .HasColumnType("int")
                         .HasColumnName("bet_rb_sum_under_over_odd_even");
 
                     b.Property<DateTime>("CreateDate")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("timestamp without time zone")
-                        .HasColumnName("create_date")
-                        .HasDefaultValueSql("now()");
+                        .HasColumnType("datetime2")
+                        .HasColumnName("create_date");
 
                     b.Property<DateTime>("GameDate")
-                        .HasColumnType("timestamp without time zone")
+                        .HasColumnType("datetime2")
                         .HasColumnName("game_date");
 
                     b.Property<long>("GameRoundId")
@@ -339,20 +337,16 @@ namespace EJumping.DAL.Migrations
                         .HasColumnName("hit_odds");
 
                     b.Property<int>("IsProvide")
-                        .HasColumnType("integer")
+                        .HasColumnType("int")
                         .HasColumnName("is_provide");
 
                     b.Property<DateTime>("StartDate")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("timestamp without time zone")
-                        .HasColumnName("start_date")
-                        .HasDefaultValueSql("now()");
+                        .HasColumnType("datetime2")
+                        .HasColumnName("start_date");
 
                     b.Property<DateTime>("UpdateDate")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("timestamp without time zone")
-                        .HasColumnName("update_date")
-                        .HasDefaultValueSql("now()");
+                        .HasColumnType("datetime2")
+                        .HasColumnName("update_date");
 
                     b.Property<long>("UserId")
                         .HasColumnType("bigint")
@@ -367,7 +361,7 @@ namespace EJumping.DAL.Migrations
             modelBuilder.Entity("EJumping.DAL.EF.Entities.PbGameroundWs", b =>
                 {
                     b.Property<DateTime>("GameDate")
-                        .HasColumnType("timestamp without time zone")
+                        .HasColumnType("datetime2")
                         .HasColumnName("game_date");
 
                     b.Property<long>("GameRoundId")
@@ -375,114 +369,108 @@ namespace EJumping.DAL.Migrations
                         .HasColumnName("game_round_id");
 
                     b.Property<DateTime>("CreateDate")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("timestamp without time zone")
-                        .HasColumnName("create_date")
-                        .HasDefaultValueSql("now()");
+                        .HasColumnType("datetime2")
+                        .HasColumnName("create_date");
 
                     b.Property<int>("HitEventId1")
-                        .HasColumnType("integer")
+                        .HasColumnType("int")
                         .HasColumnName("hit_event_id1");
 
                     b.Property<int>("HitEventId2")
-                        .HasColumnType("integer")
+                        .HasColumnType("int")
                         .HasColumnName("hit_event_id2");
 
                     b.Property<int>("HitEventId3")
-                        .HasColumnType("integer")
+                        .HasColumnType("int")
                         .HasColumnName("hit_event_id3");
 
                     b.Property<int>("HitEventId4")
-                        .HasColumnType("integer")
+                        .HasColumnType("int")
                         .HasColumnName("hit_event_id4");
 
                     b.Property<int>("HitEventId5")
-                        .HasColumnType("integer")
+                        .HasColumnType("int")
                         .HasColumnName("hit_event_id5");
 
                     b.Property<int>("IsProvide")
-                        .HasColumnType("integer")
+                        .HasColumnType("int")
                         .HasColumnName("is_provide");
 
                     b.Property<int?>("Pb")
-                        .HasColumnType("integer")
+                        .HasColumnType("int")
                         .HasColumnName("pb");
 
                     b.Property<int>("PbEventBetCount")
-                        .HasColumnType("integer")
+                        .HasColumnType("int")
                         .HasColumnName("pb_event_bet_count");
 
                     b.Property<int>("PbOddBetCount")
-                        .HasColumnType("integer")
+                        .HasColumnType("int")
                         .HasColumnName("pb_odd_bet_count");
 
                     b.Property<int>("PbOverBetCount")
-                        .HasColumnType("integer")
+                        .HasColumnType("int")
                         .HasColumnName("pb_over_bet_count");
 
                     b.Property<int>("PbUnderBetCount")
-                        .HasColumnType("integer")
+                        .HasColumnType("int")
                         .HasColumnName("pb_under_bet_count");
 
                     b.Property<int?>("Rb1")
-                        .HasColumnType("integer")
+                        .HasColumnType("int")
                         .HasColumnName("rb1");
 
                     b.Property<int?>("Rb2")
-                        .HasColumnType("integer")
+                        .HasColumnType("int")
                         .HasColumnName("rb2");
 
                     b.Property<int?>("Rb3")
-                        .HasColumnType("integer")
+                        .HasColumnType("int")
                         .HasColumnName("rb3");
 
                     b.Property<int?>("Rb4")
-                        .HasColumnType("integer")
+                        .HasColumnType("int")
                         .HasColumnName("rb4");
 
                     b.Property<int?>("Rb5")
-                        .HasColumnType("integer")
+                        .HasColumnType("int")
                         .HasColumnName("rb5");
 
                     b.Property<int>("RbSumEventBetCount")
-                        .HasColumnType("integer")
+                        .HasColumnType("int")
                         .HasColumnName("rb_sum_event_bet_count");
 
                     b.Property<int>("RbSumHighBetCount")
-                        .HasColumnType("integer")
+                        .HasColumnType("int")
                         .HasColumnName("rb_sum_high_bet_count");
 
                     b.Property<int>("RbSumLowBetCount")
-                        .HasColumnType("integer")
+                        .HasColumnType("int")
                         .HasColumnName("rb_sum_low_bet_count");
 
                     b.Property<int>("RbSumMediumBetCount")
-                        .HasColumnType("integer")
+                        .HasColumnType("int")
                         .HasColumnName("rb_sum_medium_bet_count");
 
                     b.Property<int>("RbSumOddBetCount")
-                        .HasColumnType("integer")
+                        .HasColumnType("int")
                         .HasColumnName("rb_sum_odd_bet_count");
 
                     b.Property<int>("RbSumOverBetCount")
-                        .HasColumnType("integer")
+                        .HasColumnType("int")
                         .HasColumnName("rb_sum_over_bet_count");
 
                     b.Property<int>("RbSumUnderBetCount")
-                        .HasColumnType("integer")
+                        .HasColumnType("int")
                         .HasColumnName("rb_sum_under_bet_count");
 
                     b.Property<DateTime>("StartDate")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("timestamp without time zone")
-                        .HasColumnName("start_date")
-                        .HasDefaultValueSql("now()");
+                        .HasColumnType("datetime2")
+                        .HasColumnName("start_date");
 
                     b.Property<DateTime>("UpdateDate")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("timestamp without time zone")
-                        .HasColumnName("update_date")
-                        .HasDefaultValueSql("now()");
+                        .HasColumnType("datetime2")
+                        .HasColumnName("update_date");
 
                     b.HasKey("GameDate", "GameRoundId")
                         .HasName("pb_gameround_ws_pkey");
@@ -494,32 +482,32 @@ namespace EJumping.DAL.Migrations
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("integer")
-                        .UseIdentityByDefaultColumn();
+                        .HasColumnType("int")
+                        .UseIdentityColumn();
 
                     b.Property<int>("CorrectAnswer")
-                        .HasColumnType("integer");
+                        .HasColumnType("int");
 
                     b.Property<int>("CorrectAnswerPoints")
-                        .HasColumnType("integer");
+                        .HasColumnType("int");
 
                     b.Property<string>("FirstOption")
-                        .HasColumnType("text");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("FourthOption")
-                        .HasColumnType("text");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("QuestionName")
-                        .HasColumnType("text");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("QuizId")
-                        .HasColumnType("integer");
+                        .HasColumnType("int");
 
                     b.Property<string>("SecondOption")
-                        .HasColumnType("text");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("ThirdOption")
-                        .HasColumnType("text");
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 
@@ -644,14 +632,14 @@ namespace EJumping.DAL.Migrations
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("integer")
-                        .UseIdentityByDefaultColumn();
+                        .HasColumnType("int")
+                        .UseIdentityColumn();
 
                     b.Property<string>("Name")
-                        .HasColumnType("text");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("QuizLogoUrl")
-                        .HasColumnType("text");
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 
@@ -676,7 +664,7 @@ namespace EJumping.DAL.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("bigint")
                         .HasColumnName("id")
-                        .UseIdentityByDefaultColumn();
+                        .UseIdentityColumn();
 
                     b.Property<string>("ConcurrencyStamp")
                         .HasColumnType("character varying")
@@ -701,7 +689,7 @@ namespace EJumping.DAL.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("bigint")
                         .HasColumnName("id")
-                        .UseIdentityByDefaultColumn();
+                        .UseIdentityColumn();
 
                     b.Property<string>("ClaimType")
                         .HasColumnType("character varying")
@@ -733,7 +721,7 @@ namespace EJumping.DAL.Migrations
                         .HasColumnName("blocked_user_id");
 
                     b.Property<DateTime?>("Created")
-                        .HasColumnType("timestamp without time zone")
+                        .HasColumnType("datetime2")
                         .HasColumnName("created");
 
                     b.HasKey("UserId", "BlockedUserId")
@@ -750,7 +738,7 @@ namespace EJumping.DAL.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("bigint")
                         .HasColumnName("id")
-                        .UseIdentityByDefaultColumn();
+                        .UseIdentityColumn();
 
                     b.Property<string>("ClaimType")
                         .HasColumnType("character varying")
@@ -777,10 +765,10 @@ namespace EJumping.DAL.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("bigint")
                         .HasColumnName("id")
-                        .UseIdentityByDefaultColumn();
+                        .UseIdentityColumn();
 
                     b.Property<int>("ActionType")
-                        .HasColumnType("integer")
+                        .HasColumnType("int")
                         .HasColumnName("action_type");
 
                     b.Property<long>("AfterValue")
@@ -796,7 +784,7 @@ namespace EJumping.DAL.Migrations
                         .HasColumnName("change_value");
 
                     b.Property<DateTime?>("Created")
-                        .HasColumnType("timestamp without time zone")
+                        .HasColumnType("datetime2")
                         .HasColumnName("created");
 
                     b.Property<string>("Description")
@@ -804,11 +792,11 @@ namespace EJumping.DAL.Migrations
                         .HasColumnName("description");
 
                     b.Property<DateTime?>("Modified")
-                        .HasColumnType("timestamp without time zone")
+                        .HasColumnType("datetime2")
                         .HasColumnName("modified");
 
                     b.Property<int?>("Status")
-                        .HasColumnType("integer")
+                        .HasColumnType("int")
                         .HasColumnName("status");
 
                     b.Property<long>("UserId")
@@ -833,15 +821,15 @@ namespace EJumping.DAL.Migrations
                         .HasColumnName("friend_id");
 
                     b.Property<DateTime?>("Created")
-                        .HasColumnType("timestamp without time zone")
+                        .HasColumnType("datetime2")
                         .HasColumnName("created");
 
                     b.Property<DateTime?>("FriendSince")
-                        .HasColumnType("timestamp without time zone")
+                        .HasColumnType("datetime2")
                         .HasColumnName("friend_since");
 
                     b.Property<int>("Status")
-                        .HasColumnType("integer")
+                        .HasColumnType("int")
                         .HasColumnName("status");
 
                     b.HasKey("UserId", "FriendId")
@@ -884,7 +872,7 @@ namespace EJumping.DAL.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("bigint")
                         .HasColumnName("id")
-                        .UseIdentityByDefaultColumn();
+                        .UseIdentityColumn();
 
                     b.Property<DateTime?>("LoginDate")
                         .HasColumnType("timestamp with time zone")
@@ -915,7 +903,7 @@ namespace EJumping.DAL.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("bigint")
                         .HasColumnName("id")
-                        .UseIdentityByDefaultColumn();
+                        .UseIdentityColumn();
 
                     b.Property<string>("Content")
                         .IsRequired()
@@ -923,11 +911,11 @@ namespace EJumping.DAL.Migrations
                         .HasColumnName("content");
 
                     b.Property<DateTime?>("Created")
-                        .HasColumnType("timestamp without time zone")
+                        .HasColumnType("datetime2")
                         .HasColumnName("created");
 
                     b.Property<DateTime?>("Deleted")
-                        .HasColumnType("timestamp without time zone")
+                        .HasColumnType("datetime2")
                         .HasColumnName("deleted");
 
                     b.Property<long>("ReceiverId")
@@ -939,7 +927,7 @@ namespace EJumping.DAL.Migrations
                         .HasColumnName("sender_id");
 
                     b.Property<int>("Status")
-                        .HasColumnType("integer")
+                        .HasColumnType("int")
                         .HasColumnName("status");
 
                     b.Property<string>("Title")
@@ -962,10 +950,10 @@ namespace EJumping.DAL.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("bigint")
                         .HasColumnName("id")
-                        .UseIdentityByDefaultColumn();
+                        .UseIdentityColumn();
 
                     b.Property<int>("ActionType")
-                        .HasColumnType("integer")
+                        .HasColumnType("int")
                         .HasColumnName("action_type");
 
                     b.Property<long>("AfterValue")
@@ -977,7 +965,7 @@ namespace EJumping.DAL.Migrations
                         .HasColumnName("before_value");
 
                     b.Property<int>("ChangeType")
-                        .HasColumnType("integer")
+                        .HasColumnType("int")
                         .HasColumnName("change_type");
 
                     b.Property<long>("ChangeValue")
@@ -985,7 +973,7 @@ namespace EJumping.DAL.Migrations
                         .HasColumnName("change_value");
 
                     b.Property<DateTime?>("Created")
-                        .HasColumnType("timestamp without time zone")
+                        .HasColumnType("datetime2")
                         .HasColumnName("created");
 
                     b.Property<string>("Description")
@@ -993,11 +981,11 @@ namespace EJumping.DAL.Migrations
                         .HasColumnName("description");
 
                     b.Property<DateTime?>("Modified")
-                        .HasColumnType("timestamp without time zone")
+                        .HasColumnType("datetime2")
                         .HasColumnName("modified");
 
                     b.Property<int?>("Status")
-                        .HasColumnType("integer")
+                        .HasColumnType("int")
                         .HasColumnName("status");
 
                     b.Property<long>("UserId")
@@ -1059,14 +1047,14 @@ namespace EJumping.DAL.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("bigint")
                         .HasColumnName("id")
-                        .UseIdentityByDefaultColumn();
+                        .UseIdentityColumn();
 
                     b.Property<int>("AccessFailedCount")
-                        .HasColumnType("integer")
+                        .HasColumnType("int")
                         .HasColumnName("access_failed_count");
 
                     b.Property<DateTime?>("BirthDate")
-                        .HasColumnType("timestamp without time zone")
+                        .HasColumnType("datetime2")
                         .HasColumnName("birth_date");
 
                     b.Property<string>("ConcurrencyStamp")
@@ -1074,25 +1062,23 @@ namespace EJumping.DAL.Migrations
                         .HasColumnName("concurrency_stamp");
 
                     b.Property<DateTime?>("Created")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("timestamp without time zone")
-                        .HasColumnName("created")
-                        .HasDefaultValueSql("now()");
+                        .HasColumnType("datetime2")
+                        .HasColumnName("created");
 
                     b.Property<string>("Email")
                         .HasColumnType("character varying")
                         .HasColumnName("email");
 
                     b.Property<bool>("EmailConfirmed")
-                        .HasColumnType("boolean")
+                        .HasColumnType("bit")
                         .HasColumnName("email_confirmed");
 
                     b.Property<bool?>("EmailMarketing")
-                        .HasColumnType("boolean")
+                        .HasColumnType("bit")
                         .HasColumnName("email_marketing");
 
                     b.Property<bool?>("EmailServiceNotification")
-                        .HasColumnType("boolean")
+                        .HasColumnType("bit")
                         .HasColumnName("email_service_notification");
 
                     b.Property<string>("FirstName")
@@ -1100,15 +1086,15 @@ namespace EJumping.DAL.Migrations
                         .HasColumnName("first_name");
 
                     b.Property<int?>("Gender")
-                        .HasColumnType("integer")
+                        .HasColumnType("int")
                         .HasColumnName("gender");
 
                     b.Property<DateTime?>("LastFriendrequestsRead")
-                        .HasColumnType("timestamp without time zone")
+                        .HasColumnType("datetime2")
                         .HasColumnName("last_friendrequests_read");
 
                     b.Property<DateTime?>("LastMessagesRead")
-                        .HasColumnType("timestamp without time zone")
+                        .HasColumnType("datetime2")
                         .HasColumnName("last_messages_read");
 
                     b.Property<string>("LastName")
@@ -1117,26 +1103,24 @@ namespace EJumping.DAL.Migrations
 
                     b.Property<int>("Level")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("integer")
+                        .HasColumnType("int")
                         .HasColumnName("level")
                         .HasDefaultValueSql("1");
 
                     b.Property<bool?>("Locked")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("boolean")
-                        .HasColumnName("locked")
-                        .HasDefaultValueSql("false");
+                        .HasColumnType("bit")
+                        .HasColumnName("locked");
 
                     b.Property<bool>("LockoutEnabled")
-                        .HasColumnType("boolean")
+                        .HasColumnType("bit")
                         .HasColumnName("lockout_enabled");
 
                     b.Property<DateTime?>("LockoutEnd")
-                        .HasColumnType("timestamp without time zone")
+                        .HasColumnType("datetime2")
                         .HasColumnName("lockout_end");
 
                     b.Property<string>("MfaSecret")
-                        .HasColumnType("text")
+                        .HasColumnType("nvarchar(max)")
                         .HasColumnName("mfa_secret");
 
                     b.Property<string>("NormalizedEmail")
@@ -1152,13 +1136,11 @@ namespace EJumping.DAL.Migrations
                         .HasColumnName("password_hash");
 
                     b.Property<string>("PhoneNumber")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("text")
-                        .HasColumnName("phone_number")
-                        .HasDefaultValueSql("''::text");
+                        .HasColumnType("nvarchar(max)")
+                        .HasColumnName("phone_number");
 
                     b.Property<bool>("PhoneNumberConfirmed")
-                        .HasColumnType("boolean")
+                        .HasColumnType("bit")
                         .HasColumnName("phone_number_confirmed");
 
                     b.Property<string>("PreferredLanguage")
@@ -1174,11 +1156,11 @@ namespace EJumping.DAL.Migrations
                         .HasColumnName("security_stamp");
 
                     b.Property<int?>("Status")
-                        .HasColumnType("integer")
+                        .HasColumnType("int")
                         .HasColumnName("status");
 
                     b.Property<bool>("TwoFactorEnabled")
-                        .HasColumnType("boolean")
+                        .HasColumnType("bit")
                         .HasColumnName("two_factor_enabled");
 
                     b.Property<string>("UserName")
@@ -1186,7 +1168,7 @@ namespace EJumping.DAL.Migrations
                         .HasColumnName("user_name");
 
                     b.Property<int?>("VerificationStatus")
-                        .HasColumnType("integer")
+                        .HasColumnType("int")
                         .HasColumnName("verification_status");
 
                     b.HasKey("Id");

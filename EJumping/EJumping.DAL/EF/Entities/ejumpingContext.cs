@@ -44,6 +44,7 @@ namespace EJumping.DAL.EF.Entities
             {
 #warning To protect potentially sensitive information in your connection string, you should move it out of source code. See http://go.microsoft.com/fwlink/?LinkId=723263 for guidance on storing connection strings.
                 optionsBuilder.UseNpgsql("host=localhost;database=ejumping;Username=postgres;Password=1qaz!QAZ;");
+                //optionsBuilder.UseSqlServer("Data Source=(localdb)\\MSSQLLocalDB;Initial Catalog=ejumping;Integrated Security=True;");
             }
         }
 
@@ -213,8 +214,7 @@ namespace EJumping.DAL.EF.Entities
                     .HasColumnType("numeric(13,5)");
 
                 entity.Property(e => e.RoundDate)
-                    .HasColumnName("round_date")
-                    .HasDefaultValueSql("now()");
+                    .HasColumnName("round_date");
 
                 entity.Property(e => e.RoundNumber).HasColumnName("round_number");
 
@@ -354,8 +354,7 @@ namespace EJumping.DAL.EF.Entities
                 entity.Property(e => e.BetRbSumUnderOverOddEven).HasColumnName("bet_rb_sum_under_over_odd_even");
 
                 entity.Property(e => e.CreateDate)
-                    .HasColumnName("create_date")
-                    .HasDefaultValueSql("now()");
+                    .HasColumnName("create_date");
 
                 entity.Property(e => e.GameDate).HasColumnName("game_date");
 
@@ -370,12 +369,10 @@ namespace EJumping.DAL.EF.Entities
                 entity.Property(e => e.IsProvide).HasColumnName("is_provide");
 
                 entity.Property(e => e.StartDate)
-                    .HasColumnName("start_date")
-                    .HasDefaultValueSql("now()");
+                    .HasColumnName("start_date");
 
                 entity.Property(e => e.UpdateDate)
-                    .HasColumnName("update_date")
-                    .HasDefaultValueSql("now()");
+                    .HasColumnName("update_date");
 
                 entity.Property(e => e.UserId).HasColumnName("user_id");
             });
@@ -392,8 +389,7 @@ namespace EJumping.DAL.EF.Entities
                 entity.Property(e => e.GameRoundId).HasColumnName("game_round_id");
 
                 entity.Property(e => e.CreateDate)
-                    .HasColumnName("create_date")
-                    .HasDefaultValueSql("now()");
+                    .HasColumnName("create_date");
 
                 entity.Property(e => e.HitEventId1).HasColumnName("hit_event_id1");
 
@@ -442,12 +438,10 @@ namespace EJumping.DAL.EF.Entities
                 entity.Property(e => e.RbSumUnderBetCount).HasColumnName("rb_sum_under_bet_count");
 
                 entity.Property(e => e.StartDate)
-                    .HasColumnName("start_date")
-                    .HasDefaultValueSql("now()");
+                    .HasColumnName("start_date");
 
                 entity.Property(e => e.UpdateDate)
-                    .HasColumnName("update_date")
-                    .HasDefaultValueSql("now()");
+                    .HasColumnName("update_date");
             });
 
             modelBuilder.Entity<Role>(entity =>
@@ -798,8 +792,7 @@ namespace EJumping.DAL.EF.Entities
                     .HasColumnType("character varying");
 
                 entity.Property(e => e.Created)
-                    .HasColumnName("created")
-                    .HasDefaultValueSql("now()");
+                    .HasColumnName("created");
 
                 entity.Property(e => e.Email)
                     .HasColumnName("email")
@@ -831,8 +824,7 @@ namespace EJumping.DAL.EF.Entities
                     .HasDefaultValueSql("1");
 
                 entity.Property(e => e.Locked)
-                    .HasColumnName("locked")
-                    .HasDefaultValueSql("false");
+                    .HasColumnName("locked");
 
                 entity.Property(e => e.LockoutEnabled).HasColumnName("lockout_enabled");
 
@@ -853,8 +845,7 @@ namespace EJumping.DAL.EF.Entities
                     .HasColumnType("character varying");
 
                 entity.Property(e => e.PhoneNumber)
-                    .HasColumnName("phone_number")
-                    .HasDefaultValueSql("''::text");
+                    .HasColumnName("phone_number");
 
                 entity.Property(e => e.PhoneNumberConfirmed).HasColumnName("phone_number_confirmed");
 
