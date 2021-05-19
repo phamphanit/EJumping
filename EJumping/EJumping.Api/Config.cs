@@ -22,7 +22,13 @@ namespace EJumping.Api
             {
             new ApiResource("api1", "My API")
             };
-
+        public static IEnumerable<ApiScope> Scopes
+        {
+            get
+            {
+                return new List<ApiScope> { new ApiScope("api1", "My API") };
+            }
+        }
         public static IEnumerable<Client> Clients =>
             new List<Client>
             {
@@ -34,7 +40,7 @@ namespace EJumping.Api
 
                 AllowedGrantTypes = GrantTypes.ClientCredentials,
                 // scopes that client has access to
-                AllowedScopes = { "api1" }
+                AllowedScopes = new List<string>{ "api1" }
             },
                new Client
                  {

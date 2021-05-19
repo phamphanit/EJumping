@@ -78,6 +78,7 @@ namespace EJumping.API
                .AddAspNetIdentity<ApplicationUser>()
                .AddInMemoryIdentityResources(Config.IdentityResources)
                .AddInMemoryApiResources(Config.ApiResource)
+               .AddInMemoryApiScopes(Config.Scopes)
                .AddInMemoryClients(Config.Clients)
                .AddProfileService<ProfileService>()
                ;
