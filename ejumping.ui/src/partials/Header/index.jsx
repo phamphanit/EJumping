@@ -14,13 +14,13 @@ const Header = () => {
     console.log("1111111");
     const userManager = new UserManager(oidcConfig);
     const loadUser = async () => {
+      dispatch(userLogoutRequest());
       const user = await userManager.getUser();
       if (user) {
-        userManager.signoutRedirect();
+        userManager.signoutRedirectCallback();
       }
     };
     loadUser();
-    dispatch(userLogoutRequest());
   };
   return (
     <header>
