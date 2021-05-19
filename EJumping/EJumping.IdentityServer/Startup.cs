@@ -27,6 +27,7 @@ namespace EJumping.IdentityServer
             services.AddPersistence(Configuration.GetConnectionString("DefaultConnection"))
                     .AddIdentity();
             services.AddIdentityServer()
+                    .AddDeveloperSigningCredential()
                     .AddIdServerPersistence(Configuration.GetConnectionString("Idsrv"));
 
         }

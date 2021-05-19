@@ -95,12 +95,12 @@ namespace Microsoft.Extensions.DependencyInjection
                         RequirePkce = true,
                         RedirectUris =
                         {
-                            "https://localhost:44364/signin-oidc",
+                            "https://localhost:44352/signin-oidc",
                             "http://host.docker.internal:9003/signin-oidc",
                         },
                         PostLogoutRedirectUris =
                         {
-                            "https://localhost:44364/signout-callback-oidc",
+                            "https://localhost:44352/signout-callback-oidc",
                             "http://host.docker.internal:9003/signout-callback-oidc",
                         },
                         AllowedScopes =

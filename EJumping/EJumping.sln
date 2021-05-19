@@ -27,7 +27,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EJumping.Persistence", "EJu
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EJumping.Migrator", "EJumping.Migrator\EJumping.Migrator.csproj", "{468D25A7-8FD1-42EC-AEB5-CB84A3EA1047}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EJumping.IdentityServer", "EJumping.IdentityServer\EJumping.IdentityServer.csproj", "{7636444B-711C-439F-8C0A-3CA5336107B6}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EJumping.IdentityServer", "EJumping.IdentityServer\EJumping.IdentityServer.csproj", "{7636444B-711C-439F-8C0A-3CA5336107B6}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EJumping.WebMVC", "EJumping.WebMVC\EJumping.WebMVC.csproj", "{2AB1DEB7-1985-46FB-8BAE-C3C4E43D574A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -67,6 +69,10 @@ Global
 		{7636444B-711C-439F-8C0A-3CA5336107B6}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7636444B-711C-439F-8C0A-3CA5336107B6}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7636444B-711C-439F-8C0A-3CA5336107B6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2AB1DEB7-1985-46FB-8BAE-C3C4E43D574A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2AB1DEB7-1985-46FB-8BAE-C3C4E43D574A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2AB1DEB7-1985-46FB-8BAE-C3C4E43D574A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2AB1DEB7-1985-46FB-8BAE-C3C4E43D574A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -80,6 +86,7 @@ Global
 		{725B8389-1735-4BC1-A846-2F6630B3F5B3} = {5D056647-2805-4580-A5E8-A3E009EEC513}
 		{468D25A7-8FD1-42EC-AEB5-CB84A3EA1047} = {8256C639-BE50-4C27-841B-C4DE24EFD0A8}
 		{7636444B-711C-439F-8C0A-3CA5336107B6} = {8256C639-BE50-4C27-841B-C4DE24EFD0A8}
+		{2AB1DEB7-1985-46FB-8BAE-C3C4E43D574A} = {8256C639-BE50-4C27-841B-C4DE24EFD0A8}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {058EAAA8-9573-44AB-8412-4F8B60BAD56C}
