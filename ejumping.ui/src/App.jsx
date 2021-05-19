@@ -7,6 +7,7 @@ import LoginPage from "./components/pages/Login/LoginPage";
 import FeaturePage from "./components/pages/FeaturePage/Feature";
 import { PageMenu } from "./partials/Menu/PageMenu";
 import QuizPage from "./components/pages/QuizPage";
+import OidcLoginRedirect from "./components/pages/Login/OidcLoginRedirect";
 function App() {
   return (
     <div>
@@ -16,6 +17,11 @@ function App() {
       <main className="main-wrapper">
         <Switch>
           <Route exact path="/" component={HomePage} />
+          <Route
+            exact
+            path="/oidc-login-redirect"
+            component={OidcLoginRedirect}
+          />
           <Route exact path="/feature" component={FeaturePage} />
           <Route exact path="/register" component={RegisterPageContainer} />
           <Route exact path="/login" component={LoginPage}></Route>

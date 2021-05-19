@@ -1,6 +1,28 @@
 import { SliderData } from "../../../partials/Carousel/SliderData";
 import Carousel from "./../../../partials/Carousel/Carousel";
+import { useDispatch } from "react-redux";
+import {
+  fetchMyInfoSucceed,
+  userLoginSucceed,
+} from "./../../actions/userActions";
+import { UserManager } from "oidc-client";
+import oidcConfig from "./../Login/oidcConfig";
+
 const HomePage = () => {
+  const dispatch = useDispatch();
+  const userManager = new UserManager(oidcConfig);
+  const loadUser = async () => {
+    const user = await userManager.getUser();
+    console.log(user);
+    console.log("ok");
+    if (user) {
+      dispatch(userLoginSucceed(user));
+      dispatch(fetchMyInfoSucceed(user.profile));
+    }
+    return user;
+  };
+  const user = loadUser();
+
   return (
     <div>
       <Carousel slides={SliderData}></Carousel>

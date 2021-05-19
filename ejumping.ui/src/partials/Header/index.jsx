@@ -4,11 +4,22 @@ import { useDispatch, useSelector } from "react-redux";
 import { PageMenu } from "./../Menu/PageMenu";
 import { userLogoutRequest } from "../../components/actions/userActions";
 import "antd/dist/antd.css";
+import { UserManager } from "oidc-client";
+import oidcConfig from "../../components/pages/Login/oidcConfig";
 const Header = () => {
   const dispatch = useDispatch();
   const isLoggedIn = useSelector((state) => state.user.isLoggedIn);
   const userInfo = useSelector((state) => state.user.myInfo);
   const handleLogout = () => {
+    console.log("1111111");
+    const userManager = new UserManager(oidcConfig);
+    const loadUser = async () => {
+      const user = await userManager.getUser();
+      if (user) {
+        userManager.signoutRedirect();
+      }
+    };
+    loadUser();
     dispatch(userLogoutRequest());
   };
   return (

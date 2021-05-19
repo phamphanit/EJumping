@@ -10,6 +10,8 @@ import "./Login.scss";
 import config from "../../../config.json";
 import GoogleLogin from "react-google-login";
 import { message } from "antd";
+import { UserManager } from "oidc-client";
+import oidcConfig from "./oidcConfig";
 const LoginPage = (props) => {
   const dispatch = useDispatch();
   const isLoggedIn = useSelector((state) => state.user.isLoggedIn);
@@ -23,6 +25,7 @@ const LoginPage = (props) => {
     }
   }, [isLoggedIn]);
   const userRegisterErrorMsg = "";
+
   const handleSubmit = (values) => {
     const model = {
       userName: values.userName,
@@ -36,6 +39,10 @@ const LoginPage = (props) => {
     dispatch(userExternalLogin());
     // window.location.href =
     //   "/api/auth/challengeExternalLogin?provider=" + provider + "&returnUrl=/";
+  };
+  const handleIdentityServer = () => {
+    const userManager = new UserManager(oidcConfig);
+    return userManager.signinRedirect();
   };
   const googleResponseHandler = (response) => {
     dispatch(userExternalLogin(response));
@@ -56,14 +63,12 @@ const LoginPage = (props) => {
               onFailure={googleResponseHandler}
             />
           </li>
-          <li
-            className="facebook"
-            onClick={() => handleExternalLogin("Facebook")}
-          >
+          <li className="facebook" onClick={handleIdentityServer}>
             <div className="logo">
-              <img src="https://img.icons8.com/fluent/26/000000/facebook-new.png" />{" "}
+              {/* <img src="https://img.icons8.com/fluent/26/000000/facebook-new.png" />{" "} */}
+              <img src="https://avatars.githubusercontent.com/u/10635672?s=200&v=4" />{" "}
             </div>
-            <div className="text">Facebook</div>
+            <div className="text">Idsvr4</div>
           </li>
           <li className="apple">
             <div className="logo">
