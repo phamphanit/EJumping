@@ -22,13 +22,13 @@ namespace EJumping.Api
             {
             new ApiResource("api1", "My API")
             };
-        public static IEnumerable<ApiScope> Scopes
-        {
-            get
-            {
-                return new List<ApiScope> { new ApiScope("api1", "My API") };
-            }
-        }
+        //public static IEnumerable<ApiScope> Scopes
+        //{
+        //    get
+        //    {
+        //        return new List<ApiScope> { new ApiScope("api1", "My API") };
+        //    }
+        //}
         public static IEnumerable<Client> Clients =>
             new List<Client>
             {
