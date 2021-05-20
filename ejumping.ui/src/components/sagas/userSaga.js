@@ -1,4 +1,4 @@
-import { all, call, takeLatest, put, fork } from 'redux-saga/effects';
+import { call, takeLatest, put, fork } from 'redux-saga/effects';
 import * as api from '../../api/userApi';
 import * as action from '../actions/userActions';
 import userActionTypes from '../constant/userActionTypes';

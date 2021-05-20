@@ -12,7 +12,7 @@ const MenuItem = (props) => {
       onMouseLeave={() => setDropdownMenu(false)}
     >
       <div className="menu_head_text">
-        <Link>
+        <Link to="/">
           <span>{props.children}</span>
         </Link>
         <i className="fas fa-chevron-down ml-1"></i>

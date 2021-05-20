@@ -1,4 +1,4 @@
-import { all, call } from 'redux-saga/effects'
+import { all } from 'redux-saga/effects'
 import quizSagas from '../components/sagas/quizSaga';
 import userSaga from '../components/sagas/userSaga';
 function* rootSaga() {

@@ -21,7 +21,7 @@ const Question = (props) => {
       </div>
       <div className="options">
         {options.map((x, index) => {
-          if (!x) return;
+          if (!x) return "";
           return (
             <QuestionOption
               content={x}

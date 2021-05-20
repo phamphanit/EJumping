@@ -13,15 +13,13 @@ const HomePage = () => {
   const userManager = new UserManager(oidcConfig);
   const loadUser = async () => {
     const user = await userManager.getUser();
-    console.log(user);
-    console.log("ok");
     if (user) {
       dispatch(userLoginSucceed(user));
       dispatch(fetchMyInfoSucceed(user.profile));
     }
     return user;
   };
-  const user = loadUser();
+  loadUser();
 
   return (
     <div>

@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useState } from "react";
 import "./Carousel.scss";
 
 import { FaArrowAltCircleRight, FaArrowAltCircleLeft } from "react-icons/fa";
@@ -6,7 +6,6 @@ const Carousel = ({ slides }) => {
   const [current, setCurrent] = useState(0);
   const length = slides.length;
 
-  const currentIndex = useRef(0);
   // useEffect(() => {
   //   const intervalSlide = setInterval(() => {
   //     currentIndex.current =

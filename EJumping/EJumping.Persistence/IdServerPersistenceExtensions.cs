@@ -17,7 +17,7 @@ namespace Microsoft.Extensions.DependencyInjection
             services.AddConfigurationStore(options =>
             {
                 options.ConfigureDbContext = builder =>
-                    builder.UseSqlServer(connectionString,
+                    builder.UseNpgsql(connectionString,
                         sql =>
                         {
                             if (!string.IsNullOrEmpty(migrationsAssembly))
@@ -30,7 +30,7 @@ namespace Microsoft.Extensions.DependencyInjection
                 .AddOperationalStore(options =>
                 {
                     options.ConfigureDbContext = builder =>
-                        builder.UseSqlServer(connectionString,
+                        builder.UseNpgsql(connectionString,
                             sql =>
                             {
                                 if (!string.IsNullOrEmpty(migrationsAssembly))

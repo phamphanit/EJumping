@@ -1,5 +1,4 @@
 import "./Footer.scss";
-import { Link } from "react-router-dom";
 const Footer = () => {
   return (
     <footer>
@@ -12,7 +11,7 @@ const Footer = () => {
                 <div>Got Question? Call Us 24/7</div>
                 <div>ETown Cong Hoa, Viet Nam</div>
                 <div className="footer_social">
-                  <ul>
+                  {/* <ul>
                     <li>
                       <Link>
                         <i className="fab fa-facebook-f"></i>
@@ -38,7 +37,7 @@ const Footer = () => {
                         <i className="fab fa-vimeo-v"></i>
                       </Link>
                     </li>
-                  </ul>
+                  </ul> */}
                 </div>
               </div>
             </div>

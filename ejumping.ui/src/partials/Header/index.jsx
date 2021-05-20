@@ -1,7 +1,6 @@
 import "./Header.scss";
-import { NavLink, Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { PageMenu } from "./../Menu/PageMenu";
 import { userLogoutRequest } from "../../components/actions/userActions";
 import "antd/dist/antd.css";
 import { UserManager } from "oidc-client";
@@ -11,16 +10,15 @@ const Header = () => {
   const isLoggedIn = useSelector((state) => state.user.isLoggedIn);
   const userInfo = useSelector((state) => state.user.myInfo);
   const handleLogout = () => {
-    console.log("1111111");
     const userManager = new UserManager(oidcConfig);
     const loadUser = async () => {
-      dispatch(userLogoutRequest());
       const user = await userManager.getUser();
       if (user) {
-        userManager.signoutRedirectCallback();
+        userManager.signoutRedirect();
       }
     };
     loadUser();
+    dispatch(userLogoutRequest());
   };
   return (
     <header>
@@ -73,7 +71,7 @@ const Header = () => {
                         <span>{userInfo.userName}</span>
                       </li>
                       <li className="">
-                        <Link onClick={handleLogout} className="">
+                        <Link onClick={handleLogout} className="" to="/logout">
                           Log out
                         </Link>
                       </li>
@@ -107,28 +105,40 @@ const Header = () => {
                     placeholder="Search for Product ..."
                   />
                   <div className="search_list_category">
-                    <span class="custom_dropdown_placeholder clc">
+                    <span className="custom_dropdown_placeholder clc">
                       All Categories
                     </span>
                     <i className="fas fa-chevron-down"></i>
                     <ul className="custom_list clc" style={{ display: "none" }}>
                       <li>
-                        <Link className="clc">All Categories</Link>
+                        <Link to="/" className="clc">
+                          All Categories
+                        </Link>
                       </li>
                       <li>
-                        <Link className="clc">Computers</Link>
+                        <Link to="/" className="clc">
+                          Computers
+                        </Link>
                       </li>
                       <li>
-                        <Link className="clc">Laptops</Link>
+                        <Link to="/" className="clc">
+                          Laptops
+                        </Link>
                       </li>
                       <li>
-                        <Link className="clc">Cameras</Link>
+                        <Link to="/" className="clc">
+                          Cameras
+                        </Link>
                       </li>
                       <li>
-                        <Link className="clc">Hardware</Link>
+                        <Link to="/" className="clc">
+                          Hardware
+                        </Link>
                       </li>
                       <li>
-                        <Link className="clc">Smartphones</Link>
+                        <Link to="/" className="clc">
+                          Smartphones
+                        </Link>
                       </li>
                     </ul>
                   </div>

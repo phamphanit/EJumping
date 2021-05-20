@@ -1,6 +1,5 @@
 import React, { useEffect } from "react";
 import "../Register/Register.scss";
-import PropTypes from "prop-types";
 import { Formik } from "formik";
 import { useDispatch, useSelector } from "react-redux";
 import { userExternalLogin, userLoginRequest } from "../../actions/userActions";
@@ -9,10 +8,9 @@ import { LoginValidation } from "../../validations/RegisterValidation";
 import "./Login.scss";
 import config from "../../../config.json";
 import GoogleLogin from "react-google-login";
-import { message } from "antd";
 import { UserManager } from "oidc-client";
 import oidcConfig from "./oidcConfig";
-const LoginPage = (props) => {
+const LoginPage = () => {
   const dispatch = useDispatch();
   const isLoggedIn = useSelector((state) => state.user.isLoggedIn);
   const initialValues = {
@@ -33,13 +31,13 @@ const LoginPage = (props) => {
     };
     dispatch(userLoginRequest(model));
   };
-  const handleExternalLogin = (provider) => {
-    // model.provider = provider;
-    // model.returnUrl = "/";
-    dispatch(userExternalLogin());
-    // window.location.href =
-    //   "/api/auth/challengeExternalLogin?provider=" + provider + "&returnUrl=/";
-  };
+  // const handleExternalLogin = (provider) => {
+  // model.provider = provider;
+  // model.returnUrl = "/";
+  // dispatch(userExternalLogin());
+  // window.location.href =
+  //   "/api/auth/challengeExternalLogin?provider=" + provider + "&returnUrl=/";
+  // };
   const handleIdentityServer = () => {
     const userManager = new UserManager(oidcConfig);
     return userManager.signinRedirect();
@@ -66,13 +64,19 @@ const LoginPage = (props) => {
           <li className="facebook" onClick={handleIdentityServer}>
             <div className="logo">
               {/* <img src="https://img.icons8.com/fluent/26/000000/facebook-new.png" />{" "} */}
-              <img src="https://avatars.githubusercontent.com/u/10635672?s=200&v=4" />{" "}
+              <img
+                src="https://avatars.githubusercontent.com/u/10635672?s=200&v=4"
+                alt=""
+              />{" "}
             </div>
             <div className="text">Idsvr4</div>
           </li>
           <li className="apple">
             <div className="logo">
-              <img src="https://img.icons8.com/metro/26/000000/mac-os.png" />
+              <img
+                src="https://img.icons8.com/metro/26/000000/mac-os.png"
+                alt=""
+              />
             </div>
             <div className="text">Apple</div>
           </li>

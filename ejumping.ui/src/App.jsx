@@ -8,6 +8,7 @@ import FeaturePage from "./components/pages/FeaturePage/Feature";
 import { PageMenu } from "./partials/Menu/PageMenu";
 import QuizPage from "./components/pages/QuizPage";
 import OidcLoginRedirect from "./components/pages/Login/OidcLoginRedirect";
+import OidcLogoutRedirect from "./components/pages/Login/OidcLogoutRedirect";
 function App() {
   return (
     <div>
@@ -21,6 +22,11 @@ function App() {
             exact
             path="/oidc-login-redirect"
             component={OidcLoginRedirect}
+          />
+          <Route
+            exact
+            path="/oidc-logout-redirect"
+            component={OidcLogoutRedirect}
           />
           <Route exact path="/feature" component={FeaturePage} />
           <Route exact path="/register" component={RegisterPageContainer} />

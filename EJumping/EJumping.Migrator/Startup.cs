@@ -45,18 +45,18 @@ namespace EJumping.Migrator
             {
                 app.MigrateIdServerDb();
 
-                var upgrader = DeployChanges.To
-                .SqlDatabase(Configuration.GetConnectionString("Idsrv"))
-                .WithScriptsEmbeddedInAssembly(Assembly.GetExecutingAssembly())
-                .LogToConsole()
-                .Build();
+                //var upgrader = DeployChanges.To
+                //.SqlDatabase(Configuration.GetConnectionString("Idsrv"))
+                //.WithScriptsEmbeddedInAssembly(Assembly.GetExecutingAssembly())
+                //.LogToConsole()
+                //.Build();
 
-                var result = upgrader.PerformUpgrade();
+                //var result = upgrader.PerformUpgrade();
 
-                if (!result.Successful)
-                {
-                    throw result.Error;
-                }
+                //if (!result.Successful)
+                //{
+                //    throw result.Error;
+                //}
             });
         }
     }

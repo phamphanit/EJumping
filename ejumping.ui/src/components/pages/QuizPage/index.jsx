@@ -11,9 +11,6 @@ const QuizPage = () => {
     dispatch(loadQuestionRequest(1, 0, 1, 10));
   }, []);
   const data = useSelector((state) => state.quiz.questions);
-
-  const isFetching = useSelector((state) => state.quiz.isFetching);
-
   return (
     <div className="quiz-main">
       <div className="container">
