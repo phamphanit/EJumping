@@ -9,11 +9,14 @@
       margin: 15px 0;
       li {
         display: flex;
+        background-color: white;
         border: 1px solid $border-color;
         border-radius: 5px;
         padding: 5px 15px;
         margin: auto 5px;
         cursor: pointer;
+        box-shadow: rgb(0 0 0 / 24%) 0px 2px 2px 0px,
+          rgb(0 0 0 / 24%) 0px 0px 1px 0px;
         .google {
           // width: 80px;
         }

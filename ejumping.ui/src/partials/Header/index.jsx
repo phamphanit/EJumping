@@ -16,9 +16,10 @@ const Header = () => {
       if (user) {
         userManager.signoutRedirect();
       }
+      // todo: side effect implementation
+      dispatch(userLogoutRequest());
     };
     loadUser();
-    dispatch(userLogoutRequest());
   };
   return (
     <header>
@@ -64,11 +65,14 @@ const Header = () => {
                     <ul className="d-flex flex-row">
                       <li className="user-info">
                         <img
-                          src={`${userInfo.profileImageUrl}`}
+                          src={`${
+                            userInfo.profileImageUrl ||
+                            "https://img.icons8.com/metro/26/000000/mac-os.png"
+                          }`}
                           alt=""
                           className="mr-1"
                         />
-                        <span>{userInfo.userName}</span>
+                        <span>{`${userInfo.userName || "IdsrvUser"}`} </span>
                       </li>
                       <li className="">
                         <Link onClick={handleLogout} className="" to="/logout">

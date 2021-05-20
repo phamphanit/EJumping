@@ -52,9 +52,8 @@ const LoginPage = () => {
       <div className="external_login_container">
         <div>Log in with</div>
         <ul className="login_provider">
-          <li>
+          <li className="google">
             <GoogleLogin
-              className="google"
               clientId={config.GOOGLE_CLIENT_ID}
               buttonText="Google"
               onSuccess={googleResponseHandler}

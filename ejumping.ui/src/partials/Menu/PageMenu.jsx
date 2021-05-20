@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import MenuItem from "./Menu-Item/MenuItem";
 import "./PageMenu.scss";
+import Question from "./../../components/pages/QuizPage/Question/Question";
 export const PageMenu = () => {
   const [dropdownMenu, setDropdownMenu] = useState(false);
   return (
@@ -44,6 +45,15 @@ export const PageMenu = () => {
                     </div>
                   </li>
                   <li>
+                    <div className="menu_item_container">
+                      <div className="menu_head_text">
+                        <Link to="/quiz">
+                          <span>Question</span>
+                        </Link>
+                      </div>
+                    </div>
+                  </li>
+                  <li>
                     <MenuItem>Super Details</MenuItem>
                   </li>
                   <li>
@@ -52,13 +62,7 @@ export const PageMenu = () => {
                   <li>
                     <MenuItem>Pages</MenuItem>
                   </li>
-                  <li>
-                    <div className="menu_item_container">
-                      <div className="menu_head_text">
-                        <span>Blog</span>
-                      </div>
-                    </div>
-                  </li>
+
                   <li>
                     <div className="menu_item_container">
                       <div className="menu_head_text">

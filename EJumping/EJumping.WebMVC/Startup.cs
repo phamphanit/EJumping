@@ -86,13 +86,22 @@ namespace EJumping.WebMVC
             app.UseAuthentication();
 
             app.UseAuthorization();
-
+            app.Map("/api/testMiddleware", RunMiddle);
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllerRoute(
                     name: "default",
                     pattern: "{controller=Home}/{action=Index}/{id?}");
             });
+        }
+        private static void RunMiddle(IApplicationBuilder app)
+        {
+            app.Run(async context =>
+            { 
+                    await context.Response.WriteAsync("Map Test middleware Successful");
+            
+            }
+            );
         }
     }
 }
