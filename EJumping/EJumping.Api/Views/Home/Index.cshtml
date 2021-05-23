@@ -6,3 +6,61 @@
     <h1 class="display-4">Welcome</h1>
     <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
 </div>
+<div>
+    <div class="container">
+        <span>User: </span>
+        <input type="type" name="name" value="" id="user-input" />
+        <span>Message: </span>
+
+        <input type="text" name="name" value="" id="msg-input" />
+        <button class="btn btn-primary" id="noti-btn">
+            Send Message
+        </button>
+    </div>
+    <div class="container">
+        <div id="hub-content">
+            <span class="text">Notification Content</span>
+        </div>
+    </div>
+</div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/microsoft-signalr/3.1.7/signalr.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/microsoft-signalr/3.1.14/signalr.min.js" integrity="sha512-z1IHuM5a2zYLnhWvPGXxTgfLQVqrFpWSuBsYbWpDtus0FLa0ZCbCuMylKDhVx+L3xRjUfP0Mnzgt1ROpExTDrg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/microsoft-signalr/3.1.14/signalr.js" integrity="sha512-6Ij7mQJvLGOI1diMkb7J0vhC76w+lnkKeKAQWWrwW55pC1X+wQNy13IdOSexPtnvZbgwa7nAKOAQa8hXJVSiNQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script>
+    let connection = null; 
+    var count = 0;
+    const setupConnection = () => {
+        connection = new signalR.HubConnectionBuilder()
+            .withUrl('/ejumpingHub')
+            .build();
+        connection.on("NewNoti", (user,message) => {
+            const el = document.createElement("div");
+            el.innerText = `${count}-${user} said : ${message}`;
+            document.getElementById("hub-content").appendChild(el);
+            count++;
+        });
+    }
+    setupConnection();
+   
+    async function start() {
+        try {
+            await connection.start();
+            console.log("SignalR Connected.");
+        } catch (err) {
+            console.log(err);
+            setTimeout(start, 5000);
+        }
+    };
+    connection.onclose(start);
+    start();
+
+    
+    document.getElementById("noti-btn").addEventListener('click', e => {
+        e.preventDefault();
+        let user = document.getElementById("user-input").value;
+        let message = document.getElementById("msg-input").value;
+        console.log(user);
+        connection.invoke("UpdateSample", user, message).then(() => { document.getElementById("msg-input").value = "" });
+
+    });
+</script>

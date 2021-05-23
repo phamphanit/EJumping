@@ -5,6 +5,7 @@ using System.Security.Claims;
 using System.Threading.Tasks;
 using AutoMapper;
 using EJumping.Api;
+using EJumping.Api.Hubs;
 using EJumping.BLL;
 using EJumping.BLL.QuizService;
 using EJumping.BLL.UserService;
@@ -182,6 +183,8 @@ namespace EJumping.API
             services.AddTransient<IUnitOfWork, UnitOfWork>();
             services.AddTransient<IRepository<Question>, BaseRepository<Question>>();
             services.AddScoped<IQuizService,QuizService>();
+            services.AddSignalR().AddMessagePackProtocol();
+
             services.AddControllersWithViews();
         }
 
@@ -209,7 +212,7 @@ namespace EJumping.API
             app.UseAuthentication();
 
             app.UseAuthorization();
-
+            app.UseSignalR(routes => routes.MapHub<NotificationHub>("/ejumpingHub"));
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllerRoute(

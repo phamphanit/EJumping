@@ -1,4 +1,5 @@
 using ClassifiedAds.WebMVC.ConfigurationOptions;
+using EJumping.Core.Middlewares;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authentication.OpenIdConnect;
 using Microsoft.AspNetCore.Builder;
@@ -11,6 +12,7 @@ using Microsoft.Extensions.Hosting;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace EJumping.WebMVC
@@ -68,7 +70,9 @@ namespace EJumping.WebMVC
         {
             if (env.IsDevelopment())
             {
-                app.UseDeveloperExceptionPage();
+                app.UseExceptionHandler("/Home/Error");
+
+                //app.UseDeveloperExceptionPage();
             }
             else
             {
@@ -79,6 +83,7 @@ namespace EJumping.WebMVC
             //app.UseSecurityHeaders(AppSettings.SecurityHeaders);
 
             //app.UseIPFiltering();
+            app.UseStatusCodePagesWithRedirects("/Home/Error");
             app.UseHttpsRedirection();
             app.UseStaticFiles();
 
@@ -86,7 +91,10 @@ namespace EJumping.WebMVC
             app.UseAuthentication();
 
             app.UseAuthorization();
-            app.Map("/api/testMiddleware", RunMiddle);
+            app.Map("/api/testMiddleware", TestMiddleware);
+
+            app.UseMiddleware<SampleMiddleware>();
+
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllerRoute(
@@ -94,14 +102,14 @@ namespace EJumping.WebMVC
                     pattern: "{controller=Home}/{action=Index}/{id?}");
             });
         }
-        private static void RunMiddle(IApplicationBuilder app)
+
+        private static void TestMiddleware(IApplicationBuilder app)
         {
-            app.Run(async context =>
-            { 
-                    await context.Response.WriteAsync("Map Test middleware Successful");
-            
-            }
-            );
+            app.Use(async (context, next) =>
+            {
+                await context.Response.WriteAsync("Map Test middleware Successful");
+                next.Invoke();
+            });
         }
     }
 }
