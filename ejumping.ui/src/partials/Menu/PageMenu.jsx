@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import MenuItem from "./Menu-Item/MenuItem";
 import "./PageMenu.scss";
-import Question from "./../../components/pages/QuizPage/Question/Question";
 export const PageMenu = () => {
   const [dropdownMenu, setDropdownMenu] = useState(false);
   return (

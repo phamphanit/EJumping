@@ -1,16 +1,33 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { loadQuestionRequest } from "../../actions/quizActions";
 import Question from "./Question/Question";
 import "./QuizPage.scss";
 const QuizPage = () => {
   const dispatch = useDispatch();
-  // const data = useSelector((state) => state.quiz.questions);
-  // const data = { ...mock };
   useEffect(() => {
     dispatch(loadQuestionRequest(1, 0, 1, 10));
   }, []);
+  const [result, setResult] = useState([]);
   const data = useSelector((state) => state.quiz.questions);
+  const chosenHandler = ({ index, answer }) => {
+    let element = {
+      questionNumber: index,
+      answer,
+    };
+    const oldEl = result.filter((x) => x.questionNumber === index);
+    if (oldEl.length !== 0) {
+      const newResult = [...result];
+      const oldIndex = newResult.indexOf(oldEl[0]);
+      if (oldIndex !== -1) {
+        newResult[oldIndex] = element;
+        setResult(newResult);
+      }
+    } else {
+      setResult((oldResult) => [...oldResult, element]);
+    }
+  };
+  console.log(result);
   return (
     <div className="quiz-main">
       <div className="container">
@@ -48,7 +65,12 @@ const QuizPage = () => {
             <div className="questions-container">
               {data &&
                 data.items.map((question, index) => (
-                  <Question question={question} key={question.id} />
+                  <Question
+                    question={question}
+                    key={question.id}
+                    chosenHandler={chosenHandler}
+                    questionIndex={question.id}
+                  />
                 ))}
             </div>
           </div>
