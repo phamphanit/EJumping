@@ -5,6 +5,7 @@ using System.Security.Claims;
 using System.Threading.Tasks;
 using AutoMapper;
 using EJumping.Api;
+using EJumping.Api.Filters;
 using EJumping.Api.Hubs;
 using EJumping.BLL;
 using EJumping.BLL.QuizService;
@@ -186,6 +187,10 @@ namespace EJumping.API
             services.AddSignalR().AddMessagePackProtocol();
 
             services.AddControllersWithViews();
+            services.AddControllers(configure =>
+            {
+                configure.Filters.Add(typeof(GlobalExceptionFilter));
+            });
         }
 
 
