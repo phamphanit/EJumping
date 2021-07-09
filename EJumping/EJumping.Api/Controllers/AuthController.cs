@@ -99,7 +99,7 @@ namespace EJumping.Api.Controllers
                     {
                         foreach (var error in result.Errors)
                         {
-                            if (error.Code == "DuplicateEmail")
+                            if (error.Code == "DuplicateEmaill")
                             {
                                 this.ModelState.AddModelError(string.Empty, "register.duplicateemail|" + model.Email);
                             }
