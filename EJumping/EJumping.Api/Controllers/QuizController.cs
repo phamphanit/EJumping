@@ -30,12 +30,7 @@ namespace EJumping.Api.Controllers
             {
                 int totalCount;
                 var data = this.quizService.GetQuestions(type, pageSize, page, out totalCount);
-                if (data.Count() == 10)
-                {
-                this.logger.LogInformation("Can't load");
-                this.logger.LogError("Errorrrrrrrrrrrrr");
-                    throw new ApplicationException("Failed to load 10 questions");
-                }
+
                 return this.Ok(new ListResult<Question>
                 {
                     Page = page,
@@ -48,6 +43,14 @@ namespace EJumping.Api.Controllers
             {
                 return BadRequest(ex.Message);
             }
+        }
+        [AllowAnonymous]
+        [HttpPost]
+        [Route("/api/quiz")]
+        public IActionResult CreateQuestion()
+        {
+            quizService.CreateQuestion();
+            return Ok();
         }
     }
     public class ListResult<T>
