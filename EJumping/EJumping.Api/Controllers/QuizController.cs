@@ -26,8 +26,8 @@ namespace EJumping.Api.Controllers
         [Route("/api/quiz/{type}")]
         public IActionResult GetQuestion(int type, int pageSize = 5, int page = 1)
         {
-            //try
-            //{
+            try
+            {
                 int totalCount;
                 var data = this.quizService.GetQuestions(type, pageSize, page, out totalCount);
                 if (data.Count() == 10)
@@ -43,11 +43,11 @@ namespace EJumping.Api.Controllers
                     Items = data,
                     TotalCount = totalCount
                 });
-            //}
-            //catch (Exception ex)
-            //{
-            //    return BadRequest(ex.Message);
-            //}
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
         }
     }
     public class ListResult<T>
