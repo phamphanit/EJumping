@@ -16,6 +16,7 @@ namespace EJumping.Test
         private readonly Mock<IRepository<Question>> mockQuizRepository;
         private readonly Mock<IUnitOfWork> unitOfWork;
         private readonly Mock<IQuizService> quizService;
+        private readonly Mock<ejumpingContext> ejumpingContext;
 
         public QuizServiceTest(Mock<IRepository<Question>> mockQuizRepository,Mock<IUnitOfWork> unitOfWork)
         {
@@ -34,7 +35,7 @@ namespace EJumping.Test
                 }
 
             };
-            var quizServicee = new QuizService(mockQuizRepository.Object, unitOfWork.Object);
+            var quizServicee = new QuizService(mockQuizRepository.Object, unitOfWork.Object, ejumpingContext.Object);
 
             //mockQuizRepository.Setup(x => x.dbSet).Returns(mockList);
             int totalCount;

@@ -14,7 +14,7 @@ namespace EJumping.BLL.QuizService
     {
         private readonly IRepository<Question> quizRepository;
         private readonly IUnitOfWork unitOfWork;
-        private readonly  ejumpingContext context;
+        private readonly ejumpingContext context;
 
         public QuizService(IRepository<Question> quizRepository, IUnitOfWork unitOfWork, ejumpingContext context)
         {
@@ -78,10 +78,10 @@ namespace EJumping.BLL.QuizService
                     transaction.Rollback();
                     Console.WriteLine("error");
                 }
-              
+
 
             }
-            
+
 
         }
 
@@ -91,6 +91,85 @@ namespace EJumping.BLL.QuizService
             var question = query.Skip(pageSize * (1 - page)).Take(pageSize).ToList();
             totalCount = query.Count();
             return question;
+        }
+
+        public void TestConcurrency()
+        {
+            Question question1 = null;
+            Question question2 = null;
+
+
+            question1 = context.Questions.Where(x => x.Id == 1).FirstOrDefault();
+
+            question2 = context.Questions.Where(x => x.Id == 1).FirstOrDefault();
+
+            try
+            {
+                question1.CorrectAnswer = 2;
+                context.Entry(question1).State = Microsoft.EntityFrameworkCore.EntityState.Modified;
+                context.SaveChanges();
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+            try
+            {
+                question2.CorrectAnswer = 3;
+                context.Entry(question2).State = Microsoft.EntityFrameworkCore.EntityState.Modified;
+                context.SaveChanges();
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+
+        }
+        public void TestConcurrency2()
+        {
+            Question question1 = null;
+            Question question2 = null;
+
+            using (var context = new ejumpingContext())
+            {
+                question1 = context.Questions.Where(x => x.Id == 1).FirstOrDefault();
+            }
+            using (var context = new ejumpingContext())
+            {
+                question2 = context.Questions.Where(x => x.Id == 1).FirstOrDefault();
+            }
+
+            using (var context = new ejumpingContext())
+            {
+                try
+                {
+                    question1.CorrectAnswer = 2;
+                    context.Update(question1);
+                    //context.Entry(question1).State = Microsoft.EntityFrameworkCore.EntityState.Modified;
+                    context.SaveChanges();
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine(ex.Message);
+                }
+            }
+            using (var context = new ejumpingContext())
+            {
+                try
+                {
+                    question2.CorrectAnswer = 3;
+
+                    //context.Entry(question2).State = Microsoft.EntityFrameworkCore.EntityState.Modified;
+                    context.Update(question2);
+
+                    context.SaveChanges();
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine(ex.Message);
+                }
+
+            }
         }
     }
 }

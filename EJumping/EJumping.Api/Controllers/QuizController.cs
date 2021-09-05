@@ -51,6 +51,14 @@ namespace EJumping.Api.Controllers
         {
             quizService.CreateQuestion();
             return Ok();
+        }   
+        [AllowAnonymous]
+        [HttpPost]
+        [Route("/api/test/concurrency")]
+        public IActionResult TestConcurrency()
+        {
+            quizService.TestConcurrency();
+            return Ok();
         }
     }
     public class ListResult<T>

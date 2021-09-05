@@ -1,6 +1,7 @@
 ﻿using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace EJumping.DAL.EF.Entities
 {
@@ -50,6 +51,10 @@ namespace EJumping.DAL.EF.Entities
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            var converter = new ValueConverter<byte[], long>(
+                     v => BitConverter.ToInt64(v, 0),
+                     v => BitConverter.GetBytes(v));
+
             modelBuilder.Entity<Quiz>().HasData(
                 new Quiz
                 {
@@ -63,7 +68,12 @@ namespace EJumping.DAL.EF.Entities
                     Name = "Toeic"
                 }
                 );
-            modelBuilder.Entity<Question>().HasData(
+
+            modelBuilder.Entity<Question>()
+                .UseXminAsConcurrencyToken();
+
+            modelBuilder.Entity<Question>()
+                .HasData(
                 new Question
                 {
                     Id = 1,

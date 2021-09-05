@@ -10,5 +10,6 @@ namespace EJumping.BLL.QuizService
     {
         List<Question> GetQuestions(int type, int pageSize, int page,out int totalCount);
         void CreateQuestion();
+        void TestConcurrency();
     }
 }
