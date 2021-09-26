@@ -1,4 +1,4 @@
-using ClassifiedAds.WebMVC.ConfigurationOptions;
+using EJumping.WebMVC.ConfigurationOptions;
 using EJumping.Core.Middlewares;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authentication.OpenIdConnect;

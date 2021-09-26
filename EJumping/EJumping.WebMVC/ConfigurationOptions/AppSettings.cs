@@ -1,7 +1,7 @@
 ﻿using Microsoft.Extensions.Options;
 using System.Collections.Generic;
 
-namespace ClassifiedAds.WebMVC.ConfigurationOptions
+namespace EJumping.WebMVC.ConfigurationOptions
 {
     public class AppSettings
     {

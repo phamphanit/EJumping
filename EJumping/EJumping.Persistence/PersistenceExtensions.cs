@@ -9,7 +9,7 @@ namespace Microsoft.Extensions.DependencyInjection
     {
         public static IServiceCollection AddPersistence(this IServiceCollection services, string connectionString, string migrationsAssembly = "")
         {
-            services.AddDbContext<ejumpingContext>(options => options.UseNpgsql(connectionString, sql =>
+            services.AddDbContext<ejumpingDbContext>(options => options.UseNpgsql(connectionString, sql =>
             {
                 if (!string.IsNullOrEmpty(migrationsAssembly))
                 {
@@ -30,7 +30,7 @@ namespace Microsoft.Extensions.DependencyInjection
         {
             using (var serviceScope = app.ApplicationServices.GetService<IServiceScopeFactory>().CreateScope())
             {
-                serviceScope.ServiceProvider.GetRequiredService<ejumpingContext>().Database.Migrate();
+                serviceScope.ServiceProvider.GetRequiredService<ejumpingDbContext>().Database.Migrate();
             }
         }
     }

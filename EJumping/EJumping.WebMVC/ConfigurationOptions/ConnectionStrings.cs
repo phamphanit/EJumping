@@ -1,7 +1,7 @@
-﻿namespace ClassifiedAds.WebMVC.ConfigurationOptions
+﻿namespace EJumping.WebMVC.ConfigurationOptions
 {
     public class ConnectionStrings
     {
-        public string ClassifiedAds { get; set; }
+        public string EJumping { get; set; }
     }
 }

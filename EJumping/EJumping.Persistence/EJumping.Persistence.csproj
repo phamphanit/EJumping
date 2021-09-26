@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>netcoreapp3.1</TargetFramework>
@@ -18,6 +18,8 @@
 	</ItemGroup>
 	<ItemGroup>
 	  <ProjectReference Include="..\EJumping.Core\EJumping.Core.csproj" />
+	  <ProjectReference Include="..\EJumping.CrossCuttingConcerns\EJumping.CrossCuttingConcerns.csproj" />
 	  <ProjectReference Include="..\EJumping.DAL\EJumping.DAL.csproj" />
+	  <ProjectReference Include="..\EJumping.Domain\EJumping.Domain.csproj" />
 	</ItemGroup>
 </Project>

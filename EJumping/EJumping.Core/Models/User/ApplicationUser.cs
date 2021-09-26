@@ -7,36 +7,55 @@ using System.Threading.Tasks;
 
 namespace EJumping.Core.Models.User
 {
-    public class ApplicationUser : IdentityUser<long>
+    public class ApplicationUser : IdentityUser<Guid>
     {
-        public int? Gender { get; set; }
-        public DateTime BirthDate { get; set; }
-        public string PreferredLanguage { get; set; }
-        public string ProfileImageUrl { get; set; }
-        public bool? EmailMarketing { get; set; }
-        public bool? EmailServiceNotification { get; set; }
-        public int? Status { get; set; }    
-        public int? VerificationStatus { get; set; }
-        public DateTime? Created { get; set; }
+        //public string UserName { get; set; }
+
+        //public string NormalizedUserName { get; set; }
+
+        //public string Email { get; set; }
+
+        //public string NormalizedEmail { get; set; }
+
+        //public bool EmailConfirmed { get; set; }
+
+        //public string PasswordHash { get; set; }
+
+        //public string PhoneNumber { get; set; }
+
+        //public bool PhoneNumberConfirmed { get; set; }
+
+        //public bool TwoFactorEnabled { get; set; }
+
+        //public string ConcurrencyStamp { get; set; }
+
+        //public string SecurityStamp { get; set; }
+
+        //public bool LockoutEnabled { get; set; }
+
+        //public DateTimeOffset? LockoutEnd { get; set; }
+
+        //public int AccessFailedCount { get; set; }
+
     }
 
-    public class ApplicationRole : IdentityRole<long>
+    public class ApplicationRole : IdentityRole<Guid>
     {
     }
 
-    public class ApplicationUserRole : IdentityUserRole<long>
+    public class ApplicationUserRole : IdentityUserRole<Guid>
     {
     }
-    public class ApplicationUserClaim : IdentityUserClaim<long>
+    public class ApplicationUserClaim : IdentityUserClaim<Guid>
     {
     }
-    public class ApplicationRoleClaim : IdentityRoleClaim<long>
+    public class ApplicationRoleClaim : IdentityRoleClaim<Guid>
     {
     }
-    public class ApplicationUserLogin : IdentityUserLogin<long>
+    public class ApplicationUserLogin : IdentityUserLogin<Guid>
     {
     }
-    public class ApplicationUserToken : IdentityUserToken<long>
+    public class ApplicationUserToken : IdentityUserToken<Guid>
     {
     }
 

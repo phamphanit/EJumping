@@ -1,7 +1,7 @@
 ﻿using Microsoft.Extensions.Options;
 using System;
 
-namespace ClassifiedAds.WebMVC.ConfigurationOptions
+namespace EJumping.WebMVC.ConfigurationOptions
 {
     public class ResourceServer
     {

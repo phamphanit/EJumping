@@ -29,7 +29,6 @@ namespace EJumping.WebMVC.Controllers
 
         public IActionResult Privacy()
         {
-            throw new Exception("aaaa");
             return View();
         }
 

@@ -55,16 +55,10 @@ namespace EJumping.Api.Controllers
                     {
                         Email = model.Email,
                         UserName = model.UserName,
-                        BirthDate = DateTime.UtcNow,
-                        PreferredLanguage = "ko",
-                        VerificationStatus = (int)UserVerificationStatus.Verified,
                         EmailConfirmed = true,
-                        Status = (int)UserStatus.Active,
-                        ProfileImageUrl = "https://mo2ja.s3.ap-northeast-2.amazonaws.com/images/level/level_0.png",
-                        Created = DateTime.UtcNow
                     };
 
-                    var result = await this.userManager.CreateAsync(account, model.Password);
+                    var result = await this.userManager.CreateAsync(account);
                     if (result.Succeeded)
                     {
 
@@ -155,11 +149,11 @@ namespace EJumping.Api.Controllers
 
                 if (result.Succeeded)
                 {
-                    if (user.Status != (int)UserStatus.Active)
-                    {
-                        this.ModelState.AddModelError("Login", "validation.login.accountdeactivated");
-                        return this.BadRequest(this.ModelState);
-                    }
+                    //if (user.Status != (int)UserStatus.Active)
+                    //{
+                    //    this.ModelState.AddModelError("Login", "validation.login.accountdeactivated");
+                    //    return this.BadRequest(this.ModelState);
+                    //}
 
 
                     using (var client = new HttpClient())
@@ -284,7 +278,7 @@ namespace EJumping.Api.Controllers
                     {
                         UserName = info.Name,
                         Email = info.Email,
-                        ProfileImageUrl = info.Picture
+                        //ProfileImageUrl = info.Picture
                     };
 
                     await userManager.CreateAsync(user, "1qaz!QAZ");

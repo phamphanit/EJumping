@@ -5,7 +5,10 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Google.Apis.Auth" Version="1.51.0" />
+	  <PackageReference Include="IdentityServer4" Version="4.1.1" />
+	  <PackageReference Include="IdentityServer4.AspNetIdentity" Version="4.1.1" />
+	  <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="3.1.10" />
+	  <PackageReference Include="Google.Apis.Auth" Version="1.51.0" />
     <PackageReference Include="Microsoft.AspNetCore.Authentication.Google" Version="3.1.14" />
 	  <PackageReference Include="Microsoft.AspNetCore.SignalR.Protocols.MessagePack" Version="1.0.0" />
 	  <PackageReference Include="Microsoft.AspNetCore.SignalR.Core" Version="1.1.0" />
@@ -16,9 +19,6 @@
     </PackageReference>
 	  <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="3.1.8" />
 	  <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="5.0.0" />
-	  <PackageReference Include="IdentityServer4.AccessTokenValidation" Version="3.0.1" />
-	  <PackageReference Include="IdentityServer4.AspNetIdentity" Version="3.1.4" />
-	  <PackageReference Include="IdentityServer4.EntityFramework" Version="3.1.4" />
 	  <PackageReference Include="serilog" Version="2.10.0" />
 	  <PackageReference Include="serilog.aspnetcore" Version="4.1.0" />
 	  <PackageReference Include="Serilog.Extensions.Hosting" Version="4.1.2" />
@@ -33,6 +33,7 @@
     <ProjectReference Include="..\EJumping.BLL\EJumping.BLL.csproj" />
     <ProjectReference Include="..\EJumping.Core\EJumping.Core.csproj" />
     <ProjectReference Include="..\EJumping.DAL\EJumping.DAL.csproj" />
+    <ProjectReference Include="..\EJumping.Persistence\EJumping.Persistence.csproj" />
   </ItemGroup>
 
 </Project>

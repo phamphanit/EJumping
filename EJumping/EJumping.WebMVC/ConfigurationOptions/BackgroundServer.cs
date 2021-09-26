@@ -1,4 +1,4 @@
-﻿namespace ClassifiedAds.WebMVC.ConfigurationOptions
+﻿namespace EJumping.WebMVC.ConfigurationOptions
 {
     public class BackgroundServer
     {
