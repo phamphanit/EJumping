@@ -6,6 +6,8 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using EJumping.Domain.Entities;
+using EJumping.Domain.Repositories;
 
 namespace EJumping.BLL.UserService
 {
@@ -13,11 +15,13 @@ namespace EJumping.BLL.UserService
     {
         private readonly ejumpingContext context;
         private readonly IMapper mapper;
-
-        public UserService(ejumpingContext context,IMapper mapper )
+        private IRepository<User,Guid> userRepository;
+        
+        public UserService(ejumpingContext context,IMapper mapper,IRepository<User,Guid> userRepository )
         {
             this.context = context;
             this.mapper = mapper;
+            this.userRepository = userRepository;
         }
         public UserDetail GetFullUserById(long userId)
         {

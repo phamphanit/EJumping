@@ -58,7 +58,7 @@ namespace EJumping.Api.Controllers
                         EmailConfirmed = true,
                     };
 
-                    var result = await this.userManager.CreateAsync(account);
+                    var result = await this.userManager.CreateAsync(account,model.Password);
                     if (result.Succeeded)
                     {
 
@@ -68,9 +68,9 @@ namespace EJumping.Api.Controllers
                             {
                                 Address = ejumpingConfiguration.IdSrvUrl + "/connect/token",
 
-                                ClientId = "ro.client",
+                                ClientId = "EJumping.WebApi",
                                 ClientSecret = "secret",
-                                Scope = "api1 openid profile",
+                                Scope = "openid profile EJumping.WebAPI",
 
                                 UserName = model.UserName,
                                 Password = model.Password

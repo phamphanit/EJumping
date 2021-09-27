@@ -84,7 +84,28 @@ namespace Microsoft.Extensions.DependencyInjection
                         RequireConsent = false,
                     });
                 }
-
+                if (!context.Clients.Any(x => x.ClientId == "EJumping.WebApi"))
+                {
+                    clients.Add(new Client
+                    {
+                        ClientId = "EJumping.WebApi",
+                        ClientName = "EJumping Web Api",
+                        AllowedGrantTypes = GrantTypes.ResourceOwnerPassword,
+                        RequirePkce = true,
+                        AllowedScopes =
+                        {
+                            IdentityServerConstants.StandardScopes.OpenId,
+                            IdentityServerConstants.StandardScopes.Profile,
+                            "EJumping.WebAPI",
+                        },
+                        ClientSecrets =
+                        {
+                            new Secret("secret".Sha256()),
+                        },
+                        AllowOfflineAccess = true,
+                        RequireConsent = true,
+                    });
+                }
                 if (!context.Clients.Any(x => x.ClientId == "EJumping.WebMVC"))
                 {
                     clients.Add(new Client

@@ -53,6 +53,7 @@ namespace EJumping.API
             services.AddPersistence(Configuration.GetConnectionString("DefaultConnection"))
                     .AddIdentity();
             services.AddIdentityServer()
+                    .AddAspNetIdentity<ApplicationUser>()
                     .AddDeveloperSigningCredential()
                     .AddIdServerPersistence(Configuration.GetConnectionString("Idsrv"));
             ////Config Asp.net Identity

@@ -20,6 +20,8 @@ namespace EJumping.Persistence.MappingConfigurations
             builder.HasMany(x => x.UserRoles)
                 .WithOne(x => x.User)
                 .OnDelete(DeleteBehavior.Cascade);
+            // builder.Ignore(x => x.CreatedDateTime);
+
 
             // Seed
             builder.HasData(new List<User>
