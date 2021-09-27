@@ -30,6 +30,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\EJumping.Application\EJumping.Application.csproj" />
     <ProjectReference Include="..\EJumping.BLL\EJumping.BLL.csproj" />
     <ProjectReference Include="..\EJumping.Core\EJumping.Core.csproj" />
     <ProjectReference Include="..\EJumping.DAL\EJumping.DAL.csproj" />

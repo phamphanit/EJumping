@@ -38,6 +38,9 @@ namespace EJumping.Persistence
             builder.Entity<ApplicationUserClaim>(entity =>
             {
                 entity.ToTable("UserClaims");
+                entity.Property(e => e.ClaimType).HasColumnName("Type");
+                entity.Property(e => e.ClaimValue).HasColumnName("Value");
+
             });
 
             builder.Entity<ApplicationUserLogin>(entity =>

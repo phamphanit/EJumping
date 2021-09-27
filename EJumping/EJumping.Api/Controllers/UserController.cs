@@ -1,5 +1,6 @@
-﻿using EJumping.BLL.UserService;
-using EJumping.Core.Security;
+﻿using EJumping.Core.Security;
+using EJumping.Domain.Services;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -10,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace EJumping.Api.Controllers
 {
-    [Authorize(AuthenticationSchemes = "Bearer")]
+    [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
     [Route("api/[controller]")]
     public class UserController : Controller
     {
@@ -28,13 +29,12 @@ namespace EJumping.Api.Controllers
         public IActionResult GetUser()
         {
             var userId = User.GetId();
-            if (userId == 0)
+            if (userId == Guid.Empty)
             {
                 return this.StatusCode((int)HttpStatusCode.Unauthorized, "User has not logged in yet.");
             }
 
-            // var result = _userService.GetUserById(userId, 0);
-            var user = userService.GetFullUserById(userId);
+            var user = userService.GetUserById(userId);
             if (user == null)
             {
                 return this.BadRequest(this.ModelState);

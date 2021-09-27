@@ -8,7 +8,7 @@ namespace EJumping.Core.Security
 {
     public static class ClaimsPrincipalExtensions
     {
-        public static int GetId(this ClaimsPrincipal principle)
+        public static Guid GetId(this ClaimsPrincipal principle)
         {
             var claim = principle.Claims.Any() ? principle.Claims.FirstOrDefault(x => x.Type == "sub") : null;
             // for admin site
@@ -17,7 +17,7 @@ namespace EJumping.Core.Security
                 claim = principle.Claims.Any() ? principle.Claims.FirstOrDefault(x => x.Type.Contains("nameidentifier")) : null;
             }
 
-            int.TryParse(claim?.Value, out var userId);
+            Guid.TryParse(claim?.Value, out var userId);
             return userId;
         }
     }

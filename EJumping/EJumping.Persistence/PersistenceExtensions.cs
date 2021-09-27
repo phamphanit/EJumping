@@ -1,5 +1,7 @@
 ﻿using EJumping.DAL.EF.Entities;
+using EJumping.Domain.Repositories;
 using EJumping.Persistence;
+using EJumping.Persistence.Repositories;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.EntityFrameworkCore;
 
@@ -15,7 +17,12 @@ namespace Microsoft.Extensions.DependencyInjection
                 {
                     sql.MigrationsAssembly(migrationsAssembly);
                 }
-            }));   
+            }))
+                .AddScoped(typeof(IRepository<,>), typeof(Repository<,>))
+                .AddScoped(typeof(IUnitOfWork), services =>
+                {
+                    return services.GetRequiredService<ejumpingDbContext>();
+                });
             services.AddDbContext<ApplicationDbContext>(options => options.UseNpgsql(connectionString, sql =>
             {
                 if (!string.IsNullOrEmpty(migrationsAssembly))

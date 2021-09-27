@@ -11,8 +11,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".Core", ".Core", "{7829823C
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".Infrastructure", ".Infrastructure", "{5D056647-2805-4580-A5E8-A3E009EEC513}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Application", "Application", "{D3C62926-9DB9-4099-B607-71FDBF37770B}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EJumping.DAL", "EJumping.DAL\EJumping.DAL.csproj", "{AAEEB09C-36AD-4172-AF4B-0EEDF1880F8D}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EJumping.BLL", "EJumping.BLL\EJumping.BLL.csproj", "{AECFF40F-F62E-40EA-91CE-616F1DD4D3E4}"
@@ -31,11 +29,13 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EJumping.IdentityServer", "
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EJumping.WebMVC", "EJumping.WebMVC\EJumping.WebMVC.csproj", "{2AB1DEB7-1985-46FB-8BAE-C3C4E43D574A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EJumping.Infrastructure", "EJumping.Infrastructure\EJumping.Infrastructure.csproj", "{CB2F2B57-E063-4F9C-A31A-F711C1D40CB7}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EJumping.Infrastructure", "EJumping.Infrastructure\EJumping.Infrastructure.csproj", "{CB2F2B57-E063-4F9C-A31A-F711C1D40CB7}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EJumping.Domain", "EJumping.Domain\EJumping.Domain.csproj", "{09C85261-E258-4B1F-A79E-3AB6945B712A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EJumping.Domain", "EJumping.Domain\EJumping.Domain.csproj", "{09C85261-E258-4B1F-A79E-3AB6945B712A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EJumping.CrossCuttingConcerns", "EJumping.CrossCuttingConcerns\EJumping.CrossCuttingConcerns.csproj", "{1F16FA9D-057E-4563-A10B-A13FEF09EAB7}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EJumping.CrossCuttingConcerns", "EJumping.CrossCuttingConcerns\EJumping.CrossCuttingConcerns.csproj", "{1F16FA9D-057E-4563-A10B-A13FEF09EAB7}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EJumping.Application", "EJumping.Application\EJumping.Application.csproj", "{A324035C-5809-4912-AF3C-733CF6AF4FD0}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -91,6 +91,10 @@ Global
 		{1F16FA9D-057E-4563-A10B-A13FEF09EAB7}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1F16FA9D-057E-4563-A10B-A13FEF09EAB7}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1F16FA9D-057E-4563-A10B-A13FEF09EAB7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A324035C-5809-4912-AF3C-733CF6AF4FD0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A324035C-5809-4912-AF3C-733CF6AF4FD0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A324035C-5809-4912-AF3C-733CF6AF4FD0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A324035C-5809-4912-AF3C-733CF6AF4FD0}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -108,6 +112,7 @@ Global
 		{CB2F2B57-E063-4F9C-A31A-F711C1D40CB7} = {5D056647-2805-4580-A5E8-A3E009EEC513}
 		{09C85261-E258-4B1F-A79E-3AB6945B712A} = {7829823C-A28C-4BB4-AEA4-47D045EB0179}
 		{1F16FA9D-057E-4563-A10B-A13FEF09EAB7} = {7829823C-A28C-4BB4-AEA4-47D045EB0179}
+		{A324035C-5809-4912-AF3C-733CF6AF4FD0} = {7829823C-A28C-4BB4-AEA4-47D045EB0179}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {058EAAA8-9573-44AB-8412-4F8B60BAD56C}

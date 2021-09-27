@@ -7,6 +7,7 @@ using AutoMapper;
 using EJumping.Api;
 using EJumping.Api.Filters;
 using EJumping.Api.Hubs;
+using EJumping.Application;
 using EJumping.BLL;
 using EJumping.BLL.QuizService;
 using EJumping.BLL.UserService;
@@ -52,104 +53,21 @@ namespace EJumping.API
             //Config Database
             services.AddPersistence(Configuration.GetConnectionString("DefaultConnection"))
                     .AddIdentity();
+
             services.AddIdentityServer()
                     .AddAspNetIdentity<ApplicationUser>()
                     .AddDeveloperSigningCredential()
                     .AddIdServerPersistence(Configuration.GetConnectionString("Idsrv"));
-            ////Config Asp.net Identity
-            //services.AddIdentity<ApplicationUser, ApplicationRole>(options =>
-            //{
-            //    options.Password.RequireDigit = false;
-            //    options.Password.RequiredLength = 6;
-            //    options.Password.RequireNonAlphanumeric = false;
-            //    options.Password.RequireUppercase = false;
-            //    options.Password.RequireLowercase = false;
-            //    options.User.AllowedUserNameCharacters = null;
 
-            //    options.Lockout.AllowedForNewUsers = true;
-            //    options.Lockout.DefaultLockoutTimeSpan = TimeSpan.FromMinutes(2);
-            //    options.Lockout.MaxFailedAccessAttempts = 10;
-            //})
-            // //.AddErrorDescriber<LocalizedIdentityErrorDescriber>()
-            // .AddEntityFrameworkStores<ApplicationDbContext>()
-            // .AddDefaultTokenProviders();
+            services.AddApplicationServices();
 
-
-            //Config IdentityServer4
-            //var builder = services.AddIdentityServer()
-            //   .AddAspNetIdentity<ApplicationUser>()
-            //   .AddInMemoryIdentityResources(Config.IdentityResources)
-            //   .AddInMemoryApiResources(Config.ApiResource)
-            //   //.AddInMemoryApiScopes(Config.Scopes)
-            //   .AddInMemoryClients(Config.Clients)
-            //   .AddProfileService<ProfileService>()
-            //   ;
-
-            // this adds the config data from DB (clients, resources)
-            //.AddConfigurationStore(options =>
-            //{
-            //    options.ConfigureDbContext = b =>
-            //        b.UseNpgsql(connectionStringIdsvr4,
-            //            sql => sql.MigrationsAssembly(migrationsAssembly));
-            //})
-            //// this adds the operational data from DB (codes, tokens, consents)
-            //.AddOperationalStore(options =>
-            //{
-            //    options.ConfigureDbContext = b =>
-            //        b.UseNpgsql(connectionStringIdsvr4,
-            //            sql => sql.MigrationsAssembly(migrationsAssembly));
-
-            //     // this enables automatic token cleanup. this is optional.
-            //     options.EnableTokenCleanup = true;
-            //})
-            //services.Configure<IdentityOptions>(options =>
-            //{
-            //    // Password settings
-            //    options.Password.RequireDigit = false;
-            //    options.Password.RequiredLength = 6;
-            //    options.Password.RequireNonAlphanumeric = false;
-            //    options.Password.RequireUppercase = false;
-            //    options.Password.RequireLowercase = false;
-            //    //options.Password.RequiredUniqueChars = 6;
-
-            //    // Lockout settings
-            //    options.Lockout.DefaultLockoutTimeSpan = TimeSpan.FromMinutes(2);
-            //    options.Lockout.MaxFailedAccessAttempts = 10;
-            //    options.Lockout.AllowedForNewUsers = true;
-
-            //    // User settings
-            //    options.User.RequireUniqueEmail = false;
-            //    options.User.AllowedUserNameCharacters = null;
-
-            //    // Require confirmed email, should be enabled later ?
-            //    //options.SignIn.RequireConfirmedEmail = true;
-            //});
-
-            //services.ConfigureApplicationCookie(options =>
-            //{
-            //    // Cookie settings
-            //    options.Cookie.HttpOnly = true;
-            //    options.ExpireTimeSpan = TimeSpan.FromDays(30);
-            //    options.Cookie.Name = "ejumping.identity";
-            //    // If the LoginPath isn't set, ASP.NET Core defaults 
-            //    // the path to /Account/Login.
-            //    // options.LoginPath = "/Account/Login";
-            //    options.LoginPath = "/Account/Login";
-            //    // If the AccessDeniedPath isn't set, ASP.NET Core defaults 
-            //    // the path to /Account/AccessDenied.
-            //    options.AccessDeniedPath = "/Account/AccessDenied";
-            //    options.SlidingExpiration = true;
-
-            //});
-            services.Configure<EJumpingWebConfiguration>(Configuration.GetSection("EJumpingWebConfiguration"));
-
-            //builder.AddDeveloperSigningCredential();
+            services.Configure<EJumpingWebConfiguration>(Configuration);
 
             services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
                   .AddJwtBearer(options =>
                   {
-                      options.Authority = Configuration["EJumpingWebConfiguration:IdSrvUrl"];
-                      options.Audience = "api1";
+                      options.Authority = Configuration["IdentityServerAuthentication:Authority"];
+                      options.Audience = Configuration["IdentityServerAuthentication:ApiName"];
                       options.RequireHttpsMetadata = false;
                   });
 
@@ -161,9 +79,6 @@ namespace EJumping.API
                        .AllowAnyMethod()
                        .AllowAnyHeader();
             }));
-            //services.AddScoped<DbContext, ejumpingDbContext>();
-            //services.AddScoped<IUserService, UserService>();
-
 
             //Auto Mapper
             var mappingConfig = new MapperConfiguration(mc =>
@@ -173,9 +88,6 @@ namespace EJumping.API
             });
             IMapper mapper = mappingConfig.CreateMapper();
             services.AddSingleton(mapper);
-            //services.AddTransient<IUnitOfWork, UnitOfWork>();
-            //services.AddTransient<IRepository<Question>, BaseRepository<Question>>();
-            //services.AddScoped<IQuizService,QuizService>();
             services.AddSignalR().AddMessagePackProtocol();
 
             services.AddControllersWithViews();
@@ -209,7 +121,9 @@ namespace EJumping.API
             app.UseAuthentication();
 
             app.UseAuthorization();
+
             app.UseSignalR(routes => routes.MapHub<NotificationHub>("/ejumpingHub"));
+
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllerRoute(

@@ -66,7 +66,7 @@ namespace EJumping.Api.Controllers
                         {
                             var response = await client.RequestPasswordTokenAsync(new PasswordTokenRequest
                             {
-                                Address = ejumpingConfiguration.IdSrvUrl + "/connect/token",
+                                Address = ejumpingConfiguration.IdentityServerAuthentication.Authority + "/connect/token",
 
                                 ClientId = "EJumping.WebApi",
                                 ClientSecret = "secret",
@@ -160,11 +160,11 @@ namespace EJumping.Api.Controllers
                     {
                         var response = await client.RequestPasswordTokenAsync(new PasswordTokenRequest
                         {
-                            Address = ejumpingConfiguration.IdSrvUrl + "/connect/token",
+                            Address = ejumpingConfiguration.IdentityServerAuthentication.Authority + "/connect/token",
 
-                            ClientId = "ro.client",
+                            ClientId = "EJumping.WebApi",
                             ClientSecret = "secret",
-                            Scope = "api1 openid profile",
+                            Scope = "openid profile EJumping.WebAPI",
 
                             UserName = user.UserName,
                             Password = model.Password
@@ -247,11 +247,11 @@ namespace EJumping.Api.Controllers
                 {
                     var response = await client.RequestPasswordTokenAsync(new PasswordTokenRequest
                     {
-                        Address = ejumpingConfiguration.IdSrvUrl + "/connect/token",
+                        Address = ejumpingConfiguration.IdentityServerAuthentication.Authority + "/connect/token",
 
-                        ClientId = "ro.client",
+                        ClientId = "EJumping.WebApi",
                         ClientSecret = "secret",
-                        Scope = "api1 openid profile",
+                        Scope = "openid profile EJumping.WebAPI",
 
                         UserName = user.UserName,
                         Password = "1qaz!QAZ",
@@ -287,11 +287,11 @@ namespace EJumping.Api.Controllers
                     {
                         var response = await client.RequestPasswordTokenAsync(new PasswordTokenRequest
                         {
-                            Address = ejumpingConfiguration.IdSrvUrl + "/connect/token",
+                            Address = ejumpingConfiguration.IdentityServerAuthentication.Authority + "/connect/token",
 
-                            ClientId = "ro.client",
+                            ClientId = "EJumping.WebApi",
                             ClientSecret = "secret",
-                            Scope = "api1 openid profile",
+                            Scope = "openid profile EJumping.WebAPI",
 
                             UserName = user.UserName,
                             Password = "1qaz!QAZ",
@@ -314,118 +314,6 @@ namespace EJumping.Api.Controllers
 
             }
         }
-        [AllowAnonymous]
-        [HttpGet]
-        [Route("challengeExternalLogin")]
-        public async Task<ActionResult> ChallengeExternalLogin(string provider, string returnUrl)
-        {
-            //HttpContext.Response.Cookies.Append("isauthenticating", "true");
-            var redirectUrl = "/api/auth/externalLoginCallBack?returnUrl=" + returnUrl;
-            var properties = this.signInManager.ConfigureExternalAuthenticationProperties(provider, redirectUrl);
-            return this.Challenge(properties, provider);
-        }
-        [AllowAnonymous]
-        [HttpGet]
-        [Route("externalLoginCallBack")]
-        public async Task<IActionResult> ExternalLoginCallback(string returnUrl = null, string remoteError = null)
-        {
-            if (remoteError != null)
-            {
-                //return this.RedirectPermanent("/");
-                throw new Exception(remoteError);
-            }
-            var info = await this.signInManager.GetExternalLoginInfoAsync();
-            if (info == null)
-            {
-                //return this.RedirectPermanent("/");
-                throw new Exception("signInManager.GetExternalLoginInfoAsync fails");
-            }
-            var email = info.Principal.FindFirstValue(ClaimTypes.Email);
-            var user = new ApplicationUser();
-            if (email != null)
-            {
-                user = await this.userManager.FindByEmailAsync(email);
-            }
-            // Sign in the user with this external login provider if the user already has a login.
-            var result = await signInManager.ExternalLoginSignInAsync(info.LoginProvider, info.ProviderKey, isPersistent: false, bypassTwoFactor: true);
-            if (result.Succeeded)
-            {
-
-                using (var client = new HttpClient())
-                {
-                    var response = await client.RequestPasswordTokenAsync(new PasswordTokenRequest
-                    {
-                        Address = ejumpingConfiguration.IdSrvUrl + "/connect/token",
-
-                        ClientId = "ro.client",
-                        ClientSecret = "secret",
-                        Scope = "api1 openid profile",
-
-                        UserName = user.UserName,
-                        Password = "1qaz!QAZ",
-                    });
-
-                    if (response.IsError)
-                    {
-                        return BadRequest();
-                    }
-                    return this.Ok(new
-                    {
-                        access_token = response.AccessToken,
-                        expires_in = response.ExpiresIn,
-                        token_type = response.TokenType
-                    });
-                }
-
-            }
-            else
-            {
-                if (email != null)
-                {
-                    user = new ApplicationUser
-                    {
-                        UserName = info.Principal.FindFirstValue(ClaimTypes.Email),
-                        Email = info.Principal.FindFirstValue(ClaimTypes.Email),
-                    };
-
-                    await userManager.CreateAsync(user, "1qaz!QAZ");
-
-
-                    await userManager.AddLoginAsync(user, info);
-                    await signInManager.SignInAsync(user, isPersistent: false);
-
-                    using (var client = new HttpClient())
-                    {
-                        var response = await client.RequestPasswordTokenAsync(new PasswordTokenRequest
-                        {
-                            Address = ejumpingConfiguration.IdSrvUrl + "/connect/token",
-
-                            ClientId = "ro.client",
-                            ClientSecret = "secret",
-                            Scope = "api1 openid profile",
-
-                            UserName = user.UserName,
-                            Password = "1qaz!QAZ",
-                        });
-
-                        if (response.IsError)
-                        {
-                            this.ModelState.AddModelError("Register", response.Error);
-                            return BadRequest(this.ModelState);
-                        }
-                        return this.Ok(new
-                        {
-                            access_token = response.AccessToken,
-                            expires_in = response.ExpiresIn,
-                            token_type = response.TokenType
-                        });
-                    }
-                }
-                return BadRequest();
-
-            }
-        }
-
     }
     public class GoogleLoginModel
         {

@@ -12,19 +12,23 @@ namespace EJumping.Persistence.Repositories
     public class Repository<T, TKey> : IRepository<T, TKey>
         where T : AggregateRoot<TKey>
     {
-        protected readonly ejumpingDbContext _dbContext;
+        protected readonly DbContext _dbContext;
         private readonly IDateTimeProvider _dateTimeProvider;
 
-        protected DbSet<T> DbSet => _dbContext.Set<T>();
-
-        public IUnitOfWork UnitOfWork
+        public IQueryable<T> DbSet
         {
             get
             {
-                return _dbContext;
+                return _dbContext.Set<T>();
             }
         }
-
+        //public IUnitOfWork UnitOfWork
+        //{
+        //    get
+        //    {
+        //        return _dbContext;
+        //    }
+        //}
         public Repository(ejumpingDbContext dbContext, IDateTimeProvider dateTimeProvider)
         {
             _dbContext = dbContext;
@@ -36,7 +40,7 @@ namespace EJumping.Persistence.Repositories
             if (entity.Id.Equals(default(TKey)))
             {
                 entity.CreatedDateTime = _dateTimeProvider.OffsetNow;
-                await DbSet.AddAsync(entity, cancellationToken);
+                await _dbContext.Set<T>().AddAsync(entity, cancellationToken);
             }
             else
             {
@@ -46,7 +50,7 @@ namespace EJumping.Persistence.Repositories
 
         public void Delete(T entity)
         {
-            DbSet.Remove(entity);
+            _dbContext.Set<T>().Remove(entity);
         }
 
         public IQueryable<T> GetAll()

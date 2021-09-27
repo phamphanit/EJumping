@@ -9,8 +9,9 @@ namespace EJumping.Domain.Repositories
     public interface IRepository<TEntity, TKey>
         where TEntity : AggregateRoot<TKey>
     {
-        
-        IUnitOfWork UnitOfWork { get; }
+        IQueryable<TEntity> DbSet { get; }
+
+        //IUnitOfWork UnitOfWork { get; }
 
         IQueryable<TEntity> GetAll();
 
