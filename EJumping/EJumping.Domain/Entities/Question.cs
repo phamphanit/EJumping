@@ -21,9 +21,7 @@ namespace EJumping.Domain.Entities
         public int CorrectAnswer { get; set; }
 
         public int CorrectAnswerPoints { get; set; }
-
-        public int QuizId { get; set; }
-
+        public Guid QuizId { get; set; }
         //[ConcurrencyCheck]
         //[DatabaseGenerated(DatabaseGeneratedOption.Computed)]
         //[NotMapped]

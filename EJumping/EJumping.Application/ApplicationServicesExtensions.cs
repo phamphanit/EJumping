@@ -15,6 +15,7 @@ namespace EJumping.Application
         {
             services.AddScoped<IDateTimeProvider, DateTimeProvider>();
             services.AddScoped<IUserService, UserService>();
+            services.AddScoped<IQuestionService, QuestionService>();
             return services;
         }
     }

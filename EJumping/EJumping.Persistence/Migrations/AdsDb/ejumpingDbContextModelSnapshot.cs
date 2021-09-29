@@ -26,7 +26,7 @@ namespace EJumping.Persistence.Migrations.AdsDb
                         .HasColumnType("uuid")
                         .HasDefaultValueSql("uuid_generate_v1()");
 
-                    b.Property<DateTimeOffset>("CreatedDateTime")
+                    b.Property<DateTimeOffset?>("CreatedDateTime")
                         .HasColumnType("timestamp with time zone");
 
                     b.Property<string>("Description")
@@ -57,7 +57,6 @@ namespace EJumping.Persistence.Migrations.AdsDb
                         new
                         {
                             Id = new Guid("8a051aa5-bcd1-ea11-b098-ac728981bd15"),
-                            CreatedDateTime = new DateTimeOffset(new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0)),
                             IsSensitive = false,
                             Key = "SecurityHeaders:Test-Read-From-SqlServer",
                             Value = "this-is-read-from-sqlserver"
@@ -77,7 +76,7 @@ namespace EJumping.Persistence.Migrations.AdsDb
                     b.Property<int>("CorrectAnswerPoints")
                         .HasColumnType("integer");
 
-                    b.Property<DateTimeOffset>("CreatedDateTime")
+                    b.Property<DateTimeOffset?>("CreatedDateTime")
                         .HasColumnType("timestamp with time zone");
 
                     b.Property<string>("FirstOption")
@@ -89,10 +88,7 @@ namespace EJumping.Persistence.Migrations.AdsDb
                     b.Property<string>("QuestionName")
                         .HasColumnType("text");
 
-                    b.Property<int>("QuizId")
-                        .HasColumnType("integer");
-
-                    b.Property<Guid?>("QuizId1")
+                    b.Property<Guid>("QuizId")
                         .HasColumnType("uuid");
 
                     b.Property<byte[]>("RowVersion")
@@ -109,14 +105,138 @@ namespace EJumping.Persistence.Migrations.AdsDb
                     b.Property<DateTimeOffset?>("UpdatedDateTime")
                         .HasColumnType("timestamp with time zone");
 
-                    b.Property<long>("xmin")
-                        .HasColumnType("bigint");
+                    b.Property<uint>("xmin")
+                        .IsConcurrencyToken()
+                        .ValueGeneratedOnAddOrUpdate()
+                        .HasColumnType("xid");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("QuizId1");
+                    b.HasIndex("QuizId");
 
                     b.ToTable("Questions");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = new Guid("927dd143-5893-414e-aa82-ffeb036d0601"),
+                            CorrectAnswer = 1,
+                            CorrectAnswerPoints = 0,
+                            FirstOption = "Would you like me to spell it?",
+                            QuestionName = "Could you tell me your surname?",
+                            QuizId = new Guid("12837d3d-793f-ea11-becb-5cea1d05f661"),
+                            SecondOption = "Do you like my family name?",
+                            ThirdOption = "How do I say that?",
+                            xmin = 0u
+                        },
+                        new
+                        {
+                            Id = new Guid("ad9c3ac5-08f3-42e0-9f56-0c10242cd012"),
+                            CorrectAnswer = 1,
+                            CorrectAnswerPoints = 0,
+                            FirstOption = "It's in the garden.",
+                            QuestionName = "This plant looks dead.",
+                            QuizId = new Guid("12837d3d-793f-ea11-becb-5cea1d05f661"),
+                            SecondOption = "It only needs some water.",
+                            ThirdOption = "It's sleeping.",
+                            xmin = 0u
+                        },
+                        new
+                        {
+                            Id = new Guid("f1100c71-c629-476c-bb31-897dd35a14c6"),
+                            CorrectAnswer = 1,
+                            CorrectAnswerPoints = 0,
+                            FirstOption = "Of course not.",
+                            QuestionName = "I hope it doesn't rain.",
+                            QuizId = new Guid("12837d3d-793f-ea11-becb-5cea1d05f661"),
+                            SecondOption = "Will it be wet?",
+                            ThirdOption = "So do I.",
+                            xmin = 0u
+                        },
+                        new
+                        {
+                            Id = new Guid("17fc1d9e-e62f-462e-9bb2-e03352b3619b"),
+                            CorrectAnswer = 1,
+                            CorrectAnswerPoints = 0,
+                            FirstOption = "For ever.",
+                            QuestionName = "Are you going to come inside soon?",
+                            QuizId = new Guid("12837d3d-793f-ea11-becb-5cea1d05f661"),
+                            SecondOption = "Not long.",
+                            ThirdOption = "In a minute.",
+                            xmin = 0u
+                        },
+                        new
+                        {
+                            Id = new Guid("9d3d24bb-ac70-4e3a-b73a-c703b50e8773"),
+                            CorrectAnswer = 1,
+                            CorrectAnswerPoints = 0,
+                            FirstOption = "I bought it.",
+                            QuestionName = "Who gave you this book, Lucy?",
+                            QuizId = new Guid("12837d3d-793f-ea11-becb-5cea1d05f661"),
+                            SecondOption = "For my birthday.",
+                            ThirdOption = "My uncle was.",
+                            xmin = 0u
+                        },
+                        new
+                        {
+                            Id = new Guid("3af2c53d-bfb8-4e63-ba00-2724be7f6980"),
+                            CorrectAnswer = 1,
+                            CorrectAnswerPoints = 0,
+                            FirstOption = "I know that.",
+                            QuestionName = "Shall we go out for pizza tonight?",
+                            QuizId = new Guid("12837d3d-793f-ea11-becb-5cea1d05f661"),
+                            SecondOption = "It's very good.",
+                            ThirdOption = "I'm too tired.",
+                            xmin = 0u
+                        },
+                        new
+                        {
+                            Id = new Guid("60bb34dc-2856-4a12-a916-0e9ec9c4c6f5"),
+                            CorrectAnswer = 1,
+                            CorrectAnswerPoints = 0,
+                            FirstOption = "That's fine!",
+                            QuestionName = "Do you mind if I come too?",
+                            QuizId = new Guid("12837d3d-793f-ea11-becb-5cea1d05f661"),
+                            SecondOption = "I'd like to.",
+                            ThirdOption = "I don't know if I can.",
+                            xmin = 0u
+                        },
+                        new
+                        {
+                            Id = new Guid("3d2b173a-2edb-417c-8442-055f5aaf789d"),
+                            CorrectAnswer = 1,
+                            CorrectAnswerPoints = 0,
+                            FirstOption = "Can I help you?",
+                            QuestionName = "There's someone at the door.",
+                            QuizId = new Guid("12837d3d-793f-ea11-becb-5cea1d05f661"),
+                            SecondOption = "Well, go and answer it then.",
+                            ThirdOption = "He's busy at the moment.",
+                            xmin = 0u
+                        },
+                        new
+                        {
+                            Id = new Guid("db7c4909-1aeb-4732-9387-6ae51b3de065"),
+                            CorrectAnswer = 1,
+                            CorrectAnswerPoints = 0,
+                            FirstOption = "I'd like one.",
+                            QuestionName = "How much butter do I need for this cake?",
+                            QuizId = new Guid("12837d3d-793f-ea11-becb-5cea1d05f661"),
+                            SecondOption = "I'll use some.",
+                            ThirdOption = "I'm not sure.",
+                            xmin = 0u
+                        },
+                        new
+                        {
+                            Id = new Guid("ba2fc523-7a46-4496-84c4-ce9a940f65a5"),
+                            CorrectAnswer = 1,
+                            CorrectAnswerPoints = 0,
+                            FirstOption = "Since last week.",
+                            QuestionName = "How long are you here for?",
+                            QuizId = new Guid("12837d3d-793f-ea11-becb-5cea1d05f661"),
+                            SecondOption = "Ten days ago.",
+                            ThirdOption = "Till tomorrow.",
+                            xmin = 0u
+                        });
                 });
 
             modelBuilder.Entity("EJumping.Domain.Entities.Quiz", b =>
@@ -126,7 +246,7 @@ namespace EJumping.Persistence.Migrations.AdsDb
                         .HasColumnType("uuid")
                         .HasDefaultValueSql("uuid_generate_v1()");
 
-                    b.Property<DateTimeOffset>("CreatedDateTime")
+                    b.Property<DateTimeOffset?>("CreatedDateTime")
                         .HasColumnType("timestamp with time zone");
 
                     b.Property<string>("Name")
@@ -146,6 +266,18 @@ namespace EJumping.Persistence.Migrations.AdsDb
                     b.HasKey("Id");
 
                     b.ToTable("Quizs");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = new Guid("12837d3d-793f-ea11-becb-5cea1d05f660"),
+                            Name = "Ielts"
+                        },
+                        new
+                        {
+                            Id = new Guid("12837d3d-793f-ea11-becb-5cea1d05f661"),
+                            Name = "Toeic"
+                        });
                 });
 
             modelBuilder.Entity("EJumping.Domain.Entities.Role", b =>
@@ -158,7 +290,7 @@ namespace EJumping.Persistence.Migrations.AdsDb
                     b.Property<string>("ConcurrencyStamp")
                         .HasColumnType("text");
 
-                    b.Property<DateTimeOffset>("CreatedDateTime")
+                    b.Property<DateTimeOffset?>("CreatedDateTime")
                         .HasColumnType("timestamp with time zone");
 
                     b.Property<string>("Name")
@@ -187,7 +319,7 @@ namespace EJumping.Persistence.Migrations.AdsDb
                         .HasColumnType("uuid")
                         .HasDefaultValueSql("uuid_generate_v1()");
 
-                    b.Property<DateTimeOffset>("CreatedDateTime")
+                    b.Property<DateTimeOffset?>("CreatedDateTime")
                         .HasColumnType("timestamp with time zone");
 
                     b.Property<Guid?>("RoleId")
@@ -227,7 +359,7 @@ namespace EJumping.Persistence.Migrations.AdsDb
                     b.Property<string>("ConcurrencyStamp")
                         .HasColumnType("text");
 
-                    b.Property<DateTimeOffset>("CreatedDateTime")
+                    b.Property<DateTimeOffset?>("CreatedDateTime")
                         .HasColumnType("timestamp with time zone");
 
                     b.Property<string>("Email")
@@ -283,17 +415,16 @@ namespace EJumping.Persistence.Migrations.AdsDb
                         {
                             Id = new Guid("12837d3d-793f-ea11-becb-5cea1d05f660"),
                             AccessFailedCount = 0,
-                            CreatedDateTime = new DateTimeOffset(new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0)),
-                            Email = "phong@gmail.com",
+                            Email = "vincent@gmail.com",
                             EmailConfirmed = false,
                             LockoutEnabled = true,
-                            NormalizedEmail = "PHONG@GMAIL.COM",
-                            NormalizedUserName = "PHONG@GMAIL.COM",
-                            PasswordHash = "AQAAAAEAACcQAAAAELBcKuXWkiRQEYAkD/qKs9neac5hxWs3bkegIHpGLtf+zFHuKnuI3lBqkWO9TMmFAQ==",
+                            NormalizedEmail = "VINCENT@GMAIL.COM",
+                            NormalizedUserName = "TUSER1",
+                            PasswordHash = "AQAAAAEAACcQAAAAEI/8CTFnTa2n7lLHSdaBk39FL2LxJdx8cbYBk8LqKvPSdKMcoObbZzXyQvEjLNUNjA==",
                             PhoneNumberConfirmed = false,
                             SecurityStamp = "5M2QLL65J6H6VFIS7VZETKXY27KNVVYJ",
                             TwoFactorEnabled = false,
-                            UserName = "phong@gmail.com"
+                            UserName = "tuser1"
                         });
                 });
 
@@ -304,7 +435,7 @@ namespace EJumping.Persistence.Migrations.AdsDb
                         .HasColumnType("uuid")
                         .HasDefaultValueSql("uuid_generate_v1()");
 
-                    b.Property<DateTimeOffset>("CreatedDateTime")
+                    b.Property<DateTimeOffset?>("CreatedDateTime")
                         .HasColumnType("timestamp with time zone");
 
                     b.Property<byte[]>("RowVersion")
@@ -338,7 +469,7 @@ namespace EJumping.Persistence.Migrations.AdsDb
                         .HasColumnType("uuid")
                         .HasDefaultValueSql("uuid_generate_v1()");
 
-                    b.Property<DateTimeOffset>("CreatedDateTime")
+                    b.Property<DateTimeOffset?>("CreatedDateTime")
                         .HasColumnType("timestamp with time zone");
 
                     b.Property<Guid>("RoleId")
@@ -371,7 +502,7 @@ namespace EJumping.Persistence.Migrations.AdsDb
                         .HasColumnType("uuid")
                         .HasDefaultValueSql("uuid_generate_v1()");
 
-                    b.Property<DateTimeOffset>("CreatedDateTime")
+                    b.Property<DateTimeOffset?>("CreatedDateTime")
                         .HasColumnType("timestamp with time zone");
 
                     b.Property<string>("LoginProvider")
@@ -422,8 +553,10 @@ namespace EJumping.Persistence.Migrations.AdsDb
             modelBuilder.Entity("EJumping.Domain.Entities.Question", b =>
                 {
                     b.HasOne("EJumping.Domain.Entities.Quiz", "Quiz")
-                        .WithMany("QuizQuestions")
-                        .HasForeignKey("QuizId1");
+                        .WithMany("Questions")
+                        .HasForeignKey("QuizId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("Quiz");
                 });
@@ -478,7 +611,7 @@ namespace EJumping.Persistence.Migrations.AdsDb
 
             modelBuilder.Entity("EJumping.Domain.Entities.Quiz", b =>
                 {
-                    b.Navigation("QuizQuestions");
+                    b.Navigation("Questions");
                 });
 
             modelBuilder.Entity("EJumping.Domain.Entities.Role", b =>

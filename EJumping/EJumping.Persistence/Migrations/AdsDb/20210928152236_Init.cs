@@ -18,7 +18,7 @@ namespace EJumping.Persistence.Migrations.AdsDb
                     Description = table.Column<string>(type: "text", nullable: true),
                     IsSensitive = table.Column<bool>(type: "boolean", nullable: false),
                     RowVersion = table.Column<byte[]>(type: "bytea", rowVersion: true, nullable: true),
-                    CreatedDateTime = table.Column<DateTimeOffset>(type: "timestamp with time zone", nullable: false),
+                    CreatedDateTime = table.Column<DateTimeOffset>(type: "timestamp with time zone", nullable: true),
                     UpdatedDateTime = table.Column<DateTimeOffset>(type: "timestamp with time zone", nullable: true)
                 },
                 constraints: table =>
@@ -48,7 +48,7 @@ namespace EJumping.Persistence.Migrations.AdsDb
                     Name = table.Column<string>(type: "text", nullable: true),
                     QuizLogoUrl = table.Column<string>(type: "text", nullable: true),
                     RowVersion = table.Column<byte[]>(type: "bytea", rowVersion: true, nullable: true),
-                    CreatedDateTime = table.Column<DateTimeOffset>(type: "timestamp with time zone", nullable: false),
+                    CreatedDateTime = table.Column<DateTimeOffset>(type: "timestamp with time zone", nullable: true),
                     UpdatedDateTime = table.Column<DateTimeOffset>(type: "timestamp with time zone", nullable: true)
                 },
                 constraints: table =>
@@ -65,7 +65,7 @@ namespace EJumping.Persistence.Migrations.AdsDb
                     NormalizedName = table.Column<string>(type: "text", nullable: true),
                     ConcurrencyStamp = table.Column<string>(type: "text", nullable: true),
                     RowVersion = table.Column<byte[]>(type: "bytea", rowVersion: true, nullable: true),
-                    CreatedDateTime = table.Column<DateTimeOffset>(type: "timestamp with time zone", nullable: false),
+                    CreatedDateTime = table.Column<DateTimeOffset>(type: "timestamp with time zone", nullable: true),
                     UpdatedDateTime = table.Column<DateTimeOffset>(type: "timestamp with time zone", nullable: true)
                 },
                 constraints: table =>
@@ -93,7 +93,7 @@ namespace EJumping.Persistence.Migrations.AdsDb
                     LockoutEnd = table.Column<DateTimeOffset>(type: "timestamp with time zone", nullable: true),
                     AccessFailedCount = table.Column<int>(type: "integer", nullable: false),
                     RowVersion = table.Column<byte[]>(type: "bytea", rowVersion: true, nullable: true),
-                    CreatedDateTime = table.Column<DateTimeOffset>(type: "timestamp with time zone", nullable: false),
+                    CreatedDateTime = table.Column<DateTimeOffset>(type: "timestamp with time zone", nullable: true),
                     UpdatedDateTime = table.Column<DateTimeOffset>(type: "timestamp with time zone", nullable: true)
                 },
                 constraints: table =>
@@ -113,22 +113,21 @@ namespace EJumping.Persistence.Migrations.AdsDb
                     FourthOption = table.Column<string>(type: "text", nullable: true),
                     CorrectAnswer = table.Column<int>(type: "integer", nullable: false),
                     CorrectAnswerPoints = table.Column<int>(type: "integer", nullable: false),
-                    QuizId = table.Column<int>(type: "integer", nullable: false),
-                    xmin = table.Column<long>(type: "bigint", nullable: false),
-                    QuizId1 = table.Column<Guid>(type: "uuid", nullable: true),
+                    QuizId = table.Column<Guid>(type: "uuid", nullable: false),
+                    xmin = table.Column<uint>(type: "xid", rowVersion: true, nullable: false),
                     RowVersion = table.Column<byte[]>(type: "bytea", rowVersion: true, nullable: true),
-                    CreatedDateTime = table.Column<DateTimeOffset>(type: "timestamp with time zone", nullable: false),
+                    CreatedDateTime = table.Column<DateTimeOffset>(type: "timestamp with time zone", nullable: true),
                     UpdatedDateTime = table.Column<DateTimeOffset>(type: "timestamp with time zone", nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Questions", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Questions_Quizs_QuizId1",
-                        column: x => x.QuizId1,
+                        name: "FK_Questions_Quizs_QuizId",
+                        column: x => x.QuizId,
                         principalTable: "Quizs",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -140,7 +139,7 @@ namespace EJumping.Persistence.Migrations.AdsDb
                     Value = table.Column<string>(type: "text", nullable: true),
                     RoleId = table.Column<Guid>(type: "uuid", nullable: true),
                     RowVersion = table.Column<byte[]>(type: "bytea", rowVersion: true, nullable: true),
-                    CreatedDateTime = table.Column<DateTimeOffset>(type: "timestamp with time zone", nullable: false),
+                    CreatedDateTime = table.Column<DateTimeOffset>(type: "timestamp with time zone", nullable: true),
                     UpdatedDateTime = table.Column<DateTimeOffset>(type: "timestamp with time zone", nullable: true)
                 },
                 constraints: table =>
@@ -163,7 +162,7 @@ namespace EJumping.Persistence.Migrations.AdsDb
                     Value = table.Column<string>(type: "text", nullable: true),
                     UserId = table.Column<Guid>(type: "uuid", nullable: true),
                     RowVersion = table.Column<byte[]>(type: "bytea", rowVersion: true, nullable: true),
-                    CreatedDateTime = table.Column<DateTimeOffset>(type: "timestamp with time zone", nullable: false),
+                    CreatedDateTime = table.Column<DateTimeOffset>(type: "timestamp with time zone", nullable: true),
                     UpdatedDateTime = table.Column<DateTimeOffset>(type: "timestamp with time zone", nullable: true)
                 },
                 constraints: table =>
@@ -185,7 +184,7 @@ namespace EJumping.Persistence.Migrations.AdsDb
                     UserId = table.Column<Guid>(type: "uuid", nullable: false),
                     RoleId = table.Column<Guid>(type: "uuid", nullable: false),
                     RowVersion = table.Column<byte[]>(type: "bytea", rowVersion: true, nullable: true),
-                    CreatedDateTime = table.Column<DateTimeOffset>(type: "timestamp with time zone", nullable: false),
+                    CreatedDateTime = table.Column<DateTimeOffset>(type: "timestamp with time zone", nullable: true),
                     UpdatedDateTime = table.Column<DateTimeOffset>(type: "timestamp with time zone", nullable: true)
                 },
                 constraints: table =>
@@ -215,7 +214,7 @@ namespace EJumping.Persistence.Migrations.AdsDb
                     TokenName = table.Column<string>(type: "text", nullable: true),
                     TokenValue = table.Column<string>(type: "text", nullable: true),
                     RowVersion = table.Column<byte[]>(type: "bytea", rowVersion: true, nullable: true),
-                    CreatedDateTime = table.Column<DateTimeOffset>(type: "timestamp with time zone", nullable: false),
+                    CreatedDateTime = table.Column<DateTimeOffset>(type: "timestamp with time zone", nullable: true),
                     UpdatedDateTime = table.Column<DateTimeOffset>(type: "timestamp with time zone", nullable: true)
                 },
                 constraints: table =>
@@ -232,17 +231,43 @@ namespace EJumping.Persistence.Migrations.AdsDb
             migrationBuilder.InsertData(
                 table: "ConfigurationEntries",
                 columns: new[] { "Id", "CreatedDateTime", "Description", "IsSensitive", "Key", "UpdatedDateTime", "Value" },
-                values: new object[] { new Guid("8a051aa5-bcd1-ea11-b098-ac728981bd15"), new DateTimeOffset(new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0)), null, false, "SecurityHeaders:Test-Read-From-SqlServer", null, "this-is-read-from-sqlserver" });
+                values: new object[] { new Guid("8a051aa5-bcd1-ea11-b098-ac728981bd15"), null, null, false, "SecurityHeaders:Test-Read-From-SqlServer", null, "this-is-read-from-sqlserver" });
+
+            migrationBuilder.InsertData(
+                table: "Quizs",
+                columns: new[] { "Id", "CreatedDateTime", "Name", "QuizLogoUrl", "UpdatedDateTime" },
+                values: new object[,]
+                {
+                    { new Guid("12837d3d-793f-ea11-becb-5cea1d05f660"), null, "Ielts", null, null },
+                    { new Guid("12837d3d-793f-ea11-becb-5cea1d05f661"), null, "Toeic", null, null }
+                });
 
             migrationBuilder.InsertData(
                 table: "Users",
                 columns: new[] { "Id", "AccessFailedCount", "ConcurrencyStamp", "CreatedDateTime", "Email", "EmailConfirmed", "LockoutEnabled", "LockoutEnd", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "SecurityStamp", "TwoFactorEnabled", "UpdatedDateTime", "UserName" },
-                values: new object[] { new Guid("12837d3d-793f-ea11-becb-5cea1d05f660"), 0, null, new DateTimeOffset(new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0)), "phong@gmail.com", false, true, null, "PHONG@GMAIL.COM", "PHONG@GMAIL.COM", "AQAAAAEAACcQAAAAELBcKuXWkiRQEYAkD/qKs9neac5hxWs3bkegIHpGLtf+zFHuKnuI3lBqkWO9TMmFAQ==", null, false, "5M2QLL65J6H6VFIS7VZETKXY27KNVVYJ", false, null, "phong@gmail.com" });
+                values: new object[] { new Guid("12837d3d-793f-ea11-becb-5cea1d05f660"), 0, null, null, "vincent@gmail.com", false, true, null, "VINCENT@GMAIL.COM", "TUSER1", "AQAAAAEAACcQAAAAEI/8CTFnTa2n7lLHSdaBk39FL2LxJdx8cbYBk8LqKvPSdKMcoObbZzXyQvEjLNUNjA==", null, false, "5M2QLL65J6H6VFIS7VZETKXY27KNVVYJ", false, null, "tuser1" });
+
+            migrationBuilder.InsertData(
+                table: "Questions",
+                columns: new[] { "Id", "CorrectAnswer", "CorrectAnswerPoints", "CreatedDateTime", "FirstOption", "FourthOption", "QuestionName", "QuizId", "SecondOption", "ThirdOption", "UpdatedDateTime" },
+                values: new object[,]
+                {
+                    { new Guid("927dd143-5893-414e-aa82-ffeb036d0601"), 1, 0, null, "Would you like me to spell it?", null, "Could you tell me your surname?", new Guid("12837d3d-793f-ea11-becb-5cea1d05f661"), "Do you like my family name?", "How do I say that?", null },
+                    { new Guid("ad9c3ac5-08f3-42e0-9f56-0c10242cd012"), 1, 0, null, "It's in the garden.", null, "This plant looks dead.", new Guid("12837d3d-793f-ea11-becb-5cea1d05f661"), "It only needs some water.", "It's sleeping.", null },
+                    { new Guid("f1100c71-c629-476c-bb31-897dd35a14c6"), 1, 0, null, "Of course not.", null, "I hope it doesn't rain.", new Guid("12837d3d-793f-ea11-becb-5cea1d05f661"), "Will it be wet?", "So do I.", null },
+                    { new Guid("17fc1d9e-e62f-462e-9bb2-e03352b3619b"), 1, 0, null, "For ever.", null, "Are you going to come inside soon?", new Guid("12837d3d-793f-ea11-becb-5cea1d05f661"), "Not long.", "In a minute.", null },
+                    { new Guid("9d3d24bb-ac70-4e3a-b73a-c703b50e8773"), 1, 0, null, "I bought it.", null, "Who gave you this book, Lucy?", new Guid("12837d3d-793f-ea11-becb-5cea1d05f661"), "For my birthday.", "My uncle was.", null },
+                    { new Guid("3af2c53d-bfb8-4e63-ba00-2724be7f6980"), 1, 0, null, "I know that.", null, "Shall we go out for pizza tonight?", new Guid("12837d3d-793f-ea11-becb-5cea1d05f661"), "It's very good.", "I'm too tired.", null },
+                    { new Guid("60bb34dc-2856-4a12-a916-0e9ec9c4c6f5"), 1, 0, null, "That's fine!", null, "Do you mind if I come too?", new Guid("12837d3d-793f-ea11-becb-5cea1d05f661"), "I'd like to.", "I don't know if I can.", null },
+                    { new Guid("3d2b173a-2edb-417c-8442-055f5aaf789d"), 1, 0, null, "Can I help you?", null, "There's someone at the door.", new Guid("12837d3d-793f-ea11-becb-5cea1d05f661"), "Well, go and answer it then.", "He's busy at the moment.", null },
+                    { new Guid("db7c4909-1aeb-4732-9387-6ae51b3de065"), 1, 0, null, "I'd like one.", null, "How much butter do I need for this cake?", new Guid("12837d3d-793f-ea11-becb-5cea1d05f661"), "I'll use some.", "I'm not sure.", null },
+                    { new Guid("ba2fc523-7a46-4496-84c4-ce9a940f65a5"), 1, 0, null, "Since last week.", null, "How long are you here for?", new Guid("12837d3d-793f-ea11-becb-5cea1d05f661"), "Ten days ago.", "Till tomorrow.", null }
+                });
 
             migrationBuilder.CreateIndex(
-                name: "IX_Questions_QuizId1",
+                name: "IX_Questions_QuizId",
                 table: "Questions",
-                column: "QuizId1");
+                column: "QuizId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_RoleClaims_RoleId",

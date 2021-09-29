@@ -29,11 +29,11 @@ namespace EJumping.Persistence.MappingConfigurations
                 new User
                 {
                     Id = Guid.Parse("12837D3D-793F-EA11-BECB-5CEA1D05F660"),
-                    UserName = "phong@gmail.com",
-                    NormalizedUserName = "PHONG@GMAIL.COM",
-                    Email = "phong@gmail.com",
-                    NormalizedEmail = "PHONG@GMAIL.COM",
-                    PasswordHash = "AQAAAAEAACcQAAAAELBcKuXWkiRQEYAkD/qKs9neac5hxWs3bkegIHpGLtf+zFHuKnuI3lBqkWO9TMmFAQ==", // v*7Un8b4rcN@<-RN
+                    UserName = "tuser1",
+                    NormalizedUserName = "TUSER1",
+                    Email = "vincent@gmail.com",
+                    NormalizedEmail = "VINCENT@GMAIL.COM",
+                    PasswordHash = "AQAAAAEAACcQAAAAEI/8CTFnTa2n7lLHSdaBk39FL2LxJdx8cbYBk8LqKvPSdKMcoObbZzXyQvEjLNUNjA==", // 1qaz!QAZ
                     SecurityStamp = "5M2QLL65J6H6VFIS7VZETKXY27KNVVYJ",
                     LockoutEnabled = true,
                 },

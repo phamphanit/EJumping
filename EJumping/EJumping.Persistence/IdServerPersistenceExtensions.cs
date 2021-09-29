@@ -104,6 +104,7 @@ namespace Microsoft.Extensions.DependencyInjection
                         },
                         AllowOfflineAccess = true,
                         RequireConsent = true,
+                        AccessTokenLifetime = 36000,
                     });
                 }
                 if (!context.Clients.Any(x => x.ClientId == "EJumping.WebMVC"))
@@ -136,6 +137,7 @@ namespace Microsoft.Extensions.DependencyInjection
                         },
                         AllowOfflineAccess = true,
                         RequireConsent = true,
+                        AccessTokenLifetime = 36000,
                     });
                 }
 
@@ -173,6 +175,7 @@ namespace Microsoft.Extensions.DependencyInjection
                         },
                         AllowOfflineAccess = true,
                         RequireConsent = true,
+                        AccessTokenLifetime = 36000,
                     });
                 }
 

@@ -2,8 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using EJumping.BLL.QuizService;
-using EJumping.DAL.EF.Entities;
+using EJumping.Domain.DTOs;
+using EJumping.Domain.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
@@ -12,12 +12,12 @@ namespace EJumping.Api.Controllers
 {
     public class QuizController : Controller
     {
-        private readonly IQuizService quizService;
+        private readonly IQuestionService questionService;
         private readonly ILogger<QuizController> logger;
 
-        public QuizController(IQuizService quizService,ILogger<QuizController> logger)
+        public QuizController(IQuestionService quizService,ILogger<QuizController> logger)
         {
-            this.quizService = quizService;
+            this.questionService = quizService;
             this.logger = logger;
         }
 
@@ -29,9 +29,9 @@ namespace EJumping.Api.Controllers
             try
             {
                 int totalCount;
-                var data = this.quizService.GetQuestions(type, pageSize, page, out totalCount);
+                var data = this.questionService.GetQuestions(type, pageSize, page, out totalCount);
 
-                return this.Ok(new ListResult<Question>
+                return this.Ok(new ListResult<QuestionDto>
                 {
                     Page = page,
                     PageSize = pageSize,
@@ -43,22 +43,6 @@ namespace EJumping.Api.Controllers
             {
                 return BadRequest(ex.Message);
             }
-        }
-        [AllowAnonymous]
-        [HttpPost]
-        [Route("/api/quiz")]
-        public IActionResult CreateQuestion()
-        {
-            quizService.CreateQuestion();
-            return Ok();
-        }   
-        [AllowAnonymous]
-        [HttpPost]
-        [Route("/api/test/concurrency")]
-        public IActionResult TestConcurrency()
-        {
-            quizService.TestConcurrency();
-            return Ok();
         }
     }
     public class ListResult<T>

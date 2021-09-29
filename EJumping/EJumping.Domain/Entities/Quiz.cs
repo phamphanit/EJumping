@@ -9,7 +9,7 @@ namespace EJumping.Domain.Entities
     {
         public string Name { get; set; }
 
-        public List<Question> QuizQuestions { get; set; }
+        public List<Question> Questions { get; set; }
 
         public string QuizLogoUrl { get; set; }
 
