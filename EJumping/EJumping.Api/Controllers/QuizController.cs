@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using EJumping.Application.Common;
 using EJumping.Domain.DTOs;
 using EJumping.Domain.Services;
 using Microsoft.AspNetCore.Authorization;
@@ -14,11 +15,13 @@ namespace EJumping.Api.Controllers
     {
         private readonly IQuestionService questionService;
         private readonly ILogger<QuizController> logger;
+        private readonly IResponseContext responseContext;
 
-        public QuizController(IQuestionService quizService,ILogger<QuizController> logger)
+        public QuizController(IQuestionService quizService,ILogger<QuizController> logger, IResponseContext responseContext)
         {
             this.questionService = quizService;
             this.logger = logger;
+            this.responseContext = responseContext;
         }
 
         [AllowAnonymous]
@@ -43,6 +46,23 @@ namespace EJumping.Api.Controllers
             {
                 return BadRequest(ex.Message);
             }
+        }    
+        [AllowAnonymous]
+        [HttpGet]
+        [Route("/api/quiz3/{type}")]
+        public IActionResult GetQuestionBaseResponse(int type, int pageSize = 5, int page = 1)
+        {
+            //try
+            //{
+                int totalCount;
+                var data = this.questionService.GetQuestions(type, pageSize, page, out totalCount);
+
+                return this.Ok(responseContext.ToResponse(data));
+            //}
+            //catch (Exception ex)
+            //{
+            //    return BadRequest(ex.Message);
+            //}
         }
     }
     public class ListResult<T>
