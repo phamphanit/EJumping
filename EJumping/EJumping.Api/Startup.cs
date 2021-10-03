@@ -8,6 +8,7 @@ using EJumping.Api;
 using EJumping.Api.Filters;
 using EJumping.Api.Hubs;
 using EJumping.Application;
+using EJumping.Application.EmailMessages.DTOs;
 using EJumping.BLL;
 using EJumping.BLL.QuizService;
 using EJumping.BLL.UserService;
@@ -16,6 +17,7 @@ using EJumping.Core.Models.User;
 using EJumping.DAL.EF.Entities;
 using EJumping.DAL.Repository;
 using EJumping.DAL.UnitOfWork;
+using EJumping.Infrastructure.MessageBrokers;
 using EJumping.Persistence;
 using IdentityServer4.Models;
 using IdentityServer4.Services;
@@ -38,9 +40,11 @@ namespace EJumping.API
         {
             Configuration = configuration;
             Environment = env;
+            AppSettings = new EJumpingWebConfiguration();
         }
         public IWebHostEnvironment Environment { get; }
         public IConfiguration Configuration { get; }
+        private EJumpingWebConfiguration AppSettings { get; set; }
 
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
@@ -89,6 +93,8 @@ namespace EJumping.API
             IMapper mapper = mappingConfig.CreateMapper();
             services.AddSingleton(mapper);
             services.AddSignalR().AddMessagePackProtocol();
+
+            services.AddMessageBusSender<EmailMessageCreatedEvent>(AppSettings.MessageBroker);
 
             services.AddControllersWithViews();
             services.AddControllers(configure =>

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using EJumping.Infrastructure.MessageBrokers;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -16,6 +17,7 @@ namespace EJumping.Core.Models.Configurations
         public CORS CORS { get; set; }
 
         public Dictionary<string, string> SecurityHeaders { get; set; }
+        public MessageBrokerOptions MessageBroker { get; set; }
     }
     public class ConnectionStrings
     {
@@ -34,5 +36,6 @@ namespace EJumping.Core.Models.Configurations
 
         public string[] AllowedOrigins { get; set; }
     }
-  
+
+
 }

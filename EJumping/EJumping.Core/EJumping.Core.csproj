@@ -20,6 +20,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\EJumping.Domain\EJumping.Domain.csproj" />
+    <ProjectReference Include="..\EJumping.Infrastructure\EJumping.Infrastructure.csproj" />
   </ItemGroup>
 
 </Project>
